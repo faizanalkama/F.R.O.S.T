@@ -39,11 +39,16 @@ export default function GlobalCargoTracker() {
  const [activeShipments, setActiveShipments] = useState(shipments);
 
  useEffect(() => {
-  fetch('http://localhost:5000/api/v1/cargo/manifests')
-   .then(res => res.json())
-   .then(data => {
-    if (data && data.length > 0) {
-     const mapped = data.map((m, i) => {
+  Promise.all([
+    fetch('http://localhost:5000/api/v1/cargo/manifests').then(res => res.json()).catch(() => []),
+    fetch('http://localhost:5000/api/v1/expeditions?status=In%20Transit').then(res => res.json()).catch(() => [])
+  ])
+   .then(([manifests, expeditions]) => {
+    let combined = [];
+
+    // Map Manifests
+    if (manifests && manifests.length > 0) {
+     const mapped = manifests.map((m, i) => {
       const destName = (m.destination || '').toLowerCase();
       const destCoords = destName.includes('bharati') ? [76.1, -69.4] : 
                          destName.includes('maitri') ? [11.8, -70.7] : [11.9, 78.9];
@@ -64,10 +69,38 @@ export default function GlobalCargoTracker() {
        manifest: Array.isArray(m.items) ? m.items.map(item => `${item.qty} ${item.unit} ${item.name}`) : []
       };
      });
-     setActiveShipments(mapped);
+     combined = [...combined, ...mapped];
     }
+
+    // Map Expeditions
+    if (expeditions && expeditions.length > 0) {
+     const mappedExps = expeditions.map((e) => {
+      const destName = (e.route || '').toLowerCase();
+      const destCoords = destName.includes('bharati') ? [76.1, -69.4] : 
+                         destName.includes('maitri') ? [11.8, -70.7] : [11.9, 78.9];
+      const isDelivered = e.status === 'Arrived';
+      
+      return {
+       id: e._id,
+       vessel: e.vesselName || 'Expedition Vessel',
+       cargo: 'Expedition Charter',
+       destination: e.route || 'Unknown Route',
+       eta: e.arrivalDate ? new Date(e.arrivalDate).toLocaleDateString() : 'Unknown',
+       status: e.status === 'Pending' ? 'Delayed' : isDelivered ? 'Docked' : 'In Transit',
+       start: [-40, -30],
+       current: e.currentCoordinates && e.currentCoordinates.length === 2 && e.currentCoordinates[0] !== 0 ? e.currentCoordinates : [-40, -50],
+       end: destCoords,
+       heading: isDelivered ? '000° Docked' : '184° S',
+       speed: isDelivered ? '0.0 knots' : '14.2 knots',
+       manifest: ['Expedition Staff & Equipment']
+      };
+     });
+     combined = [...combined, ...mappedExps];
+    }
+
+    setActiveShipments(combined);
    })
-   .catch(err => console.error('Failed to fetch manifests:', err));
+   .catch(err => console.error('Failed to fetch tracking data:', err));
  }, []);
 
  const handlePingAIS = () => {
