@@ -35,8 +35,8 @@ export default function ProfileModal({ isOpen, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm">
-      <div className="bg-[var(--bg-panel)] border border-border/50 shadow-sm hover:shadow-md rounded-2xl w-full max-w-lg overflow-hidden flex flex-col">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+      <div className="bg-[var(--bg-panel)] border border-border/50 shadow-sm hover:shadow-md rounded-2xl w-[95%] sm:max-w-lg md:max-w-2xl max-h-[90vh] overflow-y-auto flex flex-col">
         <div className="flex justify-between items-center p-4 border-b border-border/50">
           <h2 className="text-xl font-['Bebas_Neue'] tracking-wider text-[var(--text-primary)]">Commander Profile</h2>
           <button onClick={onClose} className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all duration-300 ease-out hover:-translate-y-0.5 w-full md:w-auto">

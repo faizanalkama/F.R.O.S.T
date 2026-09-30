@@ -529,7 +529,7 @@ export default function ExpeditionPlanner() {
               )}
             </div>
 
-            <div className={`${isBudgetEditing ? 'grid grid-cols-1 gap-4' : 'grid grid-cols-[minmax(0,1fr)_auto] gap-4 md:gap-6'} items-center w-full my-auto min-w-0`}>
+            <div className={`${isBudgetEditing ? 'flex flex-col gap-4' : 'flex flex-col lg:flex-row gap-4 md:gap-6'} items-center w-full my-auto min-w-0`}>
               {/* Donut Chart */}
               <div className="w-full flex items-center justify-center py-1 min-w-0">
                 <div className="w-40 h-40 relative flex items-center justify-center shrink-0">
@@ -917,7 +917,7 @@ export default function ExpeditionPlanner() {
                   initial={{ scale: 0.95, opacity: 0, y: 20 }}
                   animate={{ scale: 1, opacity: 1, y: 0 }}
                   exit={{ scale: 0.95, opacity: 0, y: 20 }}
-                  className="w-full max-w-2xl bg-[var(--bg-panel-raised)] border border-border/50 rounded-2xl shadow-2xl overflow-hidden font-['Work_Sans'] relative max-h-[90vh] flex flex-col"
+                  className="w-[95%] sm:max-w-lg md:max-w-2xl bg-[var(--bg-panel-raised)] border border-border/50 rounded-2xl shadow-2xl overflow-y-auto font-['Work_Sans'] relative max-h-[90vh] flex flex-col"
                 >
                   {/* Modal Header */}
                   <div className="px-6 py-5 border-b border-border/50 flex justify-between items-center bg-[var(--bg-panel)] shrink-0">

@@ -48,7 +48,7 @@ export default function AddPersonnelModal({ isOpen, onClose, onPersonnelAdded })
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-      <div className="bg-[var(--bg-panel-raised)] border border-border/50 shadow-sm hover:shadow-md rounded-2xl w-full max-w-md overflow-hidden font-['Work_Sans']">
+      <div className="bg-[var(--bg-panel-raised)] border border-border/50 shadow-sm hover:shadow-md rounded-2xl w-[95%] sm:max-w-lg md:max-w-2xl max-h-[90vh] overflow-y-auto font-['Work_Sans']">
         <div className="flex items-center justify-between p-4 border-b border-border/50 bg-[var(--bg-primary)]">
           <h3 className="text-[var(--text-primary)] font-semibold flex items-center gap-2 text-sm uppercase tracking-wider">
             <UserPlus size={16} className="text-[var(--accent-primary)]" />

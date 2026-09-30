@@ -14,8 +14,8 @@ export default function EmergencyModal({ isOpen, onClose, onDispatch }) {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-md">
-      <div className="bg-[var(--bg-panel)] border-2 border-orange-500/50 shadow-[0_0_50px_-12px_rgba(249,115,22,0.5)] rounded-2xl w-full max-w-lg overflow-hidden flex flex-col animate-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-md p-4">
+      <div className="bg-[var(--bg-panel)] border-2 border-orange-500/50 shadow-[0_0_50px_-12px_rgba(249,115,22,0.5)] rounded-2xl w-[95%] sm:max-w-lg md:max-w-2xl max-h-[90vh] overflow-y-auto flex flex-col animate-in zoom-in-95 duration-200">
         <div className="flex justify-between items-center p-4 border-b border-border/50 bg-orange-500/10">
           <div className="flex items-center gap-2 text-orange-500">
             <AlertOctagon size={24} />
