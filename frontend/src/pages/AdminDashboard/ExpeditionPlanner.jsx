@@ -796,23 +796,25 @@ export default function ExpeditionPlanner() {
                               {predictionResult.safe ? 'WITHIN MODEL THRESHOLD' : 'NO-GO · WEATHER LIMIT EXCEEDED'}
                             </h5>
                             <span className="text-[10px] font-mono text-[var(--text-primary)] bg-[var(--bg-panel-raised)] px-2 py-0.5 rounded font-bold">
-                              WHITEOUT RISK · {predictionResult.probability}%
+                              WHITEOUT RISK · {isNaN(predictionResult.probability) ? 0 : predictionResult.probability}%
                             </span>
                           </div>
 
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3 pt-3 border-t border-[var(--ok)]/20 text-xs text-[var(--text-secondary)]">
-                            <div className="flex items-center gap-1.5">
-                              <Wind size={13} className="text-[var(--accent-primary)]" />
-                              <span>Wind: <strong className="text-[var(--text-primary)]">{Number(predictionResult.wind).toFixed(1)} m/s</strong></span>
+                          <div className="flex flex-col gap-2 mt-3 pt-3 border-t border-[var(--ok)]/20 text-xs text-[var(--text-secondary)]">
+                            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 w-full">
+                              <div className="flex items-center gap-1.5">
+                                <Wind size={13} className="text-[var(--accent-primary)]" />
+                                <span>Wind: <strong className="text-[var(--text-primary)]">{Number(predictionResult.wind).toFixed(1)} m/s</strong></span>
+                              </div>
+                              <div className="flex items-center gap-1.5">
+                                <Compass size={13} className="text-[var(--accent-primary)]" />
+                                <span>Visibility: <strong className="text-[var(--text-primary)]">{Number(predictionResult.visibilityKm).toFixed(1)} km</strong></span>
+                              </div>
                             </div>
-                            <div className="flex items-center gap-1.5">
-                              <Compass size={13} className="text-[var(--accent-primary)]" />
-                              <span>Visibility: <strong className="text-[var(--text-primary)]">{Number(predictionResult.visibilityKm).toFixed(1)} km</strong></span>
-                            </div>
-                            <div className="col-span-2 text-[10px] text-[var(--text-secondary)] mt-1 font-mono">
+                            <div className="text-[10px] text-[var(--text-secondary)] mt-1 font-mono">
                               {predictionResult.source}{predictionResult.stale ? ' · STALE DATA' : ''} · Observed {new Date(predictionResult.observedAt).toLocaleString()}
                             </div>
-                            <p className="col-span-2 text-[10px] text-amber-400">Model trained on synthetic data; not validated for dispatch decisions.</p>
+                            <p className="text-[10px] text-amber-400">Model trained on synthetic data; not validated for dispatch decisions.</p>
                           </div>
                         </div>
                       </div>
