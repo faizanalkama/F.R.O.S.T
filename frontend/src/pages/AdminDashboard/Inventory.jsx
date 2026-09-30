@@ -268,8 +268,8 @@ export default function AdminInventory() {
               {activeCenter} Inventory Mirror
             </h3>
 
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
+            <div className="w-full overflow-x-auto pb-2">
+              <table className="w-full text-left border-collapse min-w-max">
                 <thead>
                   <tr className="border-b border-border/50 text-xs uppercase tracking-wider text-[var(--text-secondary)]">
                     <th className="pb-3 font-semibold">Asset ID</th>

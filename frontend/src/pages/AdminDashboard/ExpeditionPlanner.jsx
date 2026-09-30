@@ -494,7 +494,7 @@ export default function ExpeditionPlanner() {
 
           {/* Interactive INR Budget Donut */}
           <div className="lg:col-span-5 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-5 flex flex-col justify-between min-w-0">
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-2">
               <h3 className="text-[var(--text-secondary)] text-xs uppercase tracking-widest font-semibold flex items-center gap-2">
                 <IndianRupee size={15} className="text-[var(--accent-primary)]" />
                 INR Budget Allocation (₹{budgetTotal.toFixed(1)} Cr Total)
@@ -536,7 +536,7 @@ export default function ExpeditionPlanner() {
                 <div className="w-40 h-40 relative flex items-center justify-center shrink-0">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
-                      <Tooltip content={<CustomPieTooltip total={budgetTotal} />} />
+                      <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px', color: '#fff' }} content={<CustomPieTooltip total={budgetTotal} />} />
                       <Pie
                         data={displayedBudgetData}
                         dataKey="amountInCr"

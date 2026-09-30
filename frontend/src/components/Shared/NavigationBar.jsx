@@ -38,15 +38,6 @@ export default function NavigationBar() {
      </AnimatePresence>
     </motion.button>
 
-    {/* Landing Page Button */}
-    <button
-     onClick={() => navigate('/')}
-     className="flex items-center gap-2 px-4 py-2 text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors font-['Work_Sans'] font-medium cursor-pointer"
-    >
-     <Home size={18} />
-     <span>Landing Page</span>
-    </button>
-
     {/* Logout Button */}
     <button
      onClick={() => {

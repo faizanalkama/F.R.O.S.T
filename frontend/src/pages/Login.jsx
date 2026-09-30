@@ -48,10 +48,9 @@ export default function Login() {
    {/* Return to Landing Button */}
    <button
     onClick={() => navigate('/')}
-    className="absolute top-6 left-6 flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors font-['Work_Sans'] cursor-pointer"
+    className="absolute top-4 left-4 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors cursor-pointer"
    >
-    <Home size={20} />
-    <span>Return to Landing</span>
+    ← Back to Landing Page
    </button>
 
    <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 md:p-8 w-full max-w-md shadow-2xl">
