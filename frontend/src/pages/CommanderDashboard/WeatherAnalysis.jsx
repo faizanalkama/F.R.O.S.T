@@ -75,7 +75,7 @@ export default function WeatherAnalysis() {
 
    {/* 7-Day Forecast Graph */}
      <h3 className="text-[var(--text-secondary)] font-bold text-sm mb-4 uppercase tracking-wider">7-Day Wind Speed Forecast (km/h)</h3>
-   <div className="w-full min-w-0 overflow-hidden pr-2 mt-2">
+   <div className="w-full h-64 min-w-0 mt-4">
         {windForecast.length > 0 ? <ResponsiveContainer width="100%" height={300}>
          <AreaChart data={windForecast} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
       <defs>
