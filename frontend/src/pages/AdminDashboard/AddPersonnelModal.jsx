@@ -60,7 +60,7 @@ export default function AddPersonnelModal({ isOpen, onClose, onPersonnelAdded })
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-4 md:p-6 flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 pb-24 flex flex-col gap-4">
           {error && <div className="text-xs text-[var(--critical)] bg-[var(--critical)]/10 p-2 rounded border border-[var(--critical)]">{error}</div>}
           
           <div>

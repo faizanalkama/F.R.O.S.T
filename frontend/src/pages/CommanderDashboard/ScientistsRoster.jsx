@@ -201,7 +201,7 @@ function ScientistFormModal({ isOpen, onClose, onSave, onDelete, initialData }) 
      </button>
     </div>
     
-    <form onSubmit={handleSubmit} className="p-4 md:p-6 flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="p-4 sm:p-6 pb-24 flex flex-col gap-4">
      <div className="flex flex-col md:flex-row gap-4 items-center">
        <div 
         className="w-16 h-16 rounded-full bg-[var(--bg-panel)] border border-border/50 flex items-center justify-center shrink-0 overflow-hidden relative group cursor-pointer"
