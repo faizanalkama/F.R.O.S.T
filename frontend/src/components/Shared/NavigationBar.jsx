@@ -8,7 +8,7 @@ export default function NavigationBar() {
  const { theme, toggleTheme } = useTheme();
 
  return (
-  <nav className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border-b border-border/50 flex flex-row items-center justify-between w-full px-4 py-3 shrink-0">
+  <nav className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border-b border-border/50 flex items-center justify-between w-full px-4 py-3">
    <div className="flex items-center gap-2">
     <span className="text-[var(--accent-primary)] text-3xl md:text-4xl font-light tracking-tight text-foregroundfont-['Space_Grotesk'] tracking-wider">
      F.R.O.S.T
@@ -18,7 +18,7 @@ export default function NavigationBar() {
     </span>
    </div>
 
-   <div className="flex flex-row items-center gap-3">
+   <div className="flex items-center gap-2 shrink-0">
     <motion.button
      whileHover={{ scale: 1.1 }}
      whileTap={{ scale: 0.9 }}

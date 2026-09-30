@@ -36,10 +36,10 @@ function SidebarLink({ to, label, icon: Icon, end }) {
 
 export default function AdminLayout() {
  return (
-  <div className="dashboard-shell h-screen w-full bg-[var(--bg-primary)] flex flex-col relative overflow-hidden">
+  <div className="dashboard-shell min-h-screen w-full bg-[var(--bg-primary)] flex flex-col relative">
    <NavigationBar />
 
-   <div className="flex flex-1 min-h-0 overflow-hidden flex-col md:flex-row">
+   <div className="flex flex-1 min-h-0 flex-col md:flex-row">
     {/* Desktop Left Sidebar */}
     <aside className="hidden md:flex w-64 bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border-r border-border/50 flex-col p-4 gap-2 overflow-y-auto shrink-0 z-10">
      <h3 className="text-[var(--text-secondary)] text-xs font-semibold uppercase tracking-widest px-4 mb-2">
@@ -51,7 +51,7 @@ export default function AdminLayout() {
     </aside>
 
     {/* Dynamic Main Content */}
-    <main className="flex-1 p-3 sm:p-4 md:p-6 lg:p-8 overflow-y-auto bg-[var(--bg-primary)] min-w-0 flex flex-col pb-32">
+    <main className="flex-1 p-3 sm:p-4 md:p-6 lg:p-8 min-h-screen overflow-y-auto bg-[var(--bg-primary)] min-w-0 flex flex-col pb-40 mb-12">
       <Routes>
        <Route index element={<ResearchCenters />} />
        <Route path="expedition" element={<ExpeditionPlanner />} />

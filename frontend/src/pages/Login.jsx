@@ -45,15 +45,8 @@ export default function Login() {
 
  return (
   <div className="min-h-screen bg-[var(--bg-primary)] flex flex-col items-center justify-center p-4 md:p-6 relative">
-   {/* Return to Landing Button */}
-   <Link
-    to="/"
-    className="absolute top-4 left-4 text-sm font-medium text-slate-300 hover:text-white"
-   >
-    ← Back to Landing Page
-   </Link>
-
    <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 md:p-8 w-full max-w-md shadow-2xl">
+    <Link to="/" className="inline-flex items-center gap-2 text-xs font-medium text-slate-400 hover:text-white mb-4 transition-colors">← Back to Landing</Link>
     <h2 className="font-['Space_Grotesk'] font-bold text-[var(--accent-primary)] text-2xl mb-6 text-center tracking-wide">
      F.R.O.S.T SYSTEM ACCESS
     </h2>
