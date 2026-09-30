@@ -996,5 +996,4 @@ app.post('/api/v1/personnel', async (req, res) => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`F.R.O.S.T Node server running on port ${PORT}`));
