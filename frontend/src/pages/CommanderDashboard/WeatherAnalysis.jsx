@@ -74,8 +74,9 @@ export default function WeatherAnalysis() {
    </div>
 
    {/* 7-Day Forecast Graph */}
+   <div className="bg-slate-800/50 rounded-lg p-4 w-full">
      <h3 className="text-[var(--text-secondary)] font-bold text-sm mb-4 uppercase tracking-wider">7-Day Wind Speed Forecast (km/h)</h3>
-   <div className="w-full h-64 min-w-0 mt-4">
+     <div className="w-full h-64 mt-4">
         {windForecast.length > 0 ? <ResponsiveContainer width="100%" height={300}>
          <AreaChart data={windForecast} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
       <defs>
@@ -94,6 +95,7 @@ export default function WeatherAnalysis() {
       <Area type="monotone" dataKey="wind" stroke="var(--accent-primary)" fillOpacity={1} fill="url(#colorWind)" strokeWidth={2} />
      </AreaChart>
     </ResponsiveContainer> : <p className="py-12 text-center text-xs text-[var(--text-secondary)]">{weatherError || 'Waiting for forecast data.'}</p>}
+     </div>
    </div>
   </div>
  );

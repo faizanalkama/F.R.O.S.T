@@ -51,7 +51,7 @@ export default function AdminLayout() {
     </aside>
 
     {/* Dynamic Main Content */}
-    <main className="flex-1 p-3 sm:p-4 md:p-6 lg:p-8 overflow-y-auto bg-[var(--bg-primary)] min-w-0 flex flex-col pb-28">
+    <main className="flex-1 p-3 sm:p-4 md:p-6 lg:p-8 overflow-y-auto bg-[var(--bg-primary)] min-w-0 flex flex-col pb-32">
       <Routes>
        <Route index element={<ResearchCenters />} />
        <Route path="expedition" element={<ExpeditionPlanner />} />

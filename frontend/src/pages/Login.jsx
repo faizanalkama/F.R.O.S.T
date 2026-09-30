@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Shield, Radio, MapPin, Lock, Home } from 'lucide-react';
 
 export default function Login() {
@@ -46,12 +46,12 @@ export default function Login() {
  return (
   <div className="min-h-screen bg-[var(--bg-primary)] flex flex-col items-center justify-center p-4 md:p-6 relative">
    {/* Return to Landing Button */}
-   <button
-    onClick={() => navigate('/')}
-    className="absolute top-4 left-4 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors cursor-pointer"
+   <Link
+    to="/"
+    className="absolute top-4 left-4 text-sm font-medium text-slate-300 hover:text-white"
    >
     ← Back to Landing Page
-   </button>
+   </Link>
 
    <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 md:p-8 w-full max-w-md shadow-2xl">
     <h2 className="font-['Space_Grotesk'] font-bold text-[var(--accent-primary)] text-2xl mb-6 text-center tracking-wide">
