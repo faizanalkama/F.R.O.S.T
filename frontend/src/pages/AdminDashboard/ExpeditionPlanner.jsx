@@ -565,9 +565,9 @@ export default function ExpeditionPlanner() {
                 {displayedBudgetData.map((b, index) => (
                   <div
                     key={isBudgetEditing ? index : b.category}
-                    className="flex items-center justify-between bg-[var(--bg-primary)] border border-border/50 rounded px-3 py-2 w-full gap-4 md:gap-6"
+                    className="flex justify-between items-center w-full gap-4 bg-[var(--bg-primary)] border border-border/50 rounded px-3 py-2 min-w-0"
                   >
-                    <div className="flex items-center gap-2 min-w-0">
+                    <div className="flex items-center gap-2 min-w-0 flex-1">
                       <span
                         className="w-2.5 h-2.5 rounded-full shrink-0"
                         style={{ backgroundColor: b.color || '#3B82F6' }}
@@ -580,7 +580,7 @@ export default function ExpeditionPlanner() {
                           className="w-32 min-w-0 bg-[var(--bg-panel-raised)] border border-border/50 px-2 py-1 text-xs text-[var(--text-primary)]"
                         />
                       ) : (
-                        <span className="text-[var(--text-primary)] text-sm font-medium whitespace-nowrap">{b.category}</span>
+                        <span className="text-[var(--text-primary)] text-sm font-medium truncate">{b.category}</span>
                       )}
                     </div>
                     {isBudgetEditing ? (
@@ -601,7 +601,7 @@ export default function ExpeditionPlanner() {
                         </button>
                       </div>
                     ) : (
-                      <span className="whitespace-nowrap font-mono text-sm font-bold text-[var(--text-primary)]">₹{Number(b.amountInCr || 0).toFixed(1)} Cr</span>
+                      <span className="whitespace-nowrap font-medium font-mono text-sm text-[var(--text-primary)]">₹{Number(b.amountInCr || 0).toFixed(1)} Cr</span>
                     )}
                   </div>
                 ))}
