@@ -95,7 +95,7 @@ export default function AdminHistory() {
  return (
   <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 sm:p-6 h-full flex flex-col overflow-hidden">
    {/* Header */}
-   <div className="flex items-center justify-between mb-6 shrink-0">
+   <div className="flex flex-col gap-3 items-start w-full mb-6 shrink-0">
     <div>
      <h2 className="text-[var(--accent-primary)] font-['Space_Grotesk'] font-bold text-2xl tracking-wide">
       HISTORY · CRYPTOGRAPHIC AUDIT LEDGER
@@ -201,14 +201,14 @@ export default function AdminHistory() {
           onClick={() =>
            setExpandedLogId(isExpanded ? null : log.id)
           }
-          className="p-3.5 flex items-center justify-between gap-4 cursor-pointer select-none"
+          className="flex flex-col gap-2 w-full p-4 cursor-pointer select-none"
          >
           <div className="flex items-center gap-3.5 flex-1 min-w-0">
            {/* Category Icon with Severity Dot */}
-           <div className="relative p-2 rounded-xl bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 text-[var(--accent-primary)] shrink-0">
+           <div className="flex items-center gap-1.5 p-2 rounded-xl bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 text-[var(--accent-primary)] shrink-0">
             <Icon size={16} />
             <span
-             className={`absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full ${
+             className={`w-2.5 h-2.5 rounded-full ${
               severityStyles[log.severity]?.dot || 'bg-[var(--ok)]'
              }`}
             />

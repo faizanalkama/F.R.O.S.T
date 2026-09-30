@@ -8,7 +8,7 @@ export default function NavigationBar() {
  const { theme, toggleTheme } = useTheme();
 
  return (
-  <nav className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border-b border-border/50 p-4 flex items-center justify-between shrink-0">
+  <nav className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border-b border-border/50 p-4 flex flex-wrap items-center justify-between gap-2 shrink-0">
    <div className="flex items-center gap-2">
     <span className="text-[var(--accent-primary)] text-3xl md:text-4xl font-light tracking-tight text-foregroundfont-['Space_Grotesk'] tracking-wider">
      F.R.O.S.T
