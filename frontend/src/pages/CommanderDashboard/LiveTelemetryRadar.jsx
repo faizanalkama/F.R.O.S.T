@@ -11,6 +11,7 @@ import {
 } from 'recharts';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertTriangle, Radio, Activity, Zap, Thermometer } from 'lucide-react';
+import { getWsUrl, BACKEND_URL } from '../../api';
 
 const generateInitialData = () => {
  return Array.from({ length: 20 }, (_, i) => {
@@ -29,7 +30,7 @@ export default function LiveTelemetryRadar() {
 
  // Real-Time 1000ms telemetry data stream
  useEffect(() => {
-  let ws = new WebSocket('ws://localhost:5000/telemetry');
+  let ws = new WebSocket(getWsUrl('/telemetry'));
   
   ws.onmessage = (event) => {
    try {
@@ -55,7 +56,7 @@ export default function LiveTelemetryRadar() {
    const hasPowerDip = Math.random() > 0.95;
    const power = hasPowerDip ? 75 : Math.round(88 + Math.random() * 12);
 
-   fetch('http://localhost:5000/api/v1/telemetry/ingest', {
+   fetch(`${BACKEND_URL}/api/v1/telemetry/ingest`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ temp, power, time: timeStr, node_id: 'radar-1', status: power < 85 ? 'CRITICAL' : 'NOMINAL' })

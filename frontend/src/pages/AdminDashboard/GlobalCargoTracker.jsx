@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { ComposableMap, Geographies, Geography, Graticule, Marker, Line } from 'react-simple-maps';
 import { motion, AnimatePresence } from 'framer-motion';
+import { BACKEND_URL } from '../../api';
 
 const geoUrl = 'https://unpkg.com/world-atlas@2.0.2/countries-110m.json';
 
@@ -40,8 +41,8 @@ export default function GlobalCargoTracker() {
 
  useEffect(() => {
   Promise.all([
-    fetch('http://localhost:5000/api/v1/cargo/manifests').then(res => res.json()).catch(() => []),
-    fetch('http://localhost:5000/api/v1/expeditions?status=In%20Transit').then(res => res.json()).catch(() => [])
+    fetch(`${BACKEND_URL}/api/v1/cargo/manifests`).then(res => res.json()).catch(() => []),
+    fetch(`${BACKEND_URL}/api/v1/expeditions?status=In%20Transit`).then(res => res.json()).catch(() => [])
   ])
    .then(([manifests, expeditions]) => {
     let combined = [];

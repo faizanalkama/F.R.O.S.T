@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Thermometer, Eye, Wind } from 'lucide-react';
+import { BACKEND_URL } from '../../api';
 
 export default function WeatherAnalysis() {
  const [weather, setWeather] = useState(null);
@@ -12,7 +13,7 @@ export default function WeatherAnalysis() {
   const controller = new AbortController();
   const loadWeather = async () => {
    try {
-    const response = await fetch(`http://localhost:5000/api/v1/aws/current?station=${station}`, { signal: controller.signal });
+    const response = await fetch(`${BACKEND_URL}/api/v1/aws/current?station=${station}`, { signal: controller.signal });
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || 'Live weather unavailable');
     if (active) {

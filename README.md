@@ -1,171 +1,174 @@
 <div align="center">
-  <h1>❄️ F.R.O.S.T</h1>
-  <p><b>Polar Logistics Command</b></p>
-  <p>Tactical logistics, cold-chain inventory tracking, and real-time research station monitoring for extreme environments.</p>
-  
-  <div>
-    <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
-    <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
-    <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
-    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
-    <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-  </div>
+  <img src="https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node" />
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/MongoDB_Atlas-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
+  <br />
+  <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white" alt="Netlify" />
+  <img src="https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white" alt="Render" />
+</div>
+
+<br />
+
+<div align="center">
+  <h1 align="center">F.R.O.S.T. (Project Aegis / BovineGuard AI) 🐄🛡️</h1>
+  <p align="center">
+    <strong>End-to-End IoT Hardware & Full-Stack Intelligence for Predictive Bovine Mastitis Monitoring.</strong>
+    <br />
+    <em>Smart India Hackathon (SIH) 2026 — Hardware Track Submission</em>
+  </p>
 </div>
 
 ---
 
-**F.R.O.S.T** (Field Research & Operational Supply Tracker) is a mission-critical logistics platform built to sustain extreme-environment polar research stations. From predicting localized cold-chain supply exhaustion to orchestrating high-stakes global manifests, F.R.O.S.T provides commanders with a real-time, zero-latency situational awareness dashboard. Designed with a stunning cyber-tactical aesthetic, the platform bridges cutting-edge telemetry tracking with robust inventory ledgers to ensure no researcher is left stranded.
+## 📖 Project Overview
 
-## 🗺️ System Workflow & User Journey
+Bovine mastitis is one of the most debilitating and economically damaging diseases in the global dairy industry, leading to massive losses in milk yield and compromised animal welfare. Current industry solutions are largely reactive—relying on visible clinical symptoms or periodic manual testing long after the infection has taken hold.
 
-F.R.O.S.T is engineered for two primary operational profiles, ensuring streamlined communication between headquarters and the deep freeze:
+**F.R.O.S.T. (BovineGuard AI)** revolutionizes herd management through a proactive, predictive IoT architecture. By deploying non-invasive hardware (smart collars and udder sensors) connected to local gateway hubs, our system captures real-time physiological telemetry from the livestock. This high-frequency data is streamed directly to our Python-powered Machine Learning microservice, which predicts the onset of mastitis *before* clinical symptoms emerge, enabling immediate, targeted intervention.
 
-- **Global Admin (HQ):** Operates from the macro-level. The Admin dashboard provides a bird's-eye view of all polar assets (Maitri, Bharati, Himadri). HQ oversees global cargo transits, approves life-saving expeditions, manages system-wide inventory allocations, and monitors the overall health of the logistics network.
-- **Station Commander (Field):** A hyper-localized, tactical view designed for extreme environments. Commanders monitor live sensor telemetry, track real-time local weather API feeds, manage active station rosters, and submit localized supply requisitions before critical items hit zero.
+---
 
-### The Logistics Lifecycle
-1. **Requisition Created:** A Station Commander identifies a critical shortfall (e.g., thermal generators) and issues a requisition.
-2. **Manifest Generated:** HQ approves the requisition, packing the items into a global transit manifest.
-3. **Deployed:** The cargo enters transit, tracked globally via the F.R.O.S.T ledger.
-4. **Inventory Updated:** Upon arrival, the cargo is scanned into the local station's cold-chain inventory via CRDT-synced state updates.
+## 🔗 Live Deployment Links
 
-## ⚡ Comprehensive Feature Matrix
+| Resource | Link |
+| :--- | :--- |
+| **Production Application** | [https://frost-hackcypher.netlify.app](https://frost-hackcypher.netlify.app) |
+| **Node.js Core API** | [https://frost-backend.onrender.com](https://frost-backend.onrender.com) |
+| **GitHub Repository** | [Ayan933710/F.R.O.S.T](https://github.com/Ayan933710/F.R.O.S.T) |
+| **Video Walkthrough** | *(Insert YouTube Demo Link Here)* |
 
-### Operational Capabilities
-- **Cold-Chain Inventory Tracking:** Precision monitoring of perishable and high-value equipment with automatic low-stock warnings.
-- **Role-Based Tactical Dashboards:** Distinct UX/UI flows for Global Admins and Station Commanders, maximizing cognitive focus.
-- **Active Personnel Rostering:** Live tracking of deployed scientists and crew complements assigned to each polar station.
-- **Predictive Consumption Baselines:** Powered by our dedicated Python ML service to forecast supply exhaustion before it becomes critical.
+---
 
-### Technical Engineering
-- **Yjs CRDT Real-Time Synchronization:** Conflict-free, real-time localized state synchronization across the logistics network, ensuring data integrity even during intermittent satellite connections.
-- **MongoDB Aggregation Pipelines:** Highly optimized database queries that dynamically calculate cross-station metrics and active rosters.
-- **Responsive Mobile-First Tailwind UI:** Fluid, cyber-tactical interface that degrades gracefully into app-like bottom navigation bars for mobile fieldwork.
-- **Open-Meteo External API Integrations:** Live meteorological telemetry streaming surface temperature, wind speed, relative humidity, and pressure directly into the operational cards.
+## 🏗️ Cloud Architecture & Data Flow
 
-## 📸 Visual Showcase
+Our architecture utilizes a highly scalable microservice design, strictly secured via CORS domain-locking and dynamic environment variables to ensure zero data leakage between the hardware and the cloud.
 
-> [!NOTE] 
-> Insert GIF of the Admin 3-Column Research Centers Overview here
+```mermaid
+graph TD
+    subgraph IoT Edge Hardware
+        S1[Udder Sensors] -->|Telemetry/BLE| G[Central Gateway Hub]
+        S2[Smart Collars] -->|Movement/BLE| G
+    end
 
-> [!NOTE] 
-> Insert Screenshot of the Commander's Live Telemetry Radar here
+    subgraph Cloud Backend Services (Render)
+        G -->|HTTPS POST| NodeAPI[Node.js / Express API]
+        NodeAPI <-->|REST/WebSockets| ML[Python ML Service]
+    end
 
-> [!NOTE] 
-> Insert GIF of the dynamic Open-Meteo Weather Integration here
+    subgraph Data Persistence
+        NodeAPI -->|Mongoose ODM| Mongo[(MongoDB Atlas)]
+    end
 
-## 📂 Project Structure
+    subgraph Presentation Layer (Netlify)
+        NodeAPI -->|Live Dashboards| React[React 18 / Vite SPA]
+        React -->|3D Hardware Renders| ThreeJS[Three.js / Drei]
+    end
 
-The architecture is divided into three primary microservices:
-
-```ascii
-F.R.O.S.T/
-├── backend/               # Node.js + Express API Orchestrator
-│   ├── controllers/
-│   ├── models/            # Mongoose Schemas (User, Item, Requisition, Manifest)
-│   ├── routes/
-│   └── server.js
-├── frontend/              # React + Vite Client
-│   ├── src/
-│   │   ├── components/    # Reusable UI (Navbars, Modals)
-│   │   ├── pages/         # Admin & Commander Dashboards
-│   │   └── utils/         # Yjs store configurations
-│   └── package.json
-└── ml_service/            # Python Microservice
-    ├── main.py            # FastAPI / Uvicorn server
-    └── requirements.txt
+    classDef hardware fill:#2d3748,stroke:#4a5568,color:#fff;
+    classDef cloud fill:#2b6cb0,stroke:#2c5282,color:#fff;
+    classDef db fill:#276749,stroke:#22543d,color:#fff;
+    classDef ui fill:#805ad5,stroke:#553c9a,color:#fff;
+    
+    class S1,S2,G hardware;
+    class NodeAPI,ML cloud;
+    class Mongo db;
+    class React,ThreeJS ui;
 ```
 
-## 🛠️ Zero-to-Hero Local Setup Guide
+---
 
-Follow this sequential setup to deploy F.R.O.S.T flawlessly on your local machine. 
+## 🚀 Key Capabilities
 
-**Prerequisites:** 
-- Node.js (v18+)
-- Python (v3.10+)
-- Git
+*   **🔮 Predictive ML Alerts:** The Python microservice continuously analyzes physiological inputs against historical disease models to generate probability scores for sub-clinical mastitis.
+*   **🌐 Real-Time Analytics Dashboard:** Utilizing **Recharts**, the frontend visualizes complex telemetry arrays (temperature, conductivity, activity) in sleek, responsive graphs.
+*   **🛠️ Interactive 3D Hardware Renders:** Judges and users can interact with live 3D models of our IoT collars and sensors natively in the browser, powered by **React Three Fiber** and **Drei**.
+*   **✨ Immersive UX/UI:** Fluid page transitions, glassmorphism aesthetics, and dynamic rendering via **Framer Motion** and **Tailwind CSS**.
+*   **🔒 Enterprise Security:** Single Page Application (SPA) routing is handled flawlessly via Netlify `_redirects`. Backend access is locked strictly to the frontend domain via rigorous CORS policies.
 
-### Step 1: Environment Configuration
-Create a `.env` file inside the `backend/` directory. You will need to provide your MongoDB Atlas connection string.
+---
 
-```bash
-# backend/.env
+## ⚙️ Environment Configuration
+
+To run this platform locally or deploy to a new environment, configure the following `.env` files in their respective directories.
+
+### 1. Frontend (`/frontend/.env`)
+```env
+# Point to your local or live backend services
+VITE_BACKEND_URL=http://localhost:5000
+VITE_ML_URL=http://localhost:8000
+```
+
+### 2. Node Backend (`/backend/.env`)
+```env
+# MongoDB Connection String & Allowed Frontend Origin
 PORT=5000
 MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/frost?retryWrites=true&w=majority
+FRONTEND_URL=http://localhost:5173
 ```
 
-### Step 2: Backend Initialization
-Open a terminal, navigate to the backend, install the dependencies, and ignite the Express server.
+### 3. Python ML Service (`/ml_service/.env`)
+```env
+# Allowed Frontend Origin for CORS
+PORT=8000
+FRONTEND_URL=http://localhost:5173
+```
 
+---
+
+## 💻 Local Setup & Installation
+
+Clone the repository and spin up all three microservices concurrently. 
+
+**1. Clone the repository:**
+```bash
+git clone https://github.com/Ayan933710/F.R.O.S.T.git
+cd F.R.O.S.T
+```
+
+**2. Start the Node.js API (Backend):**
 ```bash
 cd backend
 npm install
 npm run dev
+# Runs on http://localhost:5000
 ```
 
-### Step 3: Frontend Initialization
-Open a second terminal instance to deploy the Vite React application.
-
+**3. Start the Python ML Service:**
 ```bash
+# Open a new terminal
+cd ml_service
+python -m venv .venv
+# Activate venv: .\.venv\Scripts\activate (Windows) or source .venv/bin/activate (Mac/Linux)
+pip install -r requirements.txt
+python -m uvicorn main:app --reload --port 8000
+# Runs on http://localhost:8000
+```
+
+**4. Start the React Frontend:**
+```bash
+# Open a new terminal
 cd frontend
 npm install
 npm run dev
+# Runs on http://localhost:5173
 ```
-
-### Step 4: ML Service Initialization
-Open a third terminal instance to boot up the Python microservice.
-
-```bash
-cd ml_service
-
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment
-# --> For Windows:
-.\venv\Scripts\activate
-# --> For Mac/Linux:
-source venv/bin/activate
-
-# Install requirements and run server
-pip install -r requirements.txt
-python -m uvicorn main:app --reload
-```
-
-## 🗄️ API & Database Reference
-
-F.R.O.S.T is backed by a robust MongoDB Atlas schema designed for supply chain immutability:
-
-- **`Users`**: Operational personnel, tracking `role`, `station`, and `status`.
-- **`Items`**: Core cold-chain inventory tracking quantities, units, and critical thresholds.
-- **`Requisitions`**: Internal base-to-base supply requests.
-- **`Manifests`**: High-level cargo shipment ledgers for global transit.
-
-### Primary Express Routes (`backend/server.js`)
-- `GET /api/v1/research-centers` : Hydrates the main F.R.O.S.T admin overview grid.
-- `GET /api/v1/research-centers/:id` : Deep-fetches station-specific analytics and calculates localized inventory metrics.
-- `GET /api/stations/:stationName/roster` : Performs regex aggregations on the `Users` collection to stream live personnel deployments.
-
-## 🤝 Contributing Guidelines
-
-We welcome pull requests from the community to help stabilize polar logistics!
-
-1. **Fork the Repository**
-2. **Create a Feature Branch:** `git checkout -b feature/tactical-radar-update`
-3. **Commit your Changes:** `git commit -m 'Add new radar ping animation'`
-4. **Push to the Branch:** `git push origin feature/tactical-radar-update`
-5. **Open a Pull Request** ensuring your code adheres to existing Tailwind styles and doesn't break Yjs synchronization flows.
 
 ---
 
+## 👥 Team HackCypher
+**Heritage Institute of Technology, Kolkata**
+
+| Member | Role | GitHub |
+| :--- | :--- | :--- |
+| **Ayan** | Repository Lead & IoT Architecture | [@Ayan933710](https://github.com/Ayan933710) |
+| **Faizan Alkama** | Full-Stack Cloud Deployment & ML Ops | *(Insert Link)* |
+| **[Name]** | Hardware Engineering / Sensor Calibrations | *(Insert Link)* |
+| **[Name]** | UI/UX Design & 3D Integration | *(Insert Link)* |
+| **[Name]** | Backend Development & Database Modeling | *(Insert Link)* |
+| **[Name]** | Researcher & Pitch Strategist | *(Insert Link)* |
+
+<br/>
 <div align="center">
-  <h3>🛡️ Built for Resilience. Engineered for the Extreme.</h3>
-  <p><b>Made by Team HackCypher</b></p>
-  <p>For inquiries, deployment access, or collaboration, establish a comm-link:</p>
-  <a href="mailto:hackcypher2025@gmail.com">
-    <img src="https://img.shields.io/badge/Email-hackcypher2025%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email Team HackCypher" />
-  </a>
-  <br />
-  <br />
-  <p><i>"Ensuring 100% mission integrity when connectivity is a luxury."</i></p>
+  <i>Developed with precision and care for the <b>Smart India Hackathon 2026</b>.</i>
 </div>

@@ -14,6 +14,7 @@ import {
  Zap,
 } from 'lucide-react';
 import { useIceNet } from '../../context/IceNetContext';
+import { BACKEND_URL } from '../../api';
 
 
 export default function ArrivalCargoScanner() {
@@ -29,7 +30,7 @@ export default function ArrivalCargoScanner() {
  useEffect(() => {
   const fetchManifest = async () => {
    try {
-    const res = await fetch('http://localhost:5000/api/v1/cargo/manifests/latest');
+    const res = await fetch(`${BACKEND_URL}/api/v1/cargo/manifests/latest`);
     if (res.ok) {
      const data = await res.json();
      setActiveManifest(data);
@@ -58,7 +59,7 @@ export default function ArrivalCargoScanner() {
     const manifest_id = activeManifest ? activeManifest.manifest_id : null;
     if (!manifest_id) throw new Error('No active manifest to verify');
     
-    const verifyRes = await fetch('http://localhost:5000/api/v1/cargo/verify-hash', {
+    const verifyRes = await fetch(`${BACKEND_URL}/api/v1/cargo/verify-hash`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ manifest_id, scanned_hash: value })
@@ -68,7 +69,7 @@ export default function ArrivalCargoScanner() {
     if (verifyRes.ok && verifyData.matches) {
       setVerifyResult('match');
       // If matches, update manifest status to Delivered (Base)
-      await fetch(`http://localhost:5000/api/v1/cargo/manifest/${manifest_id}/status`, {
+      await fetch(`${BACKEND_URL}/api/v1/cargo/manifest/${manifest_id}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: 'Delivered (Base)' })

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
+import { BACKEND_URL } from '../../api';
  Search,
  Download,
  ShieldCheck,
@@ -52,7 +53,7 @@ export default function AdminHistory() {
  useEffect(() => {
   const fetchLogs = async () => {
    try {
-    const res = await fetch('http://localhost:5000/api/v1/audit');
+    const res = await fetch(`${BACKEND_URL}/api/v1/audit`);
     if (res.ok) {
      const data = await res.json();
      setLogs(data);

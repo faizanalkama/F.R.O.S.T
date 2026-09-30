@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Calendar, CloudSnow, Wind, Droplet, ArrowRight, CheckCircle2, XCircle, Users, IndianRupee, MapPin } from 'lucide-react';
+import { backendApi, mlApi } from '../api';
 
 export default function ExpeditionPlanning() {
  const [expedition, setExpedition] = useState(null);
@@ -20,8 +21,8 @@ export default function ExpeditionPlanning() {
   const fetchData = async () => {
    try {
     const [expRes, rosterRes] = await Promise.all([
-     axios.get('http://localhost:5000/api/v1/expeditions'),
-     axios.get('http://localhost:5000/api/v1/roster')
+     backendApi.get('/api/v1/expeditions'),
+     backendApi.get('/api/v1/roster')
     ]);
     if (expRes.data.length > 0) setExpedition(expRes.data[0]);
     setRoster(rosterRes.data);
@@ -37,7 +38,7 @@ export default function ExpeditionPlanning() {
   if (awsMode) {
    const fetchAWSAndPredict = async () => {
     try {
-     const res = await axios.get('http://localhost:5000/api/v1/aws/current');
+     const res = await backendApi.get('/api/v1/aws/current');
      const newData = {
       U10: res.data.U10,
       pressure_drop: res.data.pressure_drop,

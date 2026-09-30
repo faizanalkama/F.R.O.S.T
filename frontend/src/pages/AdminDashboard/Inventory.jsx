@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Database, CheckCircle, Clock, Search, X, Satellite, MapPin, Activity } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { BACKEND_URL } from '../../api';
 
 export default function AdminInventory() {
   const [activeCenter, setActiveCenter] = useState('Himadri');
@@ -19,9 +20,9 @@ export default function AdminInventory() {
       setInventoryLoading(true);
       try {
         const [forecastResponse, requisitionResponse, insightsResponse] = await Promise.all([
-          fetch(`http://localhost:5000/api/v1/inventory/forecast?station=${activeCenter.toLowerCase()}`),
-          fetch(`http://localhost:5000/api/v1/requisitions?station=${activeCenter.toLowerCase()}`),
-          fetch(`http://localhost:5000/api/v1/ml/insights?station=${activeCenter.toLowerCase()}`)
+          fetch(`${BACKEND_URL}/api/v1/inventory/forecast?station=${activeCenter.toLowerCase()}`),
+          fetch(`${BACKEND_URL}/api/v1/requisitions?station=${activeCenter.toLowerCase()}`),
+          fetch(`${BACKEND_URL}/api/v1/ml/insights?station=${activeCenter.toLowerCase()}`)
         ]);
         const [forecast, requisitions, insights] = await Promise.all([forecastResponse.json(), requisitionResponse.json(), insightsResponse.json()]);
         
@@ -90,7 +91,7 @@ export default function AdminInventory() {
   const handleDecision = async (id, decision) => {
     setRequestError('');
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/requisitions/${encodeURIComponent(id)}`, {
+      const response = await fetch(`${BACKEND_URL}/api/v1/requisitions/${encodeURIComponent(id)}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ decision }),

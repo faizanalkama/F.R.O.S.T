@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { setupSync } from '../utils/store';
 import { Activity, Radio, AlertTriangle, Ship, Power, Play, Square } from 'lucide-react';
+import { backendApi, getWsUrl } from '../api';
 
 // Fix Leaflet icons
 delete L.Icon.Default.prototype._getIconUrl;
@@ -37,14 +38,14 @@ export default function Dashboard() {
  useEffect(() => {
   const fetchGeofences = async () => {
    try {
-    const res = await axios.get('http://localhost:5000/api/v1/geofences');
+    const res = await backendApi.get('/api/v1/geofences');
     setGeofences(res.data);
    } catch (e) { console.error('Failed to fetch geofences', e); }
   };
   
   const fetchVessel = async () => {
    try {
-    const res = await axios.get('http://localhost:5000/api/v1/ais/vessel/419000000');
+    const res = await backendApi.get('/api/v1/ais/vessel/419000000');
     setVessel(res.data);
    } catch (e) { console.error('Failed to fetch vessel', e); }
   };
@@ -53,7 +54,7 @@ export default function Dashboard() {
   fetchVessel();
 
   // Setup WS sync for telemetry
-  const sync = setupSync('ws://localhost:5000/crdt');
+  const sync = setupSync(getWsUrl('/crdt'));
   
   const handleTelemetry = (e) => {
    const data = e.detail;
@@ -75,9 +76,9 @@ export default function Dashboard() {
  const toggleSimulator = async () => {
   try {
    if (simulatorRunning) {
-    await axios.post('http://localhost:5000/api/v1/simulator/lora/stop');
+    await backendApi.post('/api/v1/simulator/lora/stop');
    } else {
-    await axios.post('http://localhost:5000/api/v1/simulator/lora/start');
+    await backendApi.post('/api/v1/simulator/lora/start');
    }
    setSimulatorRunning(!simulatorRunning);
   } catch (e) { console.error(e); }
@@ -85,7 +86,7 @@ export default function Dashboard() {
 
  const triggerMockSOS = async () => {
   try {
-   await axios.post('http://localhost:5000/api/v1/simulator/lora/sos', { personnel_id: 'EXP-BIO-04' });
+   await backendApi.post('/api/v1/simulator/lora/sos', { personnel_id: 'EXP-BIO-04' });
   } catch (e) { console.error(e); }
  };
 

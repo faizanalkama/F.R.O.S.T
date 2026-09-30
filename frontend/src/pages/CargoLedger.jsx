@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Package, ShieldCheck, ShieldAlert, FileText, QrCode, ArrowRight, Lock, Unlock, Eye, Hash, ChevronRight } from 'lucide-react';
+import { BACKEND_URL } from '../api';
 
-const API = 'http://localhost:5000/api/v1';
+const API = `${BACKEND_URL}/api/v1`;
 
 const STATUS_PIPELINE = [
  'Draft',

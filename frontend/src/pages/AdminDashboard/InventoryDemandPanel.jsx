@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Activity, ChevronDown, RefreshCw } from 'lucide-react';
+import { BACKEND_URL } from '../../api';
 
-const FORECAST_URL = 'http://localhost:5000/api/v1/inventory/forecast';
+const FORECAST_URL = `${BACKEND_URL}/api/v1/inventory/forecast`;
 
 const statusLabels = {
   reorder_now: 'Below reorder line',

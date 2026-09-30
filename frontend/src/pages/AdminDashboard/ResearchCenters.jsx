@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
+import { BACKEND_URL } from '../../api';
   Activity,
   ArrowLeft,
   CloudRain,
@@ -12,7 +13,7 @@ import {
   Zap,
 } from 'lucide-react';
 
-const API_BASE = 'http://localhost:5000/api/v1';
+const API_BASE = `${BACKEND_URL}/api/v1`;
 
 function StationCard({ station, isSelected, onSelect }) {
   const [liveTemp, setLiveTemp] = useState(null);
@@ -158,7 +159,7 @@ function DetailPanel({ station, onBack }) {
     const loadRoster = async () => {
       try {
         const stationName = station.name.split(' ')[0];
-        const res = await fetch(`http://localhost:5000/api/stations/${stationName}/roster`);
+        const res = await fetch(`${BACKEND_URL}/api/stations/${stationName}/roster`);
         const data = await res.json();
         if (active && data.success) {
           setLiveRoster(data.roster);

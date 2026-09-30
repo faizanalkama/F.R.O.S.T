@@ -33,6 +33,7 @@ import {
 import { useIceNet } from '../../context/IceNetContext';
 import InventoryDemandPanel from './InventoryDemandPanel';
 import AddPersonnelModal from './AddPersonnelModal';
+import { backendApi, BACKEND_URL } from '../../api';
 
 const defaultFlights = [];
 
@@ -85,7 +86,7 @@ export default function ExpeditionPlanner() {
       setApiError(null);
       setRawResponse("Attempting fetch to http://localhost:5000/api/v1/personnel/expedition...");
 
-      const response = await axios.get('http://localhost:5000/api/v1/personnel/expedition');
+      const response = await backendApi.get('/api/v1/personnel/expedition');
 
       setRawResponse(JSON.stringify(response.data)); // Dump raw JSON to state
 
@@ -113,8 +114,8 @@ export default function ExpeditionPlanner() {
   useEffect(() => {
     let cancelled = false;
     Promise.all([
-      fetch('http://localhost:5000/api/v1/expeditions').then(res => res.json()),
-      fetch('http://localhost:5000/api/v1/budget/ISEA-46_2026-27').then(res => res.json())
+      fetch(`${BACKEND_URL}/api/v1/expeditions`).then(res => res.json()),
+      fetch(`${BACKEND_URL}/api/v1/budget/ISEA-46_2026-27`).then(res => res.json())
     ]).then(([expeditions, budget]) => {
       if (cancelled) return;
       setFlights(Array.isArray(expeditions) ? expeditions : []);
@@ -128,7 +129,7 @@ export default function ExpeditionPlanner() {
   const saveBudget = async (allocations) => {
     setIsPlannerSaving(true);
     try {
-      const response = await fetch('http://localhost:5000/api/v1/budget/ISEA-46_2026-27', {
+      const response = await fetch(`${BACKEND_URL}/api/v1/budget/ISEA-46_2026-27`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -151,7 +152,7 @@ export default function ExpeditionPlanner() {
   const handleAddVessel = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/v1/expeditions', {
+      const res = await fetch(`${BACKEND_URL}/api/v1/expeditions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newVessel)
@@ -169,7 +170,7 @@ export default function ExpeditionPlanner() {
 
   const updateVesselStatus = async (id, status) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/v1/expeditions/${id}`, {
+      const res = await fetch(`${BACKEND_URL}/api/v1/expeditions/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status })
@@ -267,11 +268,11 @@ export default function ExpeditionPlanner() {
     setPredictionResult(null);
     setPredictionError('');
     try {
-      const weatherResponse = await fetch(`http://localhost:5000/api/v1/aws/current?station=${weatherStation}`);
+      const weatherResponse = await fetch(`${BACKEND_URL}/api/v1/aws/current?station=${weatherStation}`);
       const weather = await weatherResponse.json();
       if (!weatherResponse.ok) throw new Error(weather.error || 'Live weather unavailable');
 
-      const predictionUrl = new URL('http://localhost:5000/api/v1/ml/predict-window');
+      const predictionUrl = new URL(`${BACKEND_URL}/api/v1/ml/predict-window`);
       Object.entries({
         U10: weather.U10,
         pressure_drop: weather.pressure_drop,
@@ -331,13 +332,13 @@ export default function ExpeditionPlanner() {
         vessel_mmsi: '123456789'
       };
 
-      await fetch('http://localhost:5000/api/v1/cargo/manifest', {
+      await fetch(`${BACKEND_URL}/api/v1/cargo/manifest`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
 
-      const sealRes = await fetch(`http://localhost:5000/api/v1/cargo/manifest/${manifest_id}/seal`, {
+      const sealRes = await fetch(`${BACKEND_URL}/api/v1/cargo/manifest/${manifest_id}/seal`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       });
