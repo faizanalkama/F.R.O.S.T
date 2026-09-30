@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, UserPlus, MapPin, Briefcase, Anchor } from 'lucide-react';
+import { BACKEND_URL, safeFetch } from '../../api';
 
 export default function AddPersonnelModal({ isOpen, onClose, onPersonnelAdded }) {
   const [formData, setFormData] = useState({
@@ -20,14 +21,14 @@ export default function AddPersonnelModal({ isOpen, onClose, onPersonnelAdded })
 
     try {
       console.log("Submitting personnel...", formData);
-      const response = await fetch('/api/v1/personnel', {
+      const response = await safeFetch(`${BACKEND_URL}/api/v1/personnel`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
       const data = await response.json();
       
-      if (!response.ok || !data.success) {
+      if (!data.success) {
         console.error("Failed to add personnel:", data);
         throw new Error(data.message || data.error || 'Failed to add personnel');
       }

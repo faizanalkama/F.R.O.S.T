@@ -15,6 +15,26 @@ export const mlApi = axios.create({
   baseURL: ML_URL,
 });
 
+// Robust fetch wrapper
+export const safeFetch = async (url, options = {}) => {
+  const response = await fetch(url, options);
+  const contentType = response.headers.get("content-type");
+  
+  if (!response.ok) {
+    if (contentType && contentType.includes("application/json")) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
+    }
+    throw new Error(`Server Error (${response.status}): Received HTML instead of JSON. Check the backend endpoint.`);
+  }
+
+  if (!contentType || !contentType.includes("application/json")) {
+    throw new Error(`Invalid Response: Expected JSON, got ${contentType || 'unknown'}. This might be an HTML error page.`);
+  }
+
+  return response;
+};
+
 // 3. Dynamic WebSocket URL Generator
 // This converts http:// to ws:// for local dev, and https:// to wss:// for production
 export const getWsUrl = (path = '') => {
