@@ -269,18 +269,31 @@ export default function ExpeditionPlanner() {
     setPredictionResult(null);
     setPredictionError('');
     try {
-      const weatherResponse = await fetch(`${BACKEND_URL}/api/v1/aws/current?station=${weatherStation}`);
-      const weather = await weatherResponse.json();
-      if (!weatherResponse.ok) throw new Error(weather.error || 'Live weather unavailable');
+      const coords = {
+        maitri: { lat: -70.76, lon: 11.73 },
+        bharati: { lat: -69.40, lon: 76.19 },
+        himadri: { lat: 78.92, lon: 11.93 },
+      };
+      const { lat, lon } = coords[weatherStation] || coords.maitri;
+
+      const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m,visibility`);
+      const weatherData = await weatherResponse.json();
+      if (!weatherResponse.ok) throw new Error('Live weather unavailable from Open-Meteo');
+
+      const current = weatherData.current || {};
+      const temperature = current.temperature_2m || 0;
+      const windSpeed = current.wind_speed_10m || 0;
+      const visibilityKm = current.visibility ? current.visibility / 1000 : 0;
+      const timestamp = current.time || new Date().toISOString();
 
       const predictionUrl = new URL(`${BACKEND_URL}/api/v1/ml/predict-window`);
       Object.entries({
-        U10: weather.U10,
-        pressure_drop: weather.pressure_drop,
-        temperature: weather.temperature,
-        humidity: weather.humidity,
-        timestamp: weather.timestamp,
-        station: weather.station_id,
+        U10: windSpeed,
+        pressure_drop: 0,
+        temperature: temperature,
+        humidity: 0,
+        timestamp: timestamp,
+        station: weatherStation,
       }).forEach(([key, value]) => predictionUrl.searchParams.set(key, value));
 
       const predictionResponse = await fetch(predictionUrl);
@@ -290,12 +303,12 @@ export default function ExpeditionPlanner() {
       setPredictionResult({
         safe: prediction.safe,
         probability: Math.round(Number(prediction.probability) * 100),
-        temperature: weather.temperature,
-        wind: weather.U10,
-        visibilityKm: weather.visibility_km,
-        observedAt: weather.timestamp,
-        source: weather.source,
-        stale: weather.stale,
+        temperature: temperature,
+        wind: windSpeed,
+        visibilityKm: visibilityKm,
+        observedAt: timestamp,
+        source: 'Open-Meteo Live API',
+        stale: false,
       });
     } catch (error) {
       setPredictionError(error.message || 'Unable to fetch weather estimate.');

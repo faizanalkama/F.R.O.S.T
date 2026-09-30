@@ -28,8 +28,7 @@ mongoose.connect(process.env.MONGO_URI || process.env.DATABASE_URL)
   .catch(err => console.error('MongoDB connection error:', err));
 
 const app = express();
-const allowedOrigins = process.env.FRONTEND_URL ? [process.env.FRONTEND_URL, 'http://localhost:5173'] : ['http://localhost:5173'];
-app.use(cors({ origin: allowedOrigins, credentials: true }));
+app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 app.use('/api/v1/sync/crdt-binary', express.raw({ type: 'application/octet-stream', limit: '10mb' }));
 
@@ -77,9 +76,18 @@ app.get('/api/v1/audit', async (req, res) => {
 app.get('/api/health', async (req, res) => {
   try {
     if (mongoose.connection.readyState !== 1) throw new Error('Database not connected');
-    res.json({ status: 'pass', database: 'connected' });
+    res.json({ status: 'healthy', database: 'connected', timestamp: new Date() });
   } catch (error) {
-    res.status(500).json({ status: 'fail', error: error.message });
+    res.status(500).json({ status: 'fail', database: 'disconnected', error: error.message, timestamp: new Date() });
+  }
+});
+
+app.get('/api/v1/health', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) throw new Error('Database not connected');
+    res.json({ status: 'healthy', database: 'connected', timestamp: new Date() });
+  } catch (error) {
+    res.status(500).json({ status: 'fail', database: 'disconnected', error: error.message, timestamp: new Date() });
   }
 });
 
@@ -757,7 +765,7 @@ app.get('/api/v1/ml/predict-window', async (req, res) => {
     res.json(r.data);
   } catch (e) {
     console.error('ML Predict Window Error:', e.message);
-    res.status(200).json({ status: 'offline', message: 'ML Service unreachable', safe_to_fly: false });
+    res.status(200).json({ safe: false, probability: 0, status: 'offline', message: 'ML Service unreachable', safe_to_fly: false });
   }
 });
 
@@ -996,4 +1004,12 @@ app.post('/api/v1/personnel', async (req, res) => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-server.listen(PORT, () => console.log(`F.R.O.S.T Node server running on port ${PORT}`));
+server.listen(PORT, () => {
+  console.log('=========================================');
+  console.log('🚀 SYSTEM DIAGNOSTIC RUN 🚀');
+  console.log(`Port Listening: OK (Port ${PORT})`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`Database URL: ${process.env.MONGO_URI || process.env.DATABASE_URL ? 'Configured' : 'Missing'}`);
+  console.log(`Database Connection: ${mongoose.connection.readyState === 1 ? 'Connected' : 'Pending/Failed'}`);
+  console.log('=========================================');
+});

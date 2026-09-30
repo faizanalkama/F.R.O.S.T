@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // 1. Define base URLs with a fallback for local development
-export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://frost-backend.onrender.com';
 export const ML_URL = import.meta.env.VITE_ML_URL || 'http://localhost:8000';
 
 // 2. Export Axios instances 
@@ -25,11 +25,13 @@ export const safeFetch = async (url, options = {}) => {
       const errorData = await response.json();
       throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
     }
-    throw new Error(`Server Error (${response.status}): Received HTML instead of JSON. Check the backend endpoint.`);
+    console.warn('[API Error]: Backend may be sleeping or unreachable.');
+    throw new Error(`[API Error]: Backend may be sleeping or unreachable. (${response.status})`);
   }
 
   if (!contentType || !contentType.includes("application/json")) {
-    throw new Error(`Invalid Response: Expected JSON, got ${contentType || 'unknown'}. This might be an HTML error page.`);
+    console.warn('[API Error]: Backend may be sleeping or unreachable.');
+    throw new Error(`[API Error]: Backend may be sleeping or unreachable. (Invalid format)`);
   }
 
   return response;
