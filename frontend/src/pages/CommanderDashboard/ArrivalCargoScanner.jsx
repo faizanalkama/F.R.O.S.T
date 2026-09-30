@@ -1,3 +1,4 @@
+import { BACKEND_URL } from '../../api';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -14,7 +15,6 @@ import {
  Zap,
 } from 'lucide-react';
 import { useIceNet } from '../../context/IceNetContext';
-import { BACKEND_URL } from '../../api';
 
 
 export default function ArrivalCargoScanner() {

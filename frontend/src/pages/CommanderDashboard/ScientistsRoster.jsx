@@ -1,6 +1,6 @@
+import { BACKEND_URL } from '../../api';
 import React, { useState, useRef, useEffect } from 'react';
 import { HeartPulse, User, ShieldCheck, Edit2, Plus, X, Upload, Trash2, AlertTriangle } from 'lucide-react';
-import { BACKEND_URL } from '../../api';
 
 const initialScientists = [];
 

@@ -1,3 +1,4 @@
+import { backendApi, getWsUrl } from '../api';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MapContainer, TileLayer, Marker, Popup, Circle, Polygon } from 'react-leaflet';
@@ -5,7 +6,6 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { setupSync } from '../utils/store';
 import { Activity, Radio, AlertTriangle, Ship, Power, Play, Square } from 'lucide-react';
-import { backendApi, getWsUrl } from '../api';
 
 // Fix Leaflet icons
 delete L.Icon.Default.prototype._getIconUrl;

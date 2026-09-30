@@ -1,8 +1,8 @@
+import { BACKEND_URL } from '../../api';
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Database, CheckCircle, Clock, Search, X, Satellite, MapPin, Activity } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { BACKEND_URL } from '../../api';
 
 export default function AdminInventory() {
   const [activeCenter, setActiveCenter] = useState('Himadri');

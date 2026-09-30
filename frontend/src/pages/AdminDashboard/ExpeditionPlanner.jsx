@@ -1,3 +1,4 @@
+import { backendApi, BACKEND_URL } from '../../api';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion, AnimatePresence, Reorder } from 'framer-motion';
@@ -33,7 +34,6 @@ import {
 import { useIceNet } from '../../context/IceNetContext';
 import InventoryDemandPanel from './InventoryDemandPanel';
 import AddPersonnelModal from './AddPersonnelModal';
-import { backendApi, BACKEND_URL } from '../../api';
 
 const defaultFlights = [];
 

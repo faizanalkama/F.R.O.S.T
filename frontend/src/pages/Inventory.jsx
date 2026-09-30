@@ -1,8 +1,8 @@
+import { getWsUrl } from '../api';
 import React, { useState, useEffect, useRef } from 'react';
 import { AlertTriangle, Database, Plus, Minus, Wifi, WifiOff, RefreshCw, Clock } from 'lucide-react';
 import { doc, inventoryMap, syncStatus, setupSync } from '../utils/store';
 import * as Y from 'yjs';
-import { getWsUrl } from '../api';
 
 export default function Inventory() {
  const [items, setItems] = useState([]);

@@ -1,6 +1,6 @@
+import { BACKEND_URL } from '../../api';
 import { useCallback, useEffect, useState } from 'react';
 import { Activity, ChevronDown, RefreshCw } from 'lucide-react';
-import { BACKEND_URL } from '../../api';
 
 const FORECAST_URL = `${BACKEND_URL}/api/v1/inventory/forecast`;
 

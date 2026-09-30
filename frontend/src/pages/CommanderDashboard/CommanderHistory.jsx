@@ -1,7 +1,7 @@
+import { BACKEND_URL } from '../../api';
 import { Clock, Zap, PackageCheck, Radio, Thermometer, Shield, AlertTriangle } from 'lucide-react';
 
 import { useState, useEffect } from 'react';
-import { BACKEND_URL } from '../../api';
 
 const severityColors = {
  normal:  'text-[var(--ok)]',

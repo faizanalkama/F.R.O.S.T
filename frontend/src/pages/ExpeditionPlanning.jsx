@@ -1,7 +1,7 @@
+import { backendApi, mlApi } from '../api';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Calendar, CloudSnow, Wind, Droplet, ArrowRight, CheckCircle2, XCircle, Users, IndianRupee, MapPin } from 'lucide-react';
-import { backendApi, mlApi } from '../api';
 
 export default function ExpeditionPlanning() {
  const [expedition, setExpedition] = useState(null);

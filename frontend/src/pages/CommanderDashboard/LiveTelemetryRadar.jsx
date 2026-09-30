@@ -1,3 +1,4 @@
+import { getWsUrl, BACKEND_URL } from '../../api';
 import { useState, useEffect } from 'react';
 import {
  LineChart,
@@ -11,7 +12,6 @@ import {
 } from 'recharts';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertTriangle, Radio, Activity, Zap, Thermometer } from 'lucide-react';
-import { getWsUrl, BACKEND_URL } from '../../api';
 
 const generateInitialData = () => {
  return Array.from({ length: 20 }, (_, i) => {

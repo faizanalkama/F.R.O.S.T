@@ -1,3 +1,4 @@
+import { BACKEND_URL } from '../../api';
 import { useState, useEffect } from 'react';
 import {
  Ship,
@@ -15,7 +16,6 @@ import {
 } from 'lucide-react';
 import { ComposableMap, Geographies, Geography, Graticule, Marker, Line } from 'react-simple-maps';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BACKEND_URL } from '../../api';
 
 const geoUrl = 'https://unpkg.com/world-atlas@2.0.2/countries-110m.json';
 

@@ -1,7 +1,7 @@
+import { BACKEND_URL } from '../../api';
 import React, { useEffect, useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Thermometer, Eye, Wind } from 'lucide-react';
-import { BACKEND_URL } from '../../api';
 
 export default function WeatherAnalysis() {
  const [weather, setWeather] = useState(null);

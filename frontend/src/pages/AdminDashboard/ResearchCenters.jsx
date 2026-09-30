@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
 import { BACKEND_URL } from '../../api';
+import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
   Activity,
   ArrowLeft,
   CloudRain,

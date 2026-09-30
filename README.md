@@ -161,7 +161,7 @@ npm run dev
 
 | Member | Role | GitHub |
 | :--- | :--- | :--- |
-| **Ayan** | Repository Lead & IoT Architecture | [@Ayan933710](https://github.com/Ayan933710) |
+| **Harsh** | Repository Lead & IoT Architecture |  |
 | **Faizan Alkama** | Full-Stack Cloud Deployment & ML Ops | *(Insert Link)* |
 | **[Name]** | Hardware Engineering / Sensor Calibrations | *(Insert Link)* |
 | **[Name]** | UI/UX Design & 3D Integration | *(Insert Link)* |

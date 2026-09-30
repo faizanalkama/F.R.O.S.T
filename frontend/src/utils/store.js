@@ -1,5 +1,5 @@
-import * as Y from 'yjs';
 import { getWsUrl, BACKEND_URL } from '../api';
+import * as Y from 'yjs';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // §3.2  CRDT Sync Engine — Edge / Client Side
