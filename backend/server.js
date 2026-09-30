@@ -28,23 +28,24 @@ mongoose.connect(process.env.MONGO_URI || process.env.DATABASE_URL)
   .catch(err => console.error('MongoDB connection error:', err));
 
 const app = express();
-app.use(cors({ origin: 'http://localhost:5173' }));
+const allowedOrigins = process.env.FRONTEND_URL ? [process.env.FRONTEND_URL, 'http://localhost:5173'] : ['http://localhost:5173'];
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json({ limit: '10mb' }));
 app.use('/api/v1/sync/crdt-binary', express.raw({ type: 'application/octet-stream', limit: '10mb' }));
 
 async function createAuditLog(category, action, severity, metadata = {}) {
   try {
     await AuditLog.create({
-        log_id: `LOG-${crypto.randomUUID().substring(0, 8)}`,
-        category,
-        action,
-        severity,
-        admin_id: metadata.adminId || null,
-        commander_id: metadata.commanderId || null,
-        details: metadata.requestDetails || null,
-        status: metadata.status || null,
-        signature_hash: metadata.signatureHash || null,
-      });
+      log_id: `LOG-${crypto.randomUUID().substring(0, 8)}`,
+      category,
+      action,
+      severity,
+      admin_id: metadata.adminId || null,
+      commander_id: metadata.commanderId || null,
+      details: metadata.requestDetails || null,
+      status: metadata.status || null,
+      signature_hash: metadata.signatureHash || null,
+    });
   } catch (err) {
     console.error('Failed to create audit log:', err);
   }
@@ -97,7 +98,7 @@ function schedulePersist() {
     try {
       const state = Buffer.from(Y.encodeStateAsUpdate(globalDoc));
       await CrdtSnapshot.findOneAndUpdate({ doc_id: 'global' }, { state, updated_at: new Date() }, { upsert: true, new: true });
-    } catch (_) {}
+    } catch (_) { }
   }, 2000);
 }
 globalDoc.on('update', schedulePersist);
@@ -178,7 +179,7 @@ CrdtSnapshot.findOne({ doc_id: 'global' }).then((snap) => {
     Y.applyUpdate(globalDoc, new Uint8Array(snap.state));
     console.log('[CRDT] Restored canonical doc from MongoDB snapshot');
   }
-}).catch(() => {});
+}).catch(() => { });
 
 // ─────────────────────────────────────────────────────────────────────────────
 // JWT Auth
@@ -224,9 +225,9 @@ function authMiddleware(roles) {
 // Research Centers Detail Data
 // ─────────────────────────────────────────────────────────────────────────────
 const researchCentersMemory = {
-  maitri: { id: 'maitri', name: 'Maitri Station', coords: '70°46′S, 11°44′E', region: 'Schirmacher Oasis, Antarctica', crew: 25, temp: -34, power: 96, status: 'Operational', alert: 'Stable ice shelf conditions', leader: 'Dr. Aisha Malik', summary: 'Primary glaciology and atmospheric chemistry operations continue with full payload capacity and no transport restrictions.', weather: { condition: 'Clear / light katabatic flow', wind: 24, humidity: 58, visibility: '7.2 km', pressure: 1014, risk: 'Low' }, rosters: [ { name: 'Leena Reddy', role: 'Station Lead', shift: 'Day', status: 'On station' }, { name: 'Omar Haddad', role: 'Glaciology Lead', shift: 'Day', status: 'In field' }, { name: 'Priya Nair', role: 'Meteorology Analyst', shift: 'Night', status: 'Monitoring' }, { name: 'Milan Sethi', role: 'Power Systems', shift: 'Day', status: 'On station' }, { name: 'Tariq Chen', role: 'Logistics Officer', shift: 'Night', status: 'On call' } ], logistics: { batteryReserve: '82%', sensorHealth: 'Optimal', nextMaintenance: 'Tomorrow, 09:30 UTC', runwayStatus: 'Open' } },
-  bharati: { id: 'bharati', name: 'Bharati Station', coords: '69°24′S, 76°12′E', region: 'Larsemann Hills, Antarctica', crew: 18, temp: -41, power: 92, status: 'Operational', alert: 'Cold front moving east', leader: 'Capt. Ishan Verma', summary: 'Field teams are active with a moderate snow squall watch, but all research and power systems remain stable.', weather: { condition: 'Snow squall watch', wind: 31, humidity: 73, visibility: '3.4 km', pressure: 1002, risk: 'Moderate' }, rosters: [ { name: 'Nadia Foster', role: 'Station Operations', shift: 'Day', status: 'On station' }, { name: 'Arjun Patel', role: 'Ice Core Team', shift: 'Day', status: 'In field' }, { name: 'Elena Rossi', role: 'Climate Systems', shift: 'Night', status: 'Monitoring' }, { name: 'Siddharth Rao', role: 'Facility Tech', shift: 'Day', status: 'On station' } ], logistics: { batteryReserve: '76%', sensorHealth: 'Nominal', nextMaintenance: 'Today, 18:00 UTC', runwayStatus: 'Limited access' } },
-  himadri: { id: 'himadri', name: 'Himadri Station', coords: '78°55′N, 11°56′E', region: 'Ny-Ålesund, Svalbard', crew: 12, temp: -8, power: 99, status: 'Operational', alert: 'Low wind, clear Arctic conditions', leader: 'Dr. Helena Berg', summary: 'Arctic atmospheric research is in a favorable window, with excellent visibility and normal ventilation operations.', weather: { condition: 'Clear with low cloud cover', wind: 12, humidity: 62, visibility: '10.1 km', pressure: 1018, risk: 'Low' }, rosters: [ { name: 'Jonas Eriksen', role: 'Scientific Lead', shift: 'Day', status: 'On station' }, { name: 'Marta Novak', role: 'Ocean Sensors', shift: 'Day', status: 'Monitoring' }, { name: 'Keisuke Sato', role: 'Energy Systems', shift: 'Night', status: 'On call' }, { name: 'Alicia Moore', role: 'Field Technician', shift: 'Day', status: 'In field' } ], logistics: { batteryReserve: '89%', sensorHealth: 'Optimal', nextMaintenance: 'Thursday, 11:00 UTC', runwayStatus: 'Open' } }
+  maitri: { id: 'maitri', name: 'Maitri Station', coords: '70°46′S, 11°44′E', region: 'Schirmacher Oasis, Antarctica', crew: 25, temp: -34, power: 96, status: 'Operational', alert: 'Stable ice shelf conditions', leader: 'Dr. Aisha Malik', summary: 'Primary glaciology and atmospheric chemistry operations continue with full payload capacity and no transport restrictions.', weather: { condition: 'Clear / light katabatic flow', wind: 24, humidity: 58, visibility: '7.2 km', pressure: 1014, risk: 'Low' }, rosters: [{ name: 'Leena Reddy', role: 'Station Lead', shift: 'Day', status: 'On station' }, { name: 'Omar Haddad', role: 'Glaciology Lead', shift: 'Day', status: 'In field' }, { name: 'Priya Nair', role: 'Meteorology Analyst', shift: 'Night', status: 'Monitoring' }, { name: 'Milan Sethi', role: 'Power Systems', shift: 'Day', status: 'On station' }, { name: 'Tariq Chen', role: 'Logistics Officer', shift: 'Night', status: 'On call' }], logistics: { batteryReserve: '82%', sensorHealth: 'Optimal', nextMaintenance: 'Tomorrow, 09:30 UTC', runwayStatus: 'Open' } },
+  bharati: { id: 'bharati', name: 'Bharati Station', coords: '69°24′S, 76°12′E', region: 'Larsemann Hills, Antarctica', crew: 18, temp: -41, power: 92, status: 'Operational', alert: 'Cold front moving east', leader: 'Capt. Ishan Verma', summary: 'Field teams are active with a moderate snow squall watch, but all research and power systems remain stable.', weather: { condition: 'Snow squall watch', wind: 31, humidity: 73, visibility: '3.4 km', pressure: 1002, risk: 'Moderate' }, rosters: [{ name: 'Nadia Foster', role: 'Station Operations', shift: 'Day', status: 'On station' }, { name: 'Arjun Patel', role: 'Ice Core Team', shift: 'Day', status: 'In field' }, { name: 'Elena Rossi', role: 'Climate Systems', shift: 'Night', status: 'Monitoring' }, { name: 'Siddharth Rao', role: 'Facility Tech', shift: 'Day', status: 'On station' }], logistics: { batteryReserve: '76%', sensorHealth: 'Nominal', nextMaintenance: 'Today, 18:00 UTC', runwayStatus: 'Limited access' } },
+  himadri: { id: 'himadri', name: 'Himadri Station', coords: '78°55′N, 11°56′E', region: 'Ny-Ålesund, Svalbard', crew: 12, temp: -8, power: 99, status: 'Operational', alert: 'Low wind, clear Arctic conditions', leader: 'Dr. Helena Berg', summary: 'Arctic atmospheric research is in a favorable window, with excellent visibility and normal ventilation operations.', weather: { condition: 'Clear with low cloud cover', wind: 12, humidity: 62, visibility: '10.1 km', pressure: 1018, risk: 'Low' }, rosters: [{ name: 'Jonas Eriksen', role: 'Scientific Lead', shift: 'Day', status: 'On station' }, { name: 'Marta Novak', role: 'Ocean Sensors', shift: 'Day', status: 'Monitoring' }, { name: 'Keisuke Sato', role: 'Energy Systems', shift: 'Night', status: 'On call' }, { name: 'Alicia Moore', role: 'Field Technician', shift: 'Day', status: 'In field' }], logistics: { batteryReserve: '89%', sensorHealth: 'Optimal', nextMaintenance: 'Thursday, 11:00 UTC', runwayStatus: 'Open' } }
 };
 
 app.get('/api/v1/research-centers', async (_req, res) => {
@@ -269,21 +270,21 @@ app.get('/api/v1/research-centers/:id', async (req, res) => {
   try {
     const center = researchCentersMemory[req.params.id];
     if (!center) return res.status(404).json({ error: 'Research center not found' });
-    
+
     const stationName = center.name.split(' ')[0];
     const stationRegex = new RegExp(`^${stationName}$`, 'i');
-    
+
     // Fetch users for roster
     const users = await User.find({ station: stationRegex });
-    
+
     // Determine leader
-    const leaderUser = users.find(u => 
-      u.role.toLowerCase() === 'commander' || 
-      u.role.toLowerCase() === 'station lead' || 
+    const leaderUser = users.find(u =>
+      u.role.toLowerCase() === 'commander' ||
+      u.role.toLowerCase() === 'station lead' ||
       u.role.toLowerCase() === 'admin'
     );
     const leaderName = leaderUser ? leaderUser.name || leaderUser.username : 'Unassigned (Vacant)';
-    
+
     // Map rosters
     const rosters = users.map(u => ({
       name: u.name || u.username,
@@ -291,12 +292,12 @@ app.get('/api/v1/research-centers/:id', async (req, res) => {
       shift: 'Dynamic',
       status: 'Active'
     }));
-    
+
     // Fetch logistics (items)
     const items = await Item.find({ station: stationRegex });
     const totalItems = items.length;
     const criticalItems = items.filter(i => i.quantity <= i.critical_threshold).length;
-    
+
     // Calculate mock battery reserve based on active items if no real telemetry
     const logistics = {
       batteryReserve: `${Math.max(50, 100 - criticalItems * 5)}%`,
@@ -304,7 +305,7 @@ app.get('/api/v1/research-centers/:id', async (req, res) => {
       nextMaintenance: 'Dynamic based on stock',
       runwayStatus: totalItems > 0 ? 'Open' : 'Restricted'
     };
-    
+
     res.json({
       ...center,
       leader: `Lead: ${leaderName}`,
@@ -321,19 +322,62 @@ app.get('/api/v1/research-centers/:id', async (req, res) => {
 // Expeditions CRUD
 // ─────────────────────────────────────────────────────────────────────────────
 app.get('/api/v1/expeditions', async (req, res) => {
-  const records = await Expedition.find();
-  res.json(records);
+  try {
+    const statusFilter = req.query.status;
+    const query = statusFilter ? { status: statusFilter } : {};
+    const records = await Expedition.find(query);
+    res.json(records);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
-const { getExpeditionById } = require('./controllers/expeditionController');
-app.get('/api/v1/expeditions/:id', getExpeditionById);
 app.post('/api/v1/expeditions', async (req, res) => {
-  const data = { ...req.body, expedition_id: req.body.expedition_id || `EXP-${Date.now()}` };
-  const e = await Expedition.create(data);
-  res.json({ success: true, expedition: e });
+  try {
+    const e = await Expedition.create(req.body);
+    res.json({ success: true, expedition: e });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 app.patch('/api/v1/expeditions/:id', async (req, res) => {
-  const e = await Expedition.findOneAndUpdate({ expedition_id: req.params.id }, req.body, { new: true });
-  res.json({ success: true, expedition: e });
+  try {
+    const e = await Expedition.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!e) return res.status(404).json({ error: 'Not found' });
+    res.json({ success: true, expedition: e });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.patch('/api/v1/expeditions/:id/coordinates', async (req, res) => {
+  try {
+    const e = await Expedition.findByIdAndUpdate(req.params.id, { currentCoordinates: req.body.currentCoordinates }, { new: true });
+    res.json({ success: true, expedition: e });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+const Budget = require('./models/Budget');
+app.get('/api/v1/budget/:fiscalYear', async (req, res) => {
+  try {
+    const b = await Budget.findOne({ fiscalYear: req.params.fiscalYear });
+    res.json(b || { allocations: [], totalAllocated: 0, fiscalYear: req.params.fiscalYear });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+app.put('/api/v1/budget/:fiscalYear', async (req, res) => {
+  try {
+    const b = await Budget.findOneAndUpdate(
+      { fiscalYear: req.params.fiscalYear },
+      req.body,
+      { new: true, upsert: true }
+    );
+    res.json({ success: true, budget: b });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -441,7 +485,7 @@ app.post('/api/v1/simulator/lora/sos', async (req, res) => {
   const { personnel_id } = req.body;
   let person = await Roster.findOne({ personnel_id });
   if (!person) person = (await Roster.find())[0] || { personnel_id: 'EXP-BIO-04', blood_type: 'Unknown', allergies: 'Unknown', name: 'Unknown', role: 'Unknown' };
-  
+
   const payload = {
     node_id: person.personnel_id,
     personnel_id: person.personnel_id,
@@ -566,19 +610,19 @@ function canonicalJsonStringify(value) {
   return JSON.stringify(value);
 }
 
-const VALID_STATUSES = ['Draft','Procured','Packed (Goa)','In Transit (Ocean)','Awaiting Heli-lift','Delivered (Base)'];
+const VALID_STATUSES = ['Draft', 'Procured', 'Packed (Goa)', 'In Transit (Ocean)', 'Awaiting Heli-lift', 'Delivered (Base)'];
 
 app.post('/api/v1/cargo/manifest', async (req, res) => {
   const { manifest_id, items, destination, vessel, vessel_mmsi } = req.body;
   if (!manifest_id || !Array.isArray(items) || items.length === 0 || !destination || !vessel) {
     return res.status(400).json({ error: 'manifest_id, destination, vessel, and cargo items are required' });
   }
-  
+
   const existing = await Manifest.findOne({ manifest_id });
   if (existing) return res.status(409).json({ error: 'Manifest already exists' });
-  
+
   const data = { manifest_id, destination, vessel, status: 'Draft', items, vessel_mmsi: vessel_mmsi || null, crypto_hash: null, sealed_at: null, sealed_payload_json: null, tamper_detected: false, tamper_alerts: [] };
-  
+
   try {
     const saved = await Manifest.create(data);
     return res.status(201).json({ success: true, manifest: saved });
@@ -591,11 +635,11 @@ app.post('/api/v1/cargo/manifest/:id/seal', async (req, res) => {
   const manifest = await Manifest.findOne({ manifest_id: req.params.id });
   if (!manifest) return res.status(404).json({ error: 'Manifest not found' });
   if (manifest.crypto_hash) return res.status(409).json({ error: 'Already sealed' });
-  
+
   const payloadObj = { manifest_id: manifest.manifest_id, destination: manifest.destination, vessel: manifest.vessel, items: manifest.items, vessel_mmsi: manifest.vessel_mmsi };
   const canonicalJson = canonicalJsonStringify(payloadObj);
   const hash = crypto.createHash('sha256').update(canonicalJson, 'utf8').digest('hex');
-  
+
   const updated = await Manifest.findOneAndUpdate({ manifest_id: manifest.manifest_id }, { crypto_hash: hash, sealed_at: new Date(), sealed_payload_json: canonicalJson, status: 'Packed (Goa)', updated_at: new Date() }, { new: true });
   await createAuditLog('Transport', `Manifest ${manifest.manifest_id} sealed and cryptographically signed`, 'info', {
     adminId: 'GOA-HQ-01',
@@ -615,7 +659,7 @@ app.patch('/api/v1/cargo/manifest/:id/status', async (req, res) => {
   const tgtIdx = VALID_STATUSES.indexOf(newStatus);
   if (tgtIdx <= curIdx) return res.status(400).json({ error: `Cannot move backward` });
   if (tgtIdx >= 2 && !manifest.crypto_hash) return res.status(400).json({ error: 'Must seal first' });
-  
+
   const updated = await Manifest.findOneAndUpdate({ manifest_id: manifest.manifest_id }, { status: newStatus, updated_at: new Date() }, { new: true });
   res.json({ success: true, manifest: updated });
 });
@@ -626,7 +670,7 @@ app.post('/api/v1/cargo/verify', async (req, res) => {
   const manifest = await Manifest.findOne({ manifest_id });
   if (!manifest) return res.status(404).json({ error: 'Not found' });
   if (!manifest.crypto_hash) return res.status(400).json({ error: 'Never sealed' });
-  
+
   const incomingPayload = {
     manifest_id,
     destination: destination || manifest.destination,
@@ -636,15 +680,15 @@ app.post('/api/v1/cargo/verify', async (req, res) => {
   };
   const incomingCanonical = canonicalJsonStringify(incomingPayload);
   const incomingHash = crypto.createHash('sha256').update(incomingCanonical, 'utf8').digest('hex');
-  
+
   if (incomingHash !== manifest.crypto_hash) {
     const alert = { detected_at: new Date(), incoming_hash: incomingHash, stored_hash: manifest.crypto_hash, details: `Sealed: ${manifest.sealed_payload_json} | Incoming: ${incomingCanonical}` };
     const tamperAlerts = Array.isArray(manifest.tamper_alerts) ? manifest.tamper_alerts : [];
-    
+
     await Manifest.findOneAndUpdate({ manifest_id: manifest.manifest_id }, { tamper_alerts: [...tamperAlerts, alert], tamper_detected: true, updated_at: new Date() }, { new: true });
     return res.status(400).json({ error: 'TAMPER ALERT', hash_mismatch: true, stored_hash: manifest.crypto_hash, incoming_hash: incomingHash, sealed_payload: manifest.sealed_payload_json, incoming_payload: incomingCanonical, alert });
   }
-  if (manifest.status !== 'Delivered (Base)') { 
+  if (manifest.status !== 'Delivered (Base)') {
     await Manifest.findOneAndUpdate({ manifest_id: manifest.manifest_id }, { status: 'Delivered (Base)', updated_at: new Date() }, { new: true });
   }
   res.json({ success: true, message: 'Integrity verified', stored_hash: manifest.crypto_hash, incoming_hash: incomingHash });
@@ -700,7 +744,7 @@ app.post('/api/v1/telemetry/ingest', async (req, res) => {
   const dataStr = JSON.stringify({ type: 'telemetry', data: req.body });
   wssTelemetry.clients.forEach(c => { if (c.readyState === WebSocket.OPEN) c.send(dataStr); });
   wssCrdt.clients.forEach(c => { if (c.readyState === WebSocket.OPEN) c.send(dataStr); });
-  try { await Telemetry.create(req.body); } catch (_) {}
+  try { await Telemetry.create(req.body); } catch (_) { }
   res.json({ success: true });
 });
 
@@ -708,20 +752,20 @@ const { getPredictiveInsights } = require('./controllers/mlController');
 app.get('/api/v1/ml/insights', getPredictiveInsights);
 
 app.get('/api/v1/ml/predict-window', async (req, res) => {
-  try { 
-    const r = await axios.get(`${ML_URL}/predict-window`, { params: req.query }); 
-    res.json(r.data); 
-  } catch (e) { 
+  try {
+    const r = await axios.get(`${ML_URL}/predict-window`, { params: req.query });
+    res.json(r.data);
+  } catch (e) {
     console.error('ML Predict Window Error:', e.message);
-    res.status(200).json({ status: 'offline', message: 'ML Service unreachable', safe_to_fly: false }); 
+    res.status(200).json({ status: 'offline', message: 'ML Service unreachable', safe_to_fly: false });
   }
 });
 
 app.get('/api/v1/inventory', async (req, res) => {
-  try { 
+  try {
     const items = await Item.find();
-    return res.json(items.map(i => ({...i, qty: i.quantity})));
-  } catch (e) { res.status(500).json({ error: e.message }); } 
+    return res.json(items.map(i => ({ ...i, qty: i.quantity })));
+  } catch (e) { res.status(500).json({ error: e.message }); }
 });
 app.post('/api/v1/inventory', async (req, res) => {
   try { const i = await Item.create(req.body); return res.json(i); } catch (e) { res.status(500).json({ error: e.message }); }
@@ -772,7 +816,7 @@ app.post('/api/v1/requisitions', async (req, res) => {
 app.patch('/api/v1/requisitions/:id', async (req, res) => {
   const decision = String(req.body.decision || '').toUpperCase();
   if (!['APPROVED', 'DENIED'].includes(decision)) return res.status(400).json({ error: 'decision must be APPROVED or DENIED' });
-  
+
   const record = await Requisition.findOne({ requisition_id: req.params.id });
   if (!record) return res.status(404).json({ error: 'Requisition not found' });
   if (record.status !== 'PENDING_APPROVAL') return res.status(409).json({ error: 'Requisition is already decided' });
@@ -836,7 +880,7 @@ app.post('/api/v1/inventory/movements', async (req, res) => {
     if (existing) return res.status(200).json({ success: true, movement: existing, duplicate: true });
 
     const saved = await InventoryMovement.create(movement);
-    
+
     if (delta !== 0) {
       await createAuditLog('Logistics', `Inventory adjusted via Edge Node: ${name} [${delta > 0 ? '+' : ''}${delta} ${unit}]`, delta < 0 ? 'warning' : 'info', {
         commanderId: `CMD-${station.toUpperCase()}`,
@@ -920,4 +964,37 @@ app.get('/api/v1/inventory/forecast', async (req, res) => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Personnel (Expedition Teams)
+// ─────────────────────────────────────────────────────────────────────────────
+app.get('/api/v1/personnel/expedition', async (req, res) => {
+  try {
+    console.log("-> Fetching expedition personnel...");
+    const User = require('./models/User');
+    // Use regex to catch variations of "Summer" and "Winter"
+    const personnel = await User.find({
+      expeditionTeam: { $regex: /summer|winter/i }
+    });
+    console.log(`-> Found ${personnel.length} personnel in DB`);
+    res.status(200).json({ success: true, data: personnel });
+  } catch (error) {
+    console.error("DB Fetch Error:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+app.post('/api/v1/personnel', async (req, res) => {
+  try {
+    const User = require('./models/User');
+    const username = req.body.name.toLowerCase().replace(/\s+/g, '.') + Math.floor(Math.random() * 100000);
+    const newUser = new User({ ...req.body, username });
+    const savedUser = await newUser.save();
+    res.status(201).json({ success: true, data: savedUser });
+  } catch (error) {
+    console.error("DB Save Error:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`F.R.O.S.T Node server running on port ${PORT}`));

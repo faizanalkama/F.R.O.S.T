@@ -1,10 +1,20 @@
 from fastapi import FastAPI, Query
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
 import pandas as pd
 import os
 
 app = FastAPI(title="F.R.O.S.T PGML Transport Predictor")
+
+origins = [os.environ.get("FRONTEND_URL", "http://localhost:5173")]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 MODEL_PATH = "xgboost_model.joblib"
 model = None
