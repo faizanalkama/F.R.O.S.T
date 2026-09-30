@@ -47,6 +47,7 @@ const getFlightStatusColor = (status) => {
 const initialSummerTeam = [];
 const initialWinterTeam = [];
 const defaultBudgetData = [];
+const COLORS = ['#06b6d4', '#3b82f6', '#8b5cf6', '#14b8a6'];
 
 const CustomPieTooltip = ({ active, payload, total }) => {
   if (active && payload && payload.length) {
@@ -515,13 +516,13 @@ export default function ExpeditionPlanner() {
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
-                  <button type="button" onClick={handleAutomateBudget} className="inline-flex items-center gap-1.5 px-2.5 py-1.5 border border-[var(--accent-primary)] text-[var(--accent-primary)] text-[10px] font-semibold hover:bg-[var(--accent-primary)]/10 rounded transition-all duration-300 ease-out hover:-translate-y-0.5 w-full md:w-auto">
+                  <button type="button" onClick={handleAutomateBudget} className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-cyan-900/30 text-cyan-400 border border-cyan-700/50 rounded hover:bg-cyan-800/50 transition-colors w-full md:w-auto">
                     <BrainCircuit size={12} /> Automate Budget
                   </button>
                   <button
                     type="button"
                     onClick={() => { setBudgetDraft(budgetData.map(entry => ({ ...entry }))); setIsBudgetEditing(true); setPlannerNotice(''); }}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 border border-border/50 text-[var(--text-secondary)] text-[10px] font-semibold hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] rounded"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-cyan-900/30 text-cyan-400 border border-cyan-700/50 rounded hover:bg-cyan-800/50 transition-colors"
                   >
                     <Pencil size={12} /> Edit budget
                   </button>
@@ -547,8 +548,8 @@ export default function ExpeditionPlanner() {
                         stroke="none"
                         paddingAngle={3}
                       >
-                        {displayedBudgetData.map((entry) => (
-                          <Cell key={entry.category} fill={entry.color} />
+                        {displayedBudgetData.map((entry, index) => (
+                          <Cell key={entry.category} fill={COLORS[index % COLORS.length]} />
                         ))}
                       </Pie>
                     </PieChart>
@@ -561,16 +562,16 @@ export default function ExpeditionPlanner() {
               </div>
 
               {/* Dense Flex Legend */}
-              <div className={`flex flex-col gap-2.5 font-['Work_Sans'] w-full min-w-0 ${isBudgetEditing ? 'max-h-56' : 'max-h-48'} overflow-y-auto pr-1`}>
+              <div className="flex flex-col gap-3 w-full pl-2">
                 {displayedBudgetData.map((b, index) => (
                   <div
                     key={isBudgetEditing ? index : b.category}
-                    className="flex justify-between items-center w-full gap-4 bg-[var(--bg-primary)] border border-border/50 rounded px-3 py-2 min-w-0"
+                    className="flex justify-between items-center w-full bg-slate-800/50 rounded p-2 border border-slate-700/50"
                   >
                     <div className="flex items-center gap-2 min-w-0 flex-1">
                       <span
                         className="w-2.5 h-2.5 rounded-full shrink-0"
-                        style={{ backgroundColor: b.color || '#3B82F6' }}
+                        style={{ backgroundColor: COLORS[index % COLORS.length] }}
                       />
                       {isBudgetEditing ? (
                         <input
@@ -580,7 +581,7 @@ export default function ExpeditionPlanner() {
                           className="w-32 min-w-0 bg-[var(--bg-panel-raised)] border border-border/50 px-2 py-1 text-xs text-[var(--text-primary)]"
                         />
                       ) : (
-                        <span className="text-[var(--text-primary)] text-sm font-medium truncate">{b.category}</span>
+                        <span className="text-sm text-slate-300">{b.category}</span>
                       )}
                     </div>
                     {isBudgetEditing ? (
@@ -601,7 +602,7 @@ export default function ExpeditionPlanner() {
                         </button>
                       </div>
                     ) : (
-                      <span className="whitespace-nowrap font-medium font-mono text-sm text-[var(--text-primary)]">₹{Number(b.amountInCr || 0).toFixed(1)} Cr</span>
+                      <span className="text-sm font-semibold text-cyan-400 whitespace-nowrap">₹{Number(b.amountInCr || 0).toFixed(1)} Cr</span>
                     )}
                   </div>
                 ))}
