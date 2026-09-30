@@ -8,9 +8,9 @@ export default function NavigationBar() {
  const { theme, toggleTheme } = useTheme();
 
  return (
-  <nav className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border-b border-[var(--border)] p-4 flex items-center justify-between shrink-0">
+  <nav className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border-b border-border/50 p-4 flex items-center justify-between shrink-0">
    <div className="flex items-center gap-2">
-    <span className="text-[var(--accent-primary)] text-2xl font-bold font-['Space_Grotesk'] tracking-wider">
+    <span className="text-[var(--accent-primary)] text-3xl md:text-4xl font-light tracking-tight text-foregroundfont-['Space_Grotesk'] tracking-wider">
      F.R.O.S.T
     </span>
     <span className="text-[var(--text-secondary)] text-sm hidden sm:inline">
@@ -23,7 +23,7 @@ export default function NavigationBar() {
      whileHover={{ scale: 1.1 }}
      whileTap={{ scale: 0.9 }}
      onClick={toggleTheme}
-     className="p-2 rounded-full bg-[var(--bg-panel-raised)] border border-[var(--border)] text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors flex items-center justify-center shadow-[var(--shadow-glass)]"
+     className="p-2 rounded-full bg-[var(--bg-panel-raised)] border border-border/50 text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors flex items-center justify-center shadow-sm hover:shadow-md"
     >
      <AnimatePresence mode="wait">
       <motion.div
@@ -53,7 +53,7 @@ export default function NavigationBar() {
       localStorage.removeItem('activeStation');
       navigate('/login');
      }}
-     className="flex items-center gap-2 px-4 py-2 border border-[var(--border)] rounded bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] text-[var(--critical)] hover:bg-[var(--critical)] hover:text-[var(--text-primary)] transition-colors font-['Work_Sans'] font-medium cursor-pointer"
+     className="flex items-center gap-2 px-4 py-2 border border-border/50 rounded bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md text-[var(--critical)] hover:bg-[var(--critical)] hover:text-[var(--text-primary)] transition-colors font-['Work_Sans'] font-medium cursor-pointer"
     >
      <LogOut size={18} />
      <span>Logout</span>

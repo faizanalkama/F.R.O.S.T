@@ -37,7 +37,7 @@ export default function WeatherAnalysis() {
  const windForecast = weather?.wind_forecast || [];
 
  return (
-  <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-6 min-h-full flex flex-col">
+  <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 sm:p-6 min-h-full flex flex-col">
     <div className="flex items-center justify-between gap-3 mb-6">
      <h2 className="text-[var(--accent-primary)] font-['Space_Grotesk'] font-bold text-2xl tracking-wide">WEATHER ANALYSIS</h2>
      <span className={`text-[10px] font-mono ${weather?.stale ? 'text-amber-400' : weather ? 'text-[var(--ok)]' : 'text-[var(--text-secondary)]'}`}>
@@ -47,8 +47,8 @@ export default function WeatherAnalysis() {
     {weatherError && <p role="alert" className="mb-4 text-xs text-[var(--critical)]">{weatherError}</p>}
 
    {/* Current Stats */}
-   <div className="flex gap-4 mb-8 text-[var(--text-primary)] font-['Work_Sans']">
-    <div className="flex-1 flex flex-col items-center justify-center bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] p-4 rounded-lg border border-[var(--border)]">
+   <div className="flex flex-col sm:flex-row gap-4 mb-8 text-[var(--text-primary)] font-['Work_Sans']">
+    <div className="flex-1 flex flex-col items-center justify-center bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md p-4 rounded-xl border border-border/50">
      <div className="flex items-center gap-2 mb-2">
       <Thermometer size={18} className="text-[var(--accent-primary)]" />
       <span className="text-[var(--text-secondary)]">Temp</span>
@@ -56,7 +56,7 @@ export default function WeatherAnalysis() {
     <span className="text-[var(--accent-primary)] font-bold text-2xl">{weather ? `${weather.temperature.toFixed(1)}°C` : '—'}</span>
     </div>
 
-    <div className="flex-1 flex flex-col items-center justify-center bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] p-4 rounded-lg border border-[var(--border)]">
+    <div className="flex-1 flex flex-col items-center justify-center bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md p-4 rounded-xl border border-border/50">
      <div className="flex items-center gap-2 mb-2">
       <Eye size={18} className="text-[var(--accent-primary)]" />
       <span className="text-[var(--text-secondary)]">Visibility</span>
@@ -64,7 +64,7 @@ export default function WeatherAnalysis() {
     <span className="text-[var(--accent-primary)] font-bold text-2xl">{Number.isFinite(weather?.visibility_km) ? `${weather.visibility_km.toFixed(1)} km` : '—'}</span>
     </div>
 
-    <div className="flex-1 flex flex-col items-center justify-center bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] p-4 rounded-lg border border-[var(--border)]">
+    <div className="flex-1 flex flex-col items-center justify-center bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md p-4 rounded-xl border border-border/50">
      <div className="flex items-center gap-2 mb-2">
       <Wind size={18} className="text-[var(--critical)]" />
       <span className="text-[var(--text-secondary)]">Wind</span>

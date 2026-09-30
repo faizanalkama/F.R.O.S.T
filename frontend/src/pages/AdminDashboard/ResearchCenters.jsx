@@ -45,7 +45,7 @@ function StationCard({ station, isSelected, onSelect }) {
     <button
       type="button"
       onClick={() => onSelect(station.id)}
-      className={`w-full h-full text-left bg-slate-900/70 border backdrop-blur-sm rounded-xl p-5 flex flex-col gap-5 transition-all duration-300 ease-out cursor-pointer ${
+      className={`w-full h-full text-left bg-slate-900/70 border backdrop-blur-sm rounded-2xl p-5 flex flex-col gap-5 transition-all duration-300 ease-out cursor-pointer ${
         isSelected
           ? 'border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.15)] -translate-y-0.5'
           : 'border-cyan-500/20 hover:border-cyan-500/50 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] hover:-translate-y-0.5'
@@ -70,7 +70,7 @@ function StationCard({ station, isSelected, onSelect }) {
       <div className="flex flex-col gap-3 mt-auto">
         
         {/* Row 1: Station Crew */}
-        <div className="bg-slate-800/40 border border-slate-700/40 rounded-lg p-3 flex items-center justify-between">
+        <div className="bg-slate-800/40 border border-slate-700/40 rounded-xl p-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Users size={16} className="text-cyan-400" />
             <span className="text-slate-300 text-xs font-semibold tracking-wider uppercase">Crew Complement</span>
@@ -81,7 +81,7 @@ function StationCard({ station, isSelected, onSelect }) {
         </div>
 
         {/* Row 2: Surface Temperature */}
-        <div className="bg-slate-800/40 border border-slate-700/40 rounded-lg p-3 flex items-center justify-between">
+        <div className="bg-slate-800/40 border border-slate-700/40 rounded-xl p-3 flex items-center justify-between">
           <div className="flex flex-col justify-center gap-1">
             <div className="flex items-center gap-2">
               <Thermometer size={16} className="text-cyan-400" />
@@ -101,7 +101,7 @@ function StationCard({ station, isSelected, onSelect }) {
         </div>
 
         {/* Row 3: Power Grid Stability */}
-        <div className="bg-slate-800/40 border border-slate-700/40 rounded-lg p-3 flex flex-col gap-2">
+        <div className="bg-slate-800/40 border border-slate-700/40 rounded-xl p-3 flex flex-col gap-2">
           <div className="flex items-center justify-between w-full">
             <div className="flex items-center gap-2">
               <Zap size={16} className="text-cyan-400" />
@@ -177,11 +177,11 @@ function DetailPanel({ station, onBack }) {
   if (!station) return null;
 
   return (
-    <div className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-5">
-      <button onClick={onBack} className="mb-4 flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-sm font-medium transition-colors">
+    <div className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-5">
+      <button onClick={onBack} className="mb-4 flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-sm font-medium transition-colors transition-all duration-300 ease-out hover:-translate-y-0.5 w-full md:w-auto">
         <ArrowLeft size={16} /> Back to centers
       </button>
-      <div className="flex items-start justify-between gap-4 border-b border-[var(--border)] pb-4">
+      <div className="flex items-start justify-between gap-4 border-b border-border/50 pb-4">
         <div>
           <p className="text-[var(--text-secondary)] text-[10px] uppercase tracking-[0.2em]">Selected center</p>
           <h3 className="mt-2 text-[var(--text-primary)] font-['Space_Grotesk'] text-2xl font-bold">{station.name}</h3>
@@ -198,7 +198,7 @@ function DetailPanel({ station, onBack }) {
 
       <div className="mt-5 grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-5">
         <div className="space-y-5">
-          <div className="rounded-lg border border-[var(--border)] bg-[var(--bg-panel)] p-4">
+          <div className="rounded-xl border border-border/50 bg-[var(--bg-panel)] p-4">
             <div className="flex items-center gap-2 text-[var(--accent-primary)] font-semibold text-sm uppercase tracking-[0.12em]">
               <Users size={15} />
               Active rosters
@@ -209,14 +209,14 @@ function DetailPanel({ station, onBack }) {
                   <p className="text-[var(--text-secondary)] text-sm animate-pulse">Loading roster feed...</p>
                 </div>
               ) : liveRoster.length === 0 ? (
-                <div className="text-center py-6 px-4 bg-[var(--bg-panel-raised)] rounded-md border border-[var(--border)] border-dashed">
+                <div className="text-center py-6 px-4 bg-[var(--bg-panel-raised)] rounded-md border border-border/50 border-dashed">
                   <p className="text-[var(--text-secondary)] text-sm">
                     No personnel actively deployed to this station. Assign team members via User Roster.
                   </p>
                 </div>
               ) : (
                 liveRoster.map((member) => (
-                  <div key={member.name} className="flex items-center justify-between rounded-md border border-[var(--border)] bg-[var(--bg-panel-raised)] px-3 py-2">
+                  <div key={member.name} className="flex items-center justify-between rounded-md border border-border/50 bg-[var(--bg-panel-raised)] px-3 py-2">
                     <div>
                       <p className="text-[var(--text-primary)] text-sm font-medium">{member.name}</p>
                       <p className="text-[var(--text-secondary)] text-xs">{member.role}</p>
@@ -233,7 +233,7 @@ function DetailPanel({ station, onBack }) {
         </div>
 
         <div className="space-y-5">
-          <div className="rounded-lg border border-[var(--border)] bg-[var(--bg-panel)] p-4">
+          <div className="rounded-xl border border-border/50 bg-[var(--bg-panel)] p-4">
             <div className="flex items-center gap-2 text-[var(--accent-primary)] font-semibold text-sm uppercase tracking-[0.12em]">
               <CloudRain size={15} />
               Current weather
@@ -270,13 +270,13 @@ function DetailPanel({ station, onBack }) {
                 </span>
               </div>
             </div>
-            <div className="mt-4 flex items-center justify-between rounded-md border border-[var(--border)] bg-[var(--bg-panel-raised)] px-3 py-2">
+            <div className="mt-4 flex items-center justify-between rounded-md border border-border/50 bg-[var(--bg-panel-raised)] px-3 py-2">
               <span className="flex items-center gap-2 text-[var(--text-secondary)] text-xs"><Wind size={12} /> Live API Link</span>
               <span className="text-[var(--ok)] font-semibold text-xs">{liveWeather ? 'Connected' : 'Connecting...'}</span>
             </div>
           </div>
 
-          <div className="rounded-lg border border-[var(--border)] bg-[var(--bg-panel)] p-4">
+          <div className="rounded-xl border border-border/50 bg-[var(--bg-panel)] p-4">
             <div className="flex items-center gap-2 text-[var(--accent-primary)] font-semibold text-sm uppercase tracking-[0.12em]">
               <Gauge size={15} />
               Site logistics
@@ -330,7 +330,7 @@ export default function ResearchCenters() {
   const selectedStation = stations.find((station) => station.id === selectedStationId);
 
   return (
-    <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-6 h-full flex flex-col overflow-y-auto">
+    <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 md:p-6 h-full flex flex-col overflow-y-auto">
       <h2 className="text-[var(--accent-primary)] font-['Space_Grotesk'] font-bold text-2xl mb-6 tracking-wide">
         RESEARCH CENTERS
       </h2>
@@ -357,7 +357,7 @@ export default function ResearchCenters() {
               exit={{ opacity: 0, x: 20, scale: 0.98 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
             >
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 items-stretch">
                 {stations.map((station) => (
                   <StationCard
                     key={station.id}

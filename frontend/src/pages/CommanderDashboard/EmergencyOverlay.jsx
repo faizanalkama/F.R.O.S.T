@@ -4,7 +4,7 @@ import { AlertTriangle, MapPin, Activity, Radio, Siren, VolumeX } from 'lucide-r
 export default function EmergencyOverlay({ onClose }) {
  return (
   <motion.div
-   className="fixed inset-0 z-50 flex items-center justify-center p-6"
+   className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6"
    initial={{ opacity: 0 }}
    animate={{ opacity: 1 }}
    exit={{ opacity: 0 }}
@@ -24,7 +24,7 @@ export default function EmergencyOverlay({ onClose }) {
 
    {/* Modal Card */}
    <motion.div
-    className="relative bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border-2 border-[var(--critical)] rounded-xl p-8 max-w-2xl w-full shadow-[0_0_50px_rgba(232,62,47,0.5)]"
+    className="relative bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border-2 border-[var(--critical)] rounded-2xl p-4 md:p-8 max-w-2xl w-full shadow-[0_0_50px_rgba(232,62,47,0.5)]"
     initial={{ scale: 0.85, y: 30 }}
     animate={{ scale: 1, y: 0 }}
     transition={{ type: 'spring', damping: 20, stiffness: 300 }}
@@ -50,7 +50,7 @@ export default function EmergencyOverlay({ onClose }) {
     {/* Distress Details Grid */}
     <div className="grid grid-cols-1 gap-4 mb-8">
      {/* Source */}
-     <div className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-lg p-4 flex items-start gap-3">
+     <div className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-border/50 rounded-xl p-4 flex items-start gap-3">
       <Radio size={18} className="text-[var(--critical)] mt-0.5 shrink-0" />
       <div>
        <p className="text-[var(--text-secondary)] text-xs uppercase tracking-widest font-semibold mb-1">
@@ -66,7 +66,7 @@ export default function EmergencyOverlay({ onClose }) {
      </div>
 
      {/* Location */}
-     <div className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-lg p-4 flex items-start gap-3">
+     <div className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-border/50 rounded-xl p-4 flex items-start gap-3">
       <MapPin size={18} className="text-[var(--accent-primary)] mt-0.5 shrink-0" />
       <div>
        <p className="text-[var(--text-secondary)] text-xs uppercase tracking-widest font-semibold mb-1">
@@ -82,13 +82,13 @@ export default function EmergencyOverlay({ onClose }) {
      </div>
 
      {/* Vitals */}
-     <div className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-lg p-4 flex items-start gap-3">
+     <div className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-border/50 rounded-xl p-4 flex items-start gap-3">
       <Activity size={18} className="text-[var(--critical)] mt-0.5 shrink-0 animate-pulse" />
       <div>
        <p className="text-[var(--text-secondary)] text-xs uppercase tracking-widest font-semibold mb-1">
         Last Known Vitals
        </p>
-       <div className="flex items-center gap-6">
+       <div className="flex items-center gap-4 md:gap-6">
         <p className="text-[var(--text-primary)] text-sm">
          Heart Rate: <span className="text-[var(--critical)] font-bold text-lg">140 BPM</span>
         </p>
@@ -106,7 +106,7 @@ export default function EmergencyOverlay({ onClose }) {
     {/* Action Buttons */}
     <div className="flex items-center gap-4">
      <motion.button
-      className="flex-1 flex items-center justify-center gap-3 px-6 py-4 bg-[var(--critical)] text-[var(--text-primary)] rounded-lg font-['Space_Grotesk'] font-bold text-lg tracking-wider"
+      className="flex-1 flex items-center justify-center gap-3 px-6 py-4 bg-[var(--critical)] text-[var(--text-primary)] rounded-xl font-['Space_Grotesk'] font-bold text-lg tracking-wider"
       animate={{ scale: [1, 1.02, 1] }}
       transition={{ duration: 0.8, repeat: Infinity }}
       onClick={onClose}
@@ -117,7 +117,7 @@ export default function EmergencyOverlay({ onClose }) {
 
      <button
       onClick={onClose}
-      className="flex items-center gap-2 px-5 py-4 bg-transparent border border-[var(--border)] text-[var(--text-primary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-all duration-300 ease-out rounded-lg text-sm font-semibold hover:text-[var(--text-primary)] hover:border-[var(--text-secondary)] transition-colors"
+      className="flex items-center gap-2 px-5 py-4 bg-transparent border border-border/50 text-[var(--text-primary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-all duration-300 ease-out rounded-xl text-sm font-semibold hover:text-[var(--text-primary)] hover:border-[var(--text-secondary)] transition-colors w-full md:w-auto"
      >
       <VolumeX size={16} />
       Acknowledge & Silence

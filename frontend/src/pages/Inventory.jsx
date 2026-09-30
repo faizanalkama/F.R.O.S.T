@@ -78,7 +78,7 @@ export default function Inventory() {
  const filteredItems = activeCategory === 'All' ? items : items.filter(i => i.category === activeCategory);
 
  return (
-  <div className="page-container">
+  <div className="page-container overflow-x-hidden">
    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
     <h1><Database style={{display:'inline', marginRight:12, verticalAlign:'bottom'}} /> Offline-First Inventory</h1>
     <div style={{
@@ -155,13 +155,13 @@ export default function Inventory() {
 
        {/* Quick actions — touch-friendly large buttons */}
        <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
-        <button className="btn secondary" style={{ flex: 1, justifyContent: 'center', padding: '12px' }} onClick={() => quickDecrement(item.id, 50)}>
+        <button className="btn transition-all duration-300 ease-out hover:-translate-y-0.5 shadow-sm ring-1 ring-inset ring-black/10 dark:ring-white/10 secondary w-full md:w-auto" style={{ flex: 1, justifyContent: 'center', padding: '12px' }} onClick={() => quickDecrement(item.id, 50)}>
          <Minus size={16}/> 50
         </button>
-        <button className="btn secondary" style={{ flex: 1, justifyContent: 'center', padding: '12px' }} onClick={() => quickDecrement(item.id, 10)}>
+        <button className="btn transition-all duration-300 ease-out hover:-translate-y-0.5 shadow-sm ring-1 ring-inset ring-black/10 dark:ring-white/10 secondary w-full md:w-auto" style={{ flex: 1, justifyContent: 'center', padding: '12px' }} onClick={() => quickDecrement(item.id, 10)}>
          <Minus size={16}/> 10
         </button>
-        <button className="btn" style={{ flex: 1, justifyContent: 'center', padding: '12px' }} onClick={() => updateQuantity(item.id, 10)}>
+        <button className="btn transition-all duration-300 ease-out hover:-translate-y-0.5 shadow-sm ring-1 ring-inset ring-black/10 dark:ring-white/10 w-full md:w-auto" style={{ flex: 1, justifyContent: 'center', padding: '12px' }} onClick={() => updateQuantity(item.id, 10)}>
          <Plus size={16}/> 10
         </button>
        </div>

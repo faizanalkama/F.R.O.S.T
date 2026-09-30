@@ -44,7 +44,7 @@ export default function Login() {
  };
 
  return (
-  <div className="min-h-screen bg-[var(--bg-primary)] flex flex-col items-center justify-center p-6 relative">
+  <div className="min-h-screen bg-[var(--bg-primary)] flex flex-col items-center justify-center p-4 md:p-6 relative">
    {/* Return to Landing Button */}
    <button
     onClick={() => navigate('/')}
@@ -54,20 +54,20 @@ export default function Login() {
     <span>Return to Landing</span>
    </button>
 
-   <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-8 w-full max-w-md shadow-2xl">
+   <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 md:p-8 w-full max-w-md shadow-2xl">
     <h2 className="font-['Space_Grotesk'] font-bold text-[var(--accent-primary)] text-2xl mb-6 text-center tracking-wide">
      F.R.O.S.T SYSTEM ACCESS
     </h2>
 
     {/* Role Selection */}
-    <div className="flex gap-3 mb-6">
+    <div className="flex flex-col md:flex-row gap-3 mb-6">
      <button
       type="button"
       onClick={() => setRole('admin')}
-      className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold text-sm transition-all duration-200 ${
+      className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-semibold text-sm transition-all duration-200 ${
        role === 'admin'
-        ? 'bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--accent-primary)] text-[var(--accent-primary)]'
-        : 'border border-[var(--border)] text-[var(--text-secondary)] hover:bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)]'
+        ? 'bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-[var(--accent-primary)] text-[var(--accent-primary)]'
+        : 'border border-border/50 text-[var(--text-secondary)] hover:bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md'
       }`}
      >
       <Shield size={18} />
@@ -77,10 +77,10 @@ export default function Login() {
      <button
       type="button"
       onClick={() => setRole('commander')}
-      className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold text-sm transition-all duration-200 ${
+      className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-semibold text-sm transition-all duration-200 ${
        role === 'commander'
-        ? 'bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--accent-primary)] text-[var(--accent-primary)]'
-        : 'border border-[var(--border)] text-[var(--text-secondary)] hover:bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)]'
+        ? 'bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-[var(--accent-primary)] text-[var(--accent-primary)]'
+        : 'border border-border/50 text-[var(--text-secondary)] hover:bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md'
       }`}
      >
       <Radio size={18} />
@@ -95,7 +95,7 @@ export default function Login() {
        <MapPin size={14} className="text-[var(--accent-primary)]" />
        Select Edge Server
       </label>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
        {[
         { id: 'maitri', label: 'Maitri' },
         { id: 'bharati', label: 'Bharati' },
@@ -105,10 +105,10 @@ export default function Login() {
          key={st.id}
          type="button"
          onClick={() => setStation(st.id)}
-         className={`py-2 px-3 rounded-lg text-xs font-semibold uppercase tracking-wider border transition-all duration-200 ${
+         className={`py-2 px-3 rounded-xl text-xs font-semibold uppercase tracking-wider border transition-all duration-200 ${
           station === st.id
-           ? 'text-[var(--accent-primary)] border-[var(--accent-primary)] bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)]'
-           : 'border-[var(--border)] text-[var(--text-secondary)] hover:bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)]'
+           ? 'text-[var(--accent-primary)] border-[var(--accent-primary)] bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md'
+           : 'border-border/50 text-[var(--text-secondary)] hover:bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md'
          }`}
         >
          {st.label}
@@ -130,7 +130,7 @@ export default function Login() {
        value={operatorId}
        onChange={(e) => setOperatorId(e.target.value)}
        placeholder="e.g. MOES-ADM-01"
-       className="w-full bg-[var(--bg-primary)] border border-[var(--border)] rounded p-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
+       className="w-full bg-[var(--bg-primary)] border border-border/50 rounded p-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
       />
      </div>
 
@@ -145,7 +145,7 @@ export default function Login() {
         value={passcode}
         onChange={(e) => setPasscode(e.target.value)}
         placeholder="Enter access passcode"
-        className="w-full bg-[var(--bg-primary)] border border-[var(--border)] rounded p-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
+        className="w-full bg-[var(--bg-primary)] border border-border/50 rounded p-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
        />
        <Lock size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]" />
       </div>
@@ -165,7 +165,7 @@ export default function Login() {
      </button>
     </form>
 
-    <div className="mt-8 border-t border-[var(--border)] pt-6 w-full text-xs">
+    <div className="mt-8 border-t border-border/50 pt-6 w-full text-xs">
      <h3 className="text-[var(--text-primary)] font-bold uppercase tracking-wider mb-4 flex items-center gap-2">
        <Lock size={14} className="text-[var(--accent-primary)]" />
        Test Credentials

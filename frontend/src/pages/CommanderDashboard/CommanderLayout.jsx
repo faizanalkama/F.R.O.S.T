@@ -27,10 +27,10 @@ function SidebarLink({ to, label, icon: Icon, end }) {
    to={to}
    end={end}
    className={({ isActive }) =>
-    `flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-colors duration-200 ${
+    `flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-colors duration-200 ${
      isActive
-      ? 'bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] text-[var(--accent-primary)] border-l-2 border-[var(--accent-primary)] font-semibold'
-      : 'text-[var(--text-secondary)] hover:bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] hover:text-[var(--text-primary)]'
+      ? 'bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md text-[var(--accent-primary)] border-l-2 border-[var(--accent-primary)] font-semibold'
+      : 'text-[var(--text-secondary)] hover:bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md hover:text-[var(--text-primary)]'
     }`
    }
   >
@@ -58,7 +58,7 @@ export default function CommanderLayout() {
 
    <div className="flex flex-1 min-h-0 overflow-hidden flex-col md:flex-row">
     {/* Desktop Left Sidebar */}
-    <aside className="hidden md:flex w-64 bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border-r border-[var(--border)] flex-col p-4 gap-2 overflow-y-auto shrink-0 z-10">
+    <aside className="hidden md:flex w-64 bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border-r border-border/50 flex-col p-4 gap-2 overflow-y-auto shrink-0 z-10">
      <h3 className="text-[var(--text-secondary)] text-xs font-semibold uppercase tracking-widest px-4 mb-2">
       Commander Modules
      </h3>
@@ -100,14 +100,14 @@ export default function CommanderLayout() {
     </main>
 
     {/* Mobile Bottom Navigation */}
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.2)] border-t border-[var(--border)] flex items-center justify-around p-2 z-[100] pb-safe">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.2)] border-t border-border/50 flex items-center justify-around p-2 z-[100] pb-safe">
       {sidebarLinks.map((link) => (
        <NavLink
         key={link.to}
         to={link.to}
         end={link.end}
         className={({ isActive }) =>
-         `flex flex-col items-center justify-center gap-1 p-2 flex-1 rounded-lg transition-all min-h-[48px] ${
+         `flex flex-col items-center justify-center gap-1 p-2 flex-1 rounded-xl transition-all min-h-[48px] ${
           isActive ? 'text-[var(--accent-primary)] font-semibold' : 'text-[var(--text-secondary)]'
          }`
         }
@@ -136,7 +136,7 @@ export default function CommanderLayout() {
 
    {/* Notification Toast */}
    {notification && (
-    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] bg-red-600/90 backdrop-blur border border-red-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-3 animate-in slide-in-from-top-5 fade-in duration-300">
+    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] bg-red-600/90 backdrop-blur border border-red-500 text-white px-6 py-3 rounded-xl shadow-lg flex items-center gap-3 animate-in slide-in-from-top-5 fade-in duration-300">
       <Siren size={20} className="animate-pulse" />
       <span className="font-semibold text-sm tracking-wide">{notification}</span>
     </div>

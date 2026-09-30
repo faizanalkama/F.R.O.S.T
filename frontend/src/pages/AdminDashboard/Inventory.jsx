@@ -137,11 +137,11 @@ export default function AdminInventory() {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-[var(--bg-panel-raised)] rounded-xl shadow-[var(--shadow-glass)] border border-[var(--border)] text-[var(--accent-primary)]">
+          <div className="p-3 bg-[var(--bg-panel-raised)] rounded-2xl shadow-sm hover:shadow-md border border-border/50 text-[var(--accent-primary)]">
             <Database size={28} />
           </div>
           <div>
-            <h2 className="text-3xl font-bold font-['Space_Grotesk'] text-[var(--text-primary)] tracking-tight">Station Inventory</h2>
+            <h2 className="text-3xl md:text-4xl font-light tracking-tight text-foregroundfont-['Space_Grotesk'] text-[var(--text-primary)] tracking-tight">Station Inventory</h2>
           </div>
         </div>
       </div>
@@ -156,10 +156,10 @@ export default function AdminInventory() {
             <button 
               key={center}
               onClick={() => setActiveCenter(center)}
-              className={`px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 flex items-center gap-3 ${
+              className={`px-6 py-3 rounded-2xl font-bold text-sm transition-all duration-300 flex items-center gap-3 ${
                 activeCenter === center 
                   ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.4)] border border-blue-400/30' 
-                  : 'bg-[var(--bg-panel)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-panel-raised)] hover:border-[var(--border-hover)]'
+                  : 'bg-[var(--bg-panel)] border border-border/50 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-panel-raised)] hover:border-[var(--border-hover)]'
               }`}
             >
               <span className={`w-2 h-2 rounded-full shrink-0 ${activeCenter === center ? 'bg-white animate-pulse' : 'bg-[var(--ok)]'}`}></span>
@@ -184,7 +184,7 @@ export default function AdminInventory() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="mb-8 bg-[var(--bg-panel)] backdrop-blur-xl border border-[var(--border)] rounded-xl shadow-[var(--shadow-glass)] p-6 overflow-hidden relative"
+            className="mb-8 bg-surface/80 backdrop-blur-md border border-border/50 rounded-2xl shadow-sm hover:shadow-md p-4 md:p-6 overflow-hidden relative"
           >
             <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
               <Activity size={100} />
@@ -196,10 +196,10 @@ export default function AdminInventory() {
               <span className="ml-2 px-2 py-0.5 text-[9px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded uppercase tracking-wider">AI Powered</span>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 md:gap-6 relative z-10">
               <div className="col-span-1 lg:col-span-1 flex flex-col gap-4">
-                <div className="p-4 bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg">
-                  <p className="text-[10px] text-[var(--text-secondary)] uppercase tracking-wider font-bold mb-1">Flight Viability</p>
+                <div className="p-4 bg-[var(--bg-primary)] border border-border/50 rounded-xl">
+                  <p className="text-[10px] md:text-xs uppercase tracking-widest font-bold text-muted font-bold mb-1">Flight Viability</p>
                   <p className={`text-xl font-black ${currentInsights.transport_viability?.safe ? 'text-[var(--ok)]' : 'text-[var(--critical)]'}`}>
                     {currentInsights.transport_viability?.safe ? 'SAFE TO FLY' : 'GROUNDED'}
                   </p>
@@ -208,17 +208,17 @@ export default function AdminInventory() {
                   </p>
                 </div>
                 
-                <div className="p-4 bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg">
-                  <p className="text-[10px] text-[var(--text-secondary)] uppercase tracking-wider font-bold mb-1">Aggregated Stock Level</p>
+                <div className="p-4 bg-[var(--bg-primary)] border border-border/50 rounded-xl">
+                  <p className="text-[10px] md:text-xs uppercase tracking-widest font-bold text-muted font-bold mb-1">Aggregated Stock Level</p>
                   <p className="text-2xl font-black text-[var(--text-primary)]">
                     {currentInsights.projected_burn_rate?.[0]?.stock.toLocaleString() || '0'} <span className="text-sm text-[var(--text-secondary)]">units</span>
                   </p>
                 </div>
               </div>
 
-              <div className="col-span-1 lg:col-span-3 bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg p-4 h-[250px]">
-                <p className="text-[10px] text-[var(--text-secondary)] uppercase tracking-wider font-bold mb-4">14-Day Projected Inventory Burn Rate</p>
-                <ResponsiveContainer width="100%" height="80%">
+              <div className="col-span-1 lg:col-span-3 bg-[var(--bg-primary)] border border-border/50 rounded-xl p-4 h-auto">
+                <p className="text-[10px] md:text-xs uppercase tracking-widest font-bold text-muted font-bold mb-4">14-Day Projected Inventory Burn Rate</p>
+                <ResponsiveContainer width="100%" height={300}>
                   <LineChart data={currentInsights.projected_burn_rate}>
                     <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
                     <XAxis 
@@ -253,15 +253,15 @@ export default function AdminInventory() {
         )}
       </AnimatePresence>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
         
         {/* Module 1: Read-Only Inventory Mirror */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-4 md:gap-6">
           <motion.div 
             key={`mirror-${activeCenter}`}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="bg-[var(--bg-panel)] backdrop-blur-xl border border-[var(--border)] rounded-xl shadow-[var(--shadow-glass)] p-6"
+            className="bg-surface/80 backdrop-blur-md border border-border/50 rounded-2xl shadow-sm hover:shadow-md p-4 md:p-6"
           >
             <h3 className="text-lg font-bold text-[var(--text-primary)] font-['Space_Grotesk'] mb-4 flex items-center gap-2">
               <Search size={18} className="text-[var(--accent-primary)]" />
@@ -271,7 +271,7 @@ export default function AdminInventory() {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-[var(--border)] text-xs uppercase tracking-wider text-[var(--text-secondary)]">
+                  <tr className="border-b border-border/50 text-xs uppercase tracking-wider text-[var(--text-secondary)]">
                     <th className="pb-3 font-semibold">Asset ID</th>
                     <th className="pb-3 font-semibold">Asset Name</th>
                     <th className="pb-3 font-semibold text-right pr-4">Stock</th>
@@ -285,7 +285,7 @@ export default function AdminInventory() {
                     <tr><td colSpan={6} className="py-8 text-center text-xs text-[var(--text-secondary)]">{inventoryLoading ? 'Loading station stock...' : 'No stock snapshots for this station yet.'}</td></tr>
                   )}
                   {currentInventory.map(item => (
-                    <tr key={item.id} className="border-b border-[var(--border)]/50 hover:bg-[var(--bg-panel-raised)] transition-colors">
+                    <tr key={item.id} className="border-b border-border/50/50 hover:bg-[var(--bg-panel-raised)] transition-colors">
                       <td className="py-3 text-xs font-mono text-[var(--text-secondary)] opacity-50">SYS-{item.id}</td>
                       <td className="py-3 text-sm font-semibold text-[var(--text-primary)]">{item.name}</td>
                       <td className="py-3 text-sm font-mono text-amber-500 opacity-80">
@@ -331,7 +331,7 @@ export default function AdminInventory() {
         </div>
 
         {/* Right Column */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-4 md:gap-6">
           
           {/* Module 2: Requisition Queue */}
           {requestError && <p role="alert" className="text-xs text-[var(--critical)]">{requestError}</p>}
@@ -339,7 +339,7 @@ export default function AdminInventory() {
             key={`reqs-${activeCenter}`}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="bg-[var(--bg-panel)] backdrop-blur-xl border border-[var(--border)] rounded-xl shadow-[var(--shadow-glass)] p-6"
+            className="bg-surface/80 backdrop-blur-md border border-border/50 rounded-2xl shadow-sm hover:shadow-md p-4 md:p-6"
           >
             <h3 className="text-lg font-bold text-[var(--text-primary)] font-['Space_Grotesk'] mb-4 flex items-center gap-2">
               <Database size={18} className="text-rose-500" />
@@ -359,19 +359,19 @@ export default function AdminInventory() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, x: 50, scale: 0.9 }}
-                    className="p-4 rounded-lg bg-[var(--bg-panel-raised)] border border-[var(--border)] shadow-[var(--shadow-glass)] hover:border-[var(--border-hover)] transition-colors"
+                    className="p-4 rounded-xl bg-[var(--bg-panel-raised)] border border-border/50 shadow-sm hover:shadow-md hover:border-[var(--border-hover)] transition-colors"
                   >
                     <div className="flex justify-between items-start mb-3">
                       <div>
                         <h4 className="font-bold text-[var(--text-primary)] text-sm">Edge Request: <span className="text-rose-500">{req.qty}x {req.item}</span></h4>
                         <p className="text-[10px] text-[var(--text-secondary)] font-mono mt-1"><Clock size={10} className="inline mr-1"/>{new Date(req.time).toLocaleString()}</p>
                       </div>
-                      <span className={`text-[10px] font-bold px-2 py-1 rounded bg-[var(--bg-primary)] border border-[var(--border)] ${req.urgency === 'CRITICAL' ? 'text-[var(--critical)] animate-pulse' : 'text-[var(--text-secondary)]'}`}>
+                      <span className={`text-[10px] font-bold px-2 py-1 rounded bg-[var(--bg-primary)] border border-border/50 ${req.urgency === 'CRITICAL' ? 'text-[var(--critical)] animate-pulse' : 'text-[var(--text-secondary)]'}`}>
                         [{req.urgency}]
                       </span>
                     </div>
                     
-                    <div className="flex gap-2">
+                    <div className="flex flex-col md:flex-row gap-2">
                       <button 
                         onClick={() => handleApprove(req.id)}
                         className="flex-1 flex items-center justify-center gap-2 py-2 bg-[var(--ok)]/10 hover:bg-[var(--ok)] text-[var(--ok)] hover:text-white border border-[var(--ok)]/30 rounded text-xs font-bold transition-colors shadow-sm"
@@ -380,7 +380,7 @@ export default function AdminInventory() {
                       </button>
                       <button 
                         onClick={() => handleDeny(req.id)}
-                        className="flex-none px-4 py-2 bg-[var(--bg-primary)] hover:bg-[var(--critical)] text-[var(--text-secondary)] hover:text-white border border-[var(--border)] rounded text-xs font-bold transition-colors shadow-sm"
+                        className="flex-none px-4 py-2 bg-[var(--bg-primary)] hover:bg-[var(--critical)] text-[var(--text-secondary)] hover:text-white border border-border/50 rounded text-xs font-bold transition-colors shadow-sm"
                       >
                         <X size={14} /> DENY
                       </button>
@@ -397,10 +397,10 @@ export default function AdminInventory() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-[var(--bg-panel)] backdrop-blur-xl border border-[var(--border)] rounded-xl shadow-[var(--shadow-glass)] p-6 overflow-hidden relative"
+            className="bg-surface/80 backdrop-blur-md border border-border/50 rounded-2xl shadow-sm hover:shadow-md p-4 md:p-6 overflow-hidden relative"
           >
             {/* Status Bar */}
-              <div className="absolute top-0 left-0 right-0 bg-black/80 px-6 py-2 flex items-center justify-between border-b border-[var(--border)]">
+              <div className="absolute top-0 left-0 right-0 bg-black/80 px-6 py-2 flex items-center justify-between border-b border-border/50">
               <div className="flex items-center gap-2">
                 <Satellite size={14} className="text-[var(--accent-primary)]" />
                 <span className="text-[10px] font-mono font-bold text-[var(--accent-primary)] tracking-widest">ADMIN DECISIONS</span>
@@ -413,7 +413,7 @@ export default function AdminInventory() {
               {activeCenter} Outbound Decision Queue
             </h3>
 
-            <div className="bg-[var(--bg-primary)] rounded-lg border border-[var(--border)] p-4 shadow-inner min-h-[120px]">
+            <div className="bg-[var(--bg-primary)] rounded-xl border border-border/50 p-4 shadow-inner min-h-[120px]">
               {currentOutbound.length === 0 ? (
                 <p className="text-xs text-[var(--text-secondary)] opacity-50 text-center mt-6">No decisions queued for next {activeCenter} pass.</p>
               ) : (
@@ -424,7 +424,7 @@ export default function AdminInventory() {
                         key={item.outId}
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
-                        className="text-sm font-mono flex items-center justify-between p-2 bg-[var(--bg-panel-raised)] rounded border border-[var(--border)]"
+                        className="text-sm font-mono flex items-center justify-between p-2 bg-[var(--bg-panel-raised)] rounded border border-border/50"
                       >
                         <span className="text-[var(--text-primary)] truncate max-w-[200px]">{item.qty}x {item.item}</span>
                         <div className="flex flex-col items-end gap-1">

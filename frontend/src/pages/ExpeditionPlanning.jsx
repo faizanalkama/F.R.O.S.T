@@ -91,7 +91,7 @@ export default function ExpeditionPlanning() {
  };
 
  return (
-  <div className="page-container">
+  <div className="page-container overflow-x-hidden">
    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '24px' }}>
     <div>
      <h1><Calendar style={{display:'inline', marginRight:12, verticalAlign:'bottom'}} /> Expedition Planning</h1>
@@ -141,7 +141,7 @@ export default function ExpeditionPlanning() {
       </div>
      </div>
      
-     <button className="btn" onClick={checkTransportWindow} disabled={loading || awsMode}>
+     <button className="btn transition-all duration-300 ease-out hover:-translate-y-0.5 shadow-sm ring-1 ring-inset ring-black/10 dark:ring-white/10 w-full md:w-auto" onClick={checkTransportWindow} disabled={loading || awsMode}>
       {awsMode ? (
        <>Auto-Predicting via AWS...</>
       ) : (

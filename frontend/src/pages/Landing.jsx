@@ -60,7 +60,7 @@ export default function Landing() {
      F.R.O.S.T
     </div>
 
-    <div className="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide text-[var(--text-secondary)]">
+    <div className="hidden md:flex items-center gap-4 md:gap-8 text-sm font-medium tracking-wide text-[var(--text-secondary)]">
      <motion.a href="#features" onClick={handleScroll('features')} whileHover={{ scale: 1.08 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="hover:text-[var(--accent-primary)] duration-0 cursor-pointer">FEATURES</motion.a>
      <motion.a href="#hardware" onClick={handleScroll('hardware')} whileHover={{ scale: 1.08 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="hover:text-[var(--accent-primary)] duration-0 cursor-pointer">HARDWARE</motion.a>
      <motion.a href="#workflow" onClick={handleScroll('workflow')} whileHover={{ scale: 1.08 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="hover:text-[var(--accent-primary)] duration-0 cursor-pointer">WORKFLOW</motion.a>
@@ -72,7 +72,7 @@ export default function Landing() {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       onClick={toggleTheme}
-      className="p-2 rounded-full bg-[var(--bg-panel-raised)] border border-[var(--border)] text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors flex items-center justify-center shadow-[var(--shadow-glass)]"
+      className="p-2 rounded-full bg-[var(--bg-panel-raised)] border border-border/50 text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors flex items-center justify-center shadow-sm hover:shadow-md"
      >
       <AnimatePresence mode="wait">
        <motion.div
@@ -95,7 +95,7 @@ export default function Landing() {
      </button>
      <button
       onClick={() => navigate('/login')}
-      className="bg-gradient-to-b from-blue-500 to-blue-600 text-white font-semibold rounded-lg px-6 py-2 shadow-[0_0_20px_rgba(59,130,246,0.3),inset_0_1px_0_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.4)] hover:from-blue-400 hover:to-blue-500 transition-all duration-300 border border-blue-400/30 text-sm tracking-wider"
+      className="bg-gradient-to-b from-blue-500 to-blue-600 text-white font-semibold rounded-xl px-6 py-2 shadow-[0_0_20px_rgba(59,130,246,0.3),inset_0_1px_0_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.4)] hover:from-blue-400 hover:to-blue-500 transition-all duration-300 border border-blue-400/30 text-sm tracking-wider"
      >
       SIGN UP
      </button>
@@ -142,7 +142,7 @@ export default function Landing() {
        whileHover={{ scale: 1.04 }}
        whileTap={{ scale: 0.97 }}
        transition={{ duration: 0.3, ease: 'easeOut' }}
-       className="bg-gradient-to-b from-blue-500 to-blue-600 px-7 py-3 font-bold text-base rounded-lg tracking-wider text-white shadow-[0_0_30px_rgba(59,130,246,0.35),inset_0_1px_0_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.4)] hover:from-blue-400 hover:to-blue-500 transition-all duration-300 border border-blue-400/30"
+       className="bg-gradient-to-b from-blue-500 to-blue-600 px-7 py-3 font-bold text-base rounded-xl tracking-wider text-white shadow-[0_0_30px_rgba(59,130,246,0.35),inset_0_1px_0_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.4)] hover:from-blue-400 hover:to-blue-500 transition-all duration-300 border border-blue-400/30"
       >
        ENTER THE PLATFORM
       </motion.button>
@@ -152,7 +152,7 @@ export default function Landing() {
        whileHover={{ scale: 1.04 }}
        whileTap={{ scale: 0.97 }}
        transition={{ duration: 0.3, ease: 'easeOut' }}
-       className="backdrop-blur-xl bg-[var(--bg-panel-raised)] border border-[var(--border)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] shadow-[var(--shadow-glass)] px-7 py-3 font-bold text-base rounded-sm tracking-wider text-center transition-colors text-[var(--text-primary)]"
+       className="backdrop-blur-xl bg-[var(--bg-panel-raised)] border border-border/50 hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] shadow-sm hover:shadow-md px-7 py-3 font-bold text-base rounded-sm tracking-wider text-center transition-colors text-[var(--text-primary)]"
       >
        SEE THE MISSION
       </motion.a>
@@ -191,11 +191,11 @@ export default function Landing() {
       initial="hidden"
       variants={fadeUp}
       viewport={{ once: true }}
-      className="md:col-span-5 md:row-span-2 bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-2xl p-8 flex flex-col hover:border-[var(--accent-primary)] hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(59,130,246,0.2)] transition-all duration-500 ease-out group relative overflow-hidden"
+      className="md:col-span-5 md:row-span-2 bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 md:p-8 flex flex-col hover:border-[var(--accent-primary)] hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(59,130,246,0.2)] transition-all duration-500 ease-out group relative overflow-hidden"
      >
       <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent-primary)] opacity-5 rounded-full blur-3xl -mr-20 -mt-20 transition-opacity group-hover:opacity-10"></div>
       
-      <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 mb-8">
+      <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 mb-8">
         <Activity size={24} className="text-[var(--accent-primary)]" />
       </div>
       
@@ -205,7 +205,7 @@ export default function Landing() {
       </p>
 
       {/* Decorative element simulating a chart */}
-      <div className="flex items-end gap-2 h-32 mt-auto w-full pt-6 border-t border-[var(--border)]">
+      <div className="flex items-end gap-2 h-32 mt-auto w-full pt-6 border-t border-border/50">
         {[40, 70, 45, 90, 65, 80, 100, 60].map((h, i) => (
           <div key={i} className="flex-1 bg-[var(--accent-primary)] rounded-t-sm opacity-20 group-hover:opacity-60 transition-opacity duration-500" style={{ height: `${h}%`, transitionDelay: `${i * 50}ms` }}></div>
         ))}
@@ -218,12 +218,12 @@ export default function Landing() {
       initial="hidden"
       variants={fadeUp}
       viewport={{ once: true }}
-      className="md:col-span-7 bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 hover:border-purple-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(168,85,247,0.15)] transition-all duration-500 ease-out group relative overflow-hidden"
+      className="md:col-span-7 bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 md:p-8 flex flex-col md:flex-row items-center gap-4 md:gap-8 hover:border-purple-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(168,85,247,0.15)] transition-all duration-500 ease-out group relative overflow-hidden"
      >
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/5 opacity-0 rounded-full blur-3xl -ml-20 -mb-20 transition-opacity group-hover:opacity-100"></div>
       
       <div className="flex-1 z-10">
-        <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center border border-purple-500/20 mb-6">
+        <div className="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center border border-purple-500/20 mb-6">
           <Cpu size={24} className="text-purple-400" />
         </div>
         <h3 className="text-2xl font-['Bebas_Neue'] text-[var(--text-primary)] tracking-wider mb-3">Intelligent Processing</h3>
@@ -233,8 +233,8 @@ export default function Landing() {
       </div>
       
       {/* Decorative element */}
-      <div className="w-full md:w-1/3 aspect-square rounded-full border border-dashed border-[var(--border)] flex items-center justify-center relative animate-[spin_30s_linear_infinite] group-hover:border-purple-500/30 transition-colors">
-        <div className="w-2/3 h-2/3 rounded-full border border-[var(--border)] flex items-center justify-center absolute group-hover:border-purple-500/50 transition-colors">
+      <div className="w-full md:w-1/3 aspect-square rounded-full border border-dashed border-border/50 flex items-center justify-center relative animate-[spin_30s_linear_infinite] group-hover:border-purple-500/30 transition-colors">
+        <div className="w-2/3 h-2/3 rounded-full border border-border/50 flex items-center justify-center absolute group-hover:border-purple-500/50 transition-colors">
           <div className="w-1/3 h-1/3 bg-purple-500/20 rounded-full group-hover:bg-purple-500/40 transition-colors blur-sm"></div>
         </div>
         <div className="absolute top-0 w-3 h-3 bg-purple-400 rounded-full shadow-[0_0_10px_rgba(168,85,247,0.8)]"></div>
@@ -247,9 +247,9 @@ export default function Landing() {
       initial="hidden"
       variants={fadeUp}
       viewport={{ once: true }}
-      className="md:col-span-3 bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-2xl p-6 flex flex-col hover:border-green-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(34,197,94,0.15)] transition-all duration-500 ease-out group"
+      className="md:col-span-3 bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 md:p-6 flex flex-col hover:border-green-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(34,197,94,0.15)] transition-all duration-500 ease-out group"
      >
-      <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center border border-green-500/20 mb-5">
+      <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center border border-green-500/20 mb-5">
         <ShieldCheck size={20} className="text-green-400" />
       </div>
       <h3 className="text-xl font-['Bebas_Neue'] text-[var(--text-primary)] tracking-wider mb-2">Zero-Trust Security</h3>
@@ -264,9 +264,9 @@ export default function Landing() {
       initial="hidden"
       variants={fadeUp}
       viewport={{ once: true }}
-      className="md:col-span-4 bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-2xl p-6 flex flex-col hover:border-orange-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(249,115,22,0.15)] transition-all duration-500 ease-out group"
+      className="md:col-span-4 bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 md:p-6 flex flex-col hover:border-orange-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(249,115,22,0.15)] transition-all duration-500 ease-out group"
      >
-      <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center border border-orange-500/20 mb-5">
+      <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center border border-orange-500/20 mb-5">
         <Compass size={20} className="text-orange-400" />
       </div>
       <h3 className="text-xl font-['Bebas_Neue'] text-[var(--text-primary)] tracking-wider mb-2">Global Access</h3>
@@ -289,7 +289,7 @@ export default function Landing() {
     <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-900/50 to-transparent"></div>
     {/* Title Overlay */}
     <div className="absolute top-8 left-0 w-full text-center z-20 pointer-events-none">
-     <h2 className="text-2xl font-bold tracking-widest text-[var(--text-primary)] font-['Bebas_Neue']">HARDWARE SPECIFICATIONS</h2>
+     <h2 className="text-3xl md:text-4xl font-light tracking-tight text-foregroundtracking-widest text-[var(--text-primary)] font-['Bebas_Neue']">HARDWARE SPECIFICATIONS</h2>
     </div>
 
     {/* 3D Canvas */}
@@ -312,9 +312,9 @@ export default function Landing() {
      whileInView="visible"
      variants={fadeUp}
      viewport={{ once: true }}
-     className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 px-6 mt-8 relative z-20"
+     className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 md:grid-cols-4 gap-3 px-6 mt-8 relative z-20"
     >
-     <motion.div className="bg-[var(--bg-primary)] border border-white/10 rounded-lg p-4 cursor-pointer hover:border-[rgba(59,130,246,0.3)] hover:-translate-y-1 hover:shadow-[0_8px_25px_-8px_rgba(59,130,246,0.1)] transition-all duration-500 ease-out">
+     <motion.div className="bg-[var(--bg-primary)] border border-white/10 rounded-xl p-4 cursor-pointer hover:border-[rgba(59,130,246,0.3)] hover:-translate-y-1 hover:shadow-[0_8px_25px_-8px_rgba(59,130,246,0.1)] transition-all duration-500 ease-out">
       <span className="text-[var(--accent-primary)] font-mono text-[10px] tracking-widest block mb-2">HW-ID: ESP-32S3</span>
       <h4 className="font-['Bebas_Neue'] text-lg text-[var(--text-primary)] tracking-wide mb-2">Core Processing</h4>
       <div className="flex justify-between text-xs text-[var(--text-secondary)] font-mono border-t border-white/5 pt-2 mt-2">
@@ -325,7 +325,7 @@ export default function Landing() {
       </div>
      </motion.div>
 
-     <motion.div className="bg-[var(--bg-primary)] border border-white/10 rounded-lg p-4 cursor-pointer hover:border-[rgba(59,130,246,0.3)] hover:-translate-y-1 hover:shadow-[0_8px_25px_-8px_rgba(59,130,246,0.15)] transition-all duration-500 ease-out">
+     <motion.div className="bg-[var(--bg-primary)] border border-white/10 rounded-xl p-4 cursor-pointer hover:border-[rgba(59,130,246,0.3)] hover:-translate-y-1 hover:shadow-[0_8px_25px_-8px_rgba(59,130,246,0.15)] transition-all duration-500 ease-out">
       <span className="text-[var(--accent-primary)] font-mono text-[10px] tracking-widest block mb-2">HW-ID: SX1262</span>
       <h4 className="font-['Bebas_Neue'] text-lg text-[var(--text-primary)] tracking-wide mb-2">LoRa Radio</h4>
       <div className="flex justify-between text-xs text-[var(--text-secondary)] font-mono border-t border-white/5 pt-2 mt-2">
@@ -336,7 +336,7 @@ export default function Landing() {
       </div>
      </motion.div>
 
-     <motion.div className="bg-[var(--bg-primary)] border border-white/10 rounded-lg p-4 cursor-pointer hover:border-[rgba(59,130,246,0.3)] hover:-translate-y-1 hover:shadow-[0_8px_25px_-8px_rgba(59,130,246,0.1)] transition-all duration-500 ease-out">
+     <motion.div className="bg-[var(--bg-primary)] border border-white/10 rounded-xl p-4 cursor-pointer hover:border-[rgba(59,130,246,0.3)] hover:-translate-y-1 hover:shadow-[0_8px_25px_-8px_rgba(59,130,246,0.1)] transition-all duration-500 ease-out">
       <span className="text-[var(--accent-primary)] font-mono text-[10px] tracking-widest block mb-2">HW-ID: NEO-M9N</span>
       <h4 className="font-['Bebas_Neue'] text-lg text-[var(--text-primary)] tracking-wide mb-2">GNSS Module</h4>
       <div className="flex justify-between text-xs text-[var(--text-secondary)] font-mono border-t border-white/5 pt-2 mt-2">
@@ -347,7 +347,7 @@ export default function Landing() {
       </div>
      </motion.div>
 
-     <motion.div className="bg-[var(--bg-primary)] border border-white/10 rounded-lg p-4 cursor-pointer hover:border-[rgba(59,130,246,0.3)] hover:-translate-y-1 hover:shadow-[0_8px_25px_-8px_rgba(59,130,246,0.1)] transition-all duration-500 ease-out">
+     <motion.div className="bg-[var(--bg-primary)] border border-white/10 rounded-xl p-4 cursor-pointer hover:border-[rgba(59,130,246,0.3)] hover:-translate-y-1 hover:shadow-[0_8px_25px_-8px_rgba(59,130,246,0.1)] transition-all duration-500 ease-out">
       <span className="text-[var(--accent-primary)] font-mono text-[10px] tracking-widest block mb-2">HW-ID: BME280</span>
       <h4 className="font-['Bebas_Neue'] text-lg text-[var(--text-primary)] tracking-wide mb-2">Env Sensor</h4>
       <div className="flex justify-between text-xs text-[var(--text-secondary)] font-mono border-t border-white/5 pt-2 mt-2">
@@ -486,7 +486,7 @@ export default function Landing() {
    {/* ═══════════════════════════════════════════════════════════
      6. FOOTER
      ═══════════════════════════════════════════════════════════ */}
-   <footer className="w-full bg-[var(--bg-panel)] relative z-20 overflow-hidden pt-12 pb-8 px-6 border-t border-[var(--border)] shadow-[0_-10px_30px_rgba(0,0,0,0.2)]">
+   <footer className="w-full bg-[var(--bg-panel)] relative z-20 overflow-hidden pt-12 pb-8 px-6 border-t border-border/50 shadow-[0_-10px_30px_rgba(0,0,0,0.2)]">
     {/* Glowing background effects */}
     <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[var(--accent-primary)]/5 rounded-full blur-[120px] pointer-events-none"></div>
     <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[100px] pointer-events-none"></div>
@@ -532,7 +532,7 @@ export default function Landing() {
        <span className="text-[var(--text-secondary)] font-medium">Heritage Institute of Technology</span>
        <span className="text-xs opacity-75">Kolkata, India</span>
       </div>
-      <a href="mailto:hackcypher2025@gmail.com" className="group text-sm mt-3 flex items-center gap-2 bg-[var(--bg-primary)] border border-[var(--border)] px-4 py-2 rounded-lg hover:border-[var(--accent-primary)] hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] transition-all w-fit">
+      <a href="mailto:hackcypher2025@gmail.com" className="group text-sm mt-3 flex items-center gap-2 bg-[var(--bg-primary)] border border-border/50 px-4 py-2 rounded-xl hover:border-[var(--accent-primary)] hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] transition-all w-fit">
        <div className="text-[var(--accent-primary)] group-hover:scale-110 transition-transform">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
        </div>
@@ -542,13 +542,13 @@ export default function Landing() {
     </div>
 
     {/* Bottom Bar */}
-    <div className="max-w-6xl mx-auto pt-6 flex flex-col md:flex-row items-center justify-between gap-6 text-xs font-mono text-[var(--text-secondary)] relative z-10">
+    <div className="max-w-6xl mx-auto pt-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 text-xs font-mono text-[var(--text-secondary)] relative z-10">
      {/* Bottom gradient divider */}
      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--accent-primary)]/30 to-transparent"></div>
      <div>
       &copy; {new Date().getFullYear()} F.R.O.S.T. Built with ❄️ by <span className="text-[var(--accent-primary)]">Team HackCypher</span>.
      </div>
-     <div className="flex items-center gap-3 bg-[var(--bg-primary)] border border-[var(--border)] px-3 py-1.5 rounded-full">
+     <div className="flex items-center gap-3 bg-[var(--bg-primary)] border border-border/50 px-3 py-1.5 rounded-full">
       <div className="w-2 h-2 rounded-full bg-[var(--ok)] animate-pulse shadow-[0_0_8px_var(--ok)]"></div>
       <span className="text-[var(--ok)] font-bold tracking-wider text-[10px]">ALL SYSTEMS NOMINAL</span>
      </div>

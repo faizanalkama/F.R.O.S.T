@@ -125,7 +125,7 @@ export default function CargoLedger() {
   : null;
 
  return (
-  <div className="page-container">
+  <div className="page-container overflow-x-hidden">
    <h1><Package style={{display:'inline', marginRight:12, verticalAlign:'bottom'}} /> Immutable Cargo Ledger</h1>
 
    {/* ── Toast ──────────────────────────────────────────────────────────── */}
@@ -170,7 +170,7 @@ export default function CargoLedger() {
      {/* Advance button */}
      {nextStatus && (
       <button
-       className="btn"
+       className="btn transition-all duration-300 ease-out hover:-translate-y-0.5 shadow-sm ring-1 ring-inset ring-black/10 dark:ring-white/10 w-full md:w-auto"
        style={{ marginTop: '16px' }}
        disabled={loading || (!isSealed && STATUS_PIPELINE.indexOf(nextStatus) >= 2)}
        onClick={() => advanceStatus(nextStatus)}
@@ -207,10 +207,10 @@ export default function CargoLedger() {
      </div>
 
      <div style={{ display: 'flex', gap: '12px' }}>
-      <button className="btn secondary" onClick={createManifest} disabled={loading}>
+      <button className="btn transition-all duration-300 ease-out hover:-translate-y-0.5 shadow-sm ring-1 ring-inset ring-black/10 dark:ring-white/10 secondary w-full md:w-auto" onClick={createManifest} disabled={loading}>
        <Unlock size={16}/> Create Draft
       </button>
-      <button className="btn" onClick={sealManifest} disabled={loading || !manifest || isSealed}>
+      <button className="btn transition-all duration-300 ease-out hover:-translate-y-0.5 shadow-sm ring-1 ring-inset ring-black/10 dark:ring-white/10 w-full md:w-auto" onClick={sealManifest} disabled={loading || !manifest || isSealed}>
        <Lock size={16}/> Seal & Hash
       </button>
      </div>
@@ -225,14 +225,14 @@ export default function CargoLedger() {
 
      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '16px' }}>
       <button
-       className="btn" style={{ background: 'var(--success)' }}
+       className="btn transition-all duration-300 ease-out hover:-translate-y-0.5 shadow-sm ring-1 ring-inset ring-black/10 dark:ring-white/10 w-full md:w-auto" style={{ background: 'var(--success)' }}
        onClick={() => verifyManifest(false)}
        disabled={loading || !isSealed}
       >
        <ShieldCheck size={16}/> Simulate Scan: Untampered Cargo
       </button>
       <button
-       className="btn danger"
+       className="btn transition-all duration-300 ease-out hover:-translate-y-0.5 shadow-sm ring-1 ring-inset ring-black/10 dark:ring-white/10 danger w-full md:w-auto"
        onClick={() => verifyManifest(true)}
        disabled={loading || !isSealed}
       >

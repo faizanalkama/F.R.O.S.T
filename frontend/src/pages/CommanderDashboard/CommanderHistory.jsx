@@ -42,7 +42,7 @@ export default function CommanderHistory() {
  }, [station]);
 
  return (
-  <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-6 min-h-full flex flex-col">
+  <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 md:p-6 min-h-full flex flex-col">
    <h2 className="text-[var(--accent-primary)] font-['Space_Grotesk'] font-bold text-2xl tracking-wide mb-2">
     COMMANDER HISTORY
    </h2>
@@ -63,7 +63,7 @@ export default function CommanderHistory() {
      return (
       <div
        key={i}
-       className={`flex items-start gap-4 border-l-2 ${severityBorder[entry.severity]} pl-4 py-4 hover:bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] transition-colors rounded-r-lg`}
+       className={`flex items-start gap-4 border-l-2 ${severityBorder[entry.severity]} pl-4 py-4 hover:bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md transition-colors rounded-r-lg`}
       >
        <div className={`mt-0.5 ${severityColors[entry.severity]}`}>
         <Icon size={18} />

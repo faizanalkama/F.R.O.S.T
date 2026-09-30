@@ -102,7 +102,7 @@ function InventoryCard({ item, onRemove, onAdjust }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.2 }}
-      className="bg-[var(--bg-panel)] backdrop-blur-xl border border-[var(--border)] rounded-xl p-5 shadow-[var(--shadow-glass)] flex flex-col hover:border-[var(--border-hover)] transition-colors relative group"
+      className="bg-surface/80 backdrop-blur-md border border-border/50 rounded-2xl p-5 shadow-sm hover:shadow-md flex flex-col hover:border-[var(--border-hover)] transition-colors relative group"
     >
       <button 
         onClick={() => onRemove(item.id)}
@@ -116,7 +116,7 @@ function InventoryCard({ item, onRemove, onAdjust }) {
       <div className="flex items-center gap-2 mb-4">
         <span className="text-[10px] font-bold tracking-widest text-[var(--accent-primary)] uppercase">{item.category}</span>
         {item.shelfNumber && (
-          <span className="text-[10px] font-bold tracking-widest text-[var(--text-secondary)] border border-[var(--border)] px-1.5 py-0.5 rounded-sm uppercase">SHELF: {item.shelfNumber}</span>
+          <span className="text-[10px] font-bold tracking-widest text-[var(--text-secondary)] border border-border/50 px-1.5 py-0.5 rounded-sm uppercase">SHELF: {item.shelfNumber}</span>
         )}
       </div>
       
@@ -135,22 +135,22 @@ function InventoryCard({ item, onRemove, onAdjust }) {
       )}
 
       <div className="mt-auto flex flex-col gap-3">
-        <div className="grid grid-cols-2 gap-2">
-          <button onClick={() => handleAdjustDraft(-10)} className="py-2 bg-[var(--bg-primary)] border border-[var(--border)] rounded text-xs font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-primary)] transition-colors">- 10</button>
-          <button onClick={() => handleAdjustDraft(10)} className="py-2 bg-[var(--bg-panel-raised)] border border-[var(--border)] rounded text-xs font-bold text-[var(--text-primary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-colors">+ 10</button>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <button onClick={() => handleAdjustDraft(-10)} className="py-2 bg-[var(--bg-primary)] border border-border/50 rounded text-xs font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-primary)] transition-colors">- 10</button>
+          <button onClick={() => handleAdjustDraft(10)} className="py-2 bg-[var(--bg-panel-raised)] border border-border/50 rounded text-xs font-bold text-[var(--text-primary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-colors">+ 10</button>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-col md:flex-row gap-2">
           <input 
             type="number" 
             placeholder="Custom qty..." 
             value={draftQty}
             onChange={(e) => setDraftQty(e.target.value)}
-            className="flex-1 min-w-0 bg-[var(--bg-primary)] border border-[var(--border)] rounded px-3 py-2 text-xs text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
+            className="flex-1 min-w-0 bg-[var(--bg-primary)] border border-border/50 rounded px-3 py-2 text-xs text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
           />
-          <button onClick={handleApplyRemove} className="px-3 py-2 bg-[var(--bg-primary)] border border-[var(--border)] rounded text-[var(--text-secondary)] hover:text-[var(--critical)] hover:border-[var(--critical)] transition-colors shrink-0">
+          <button onClick={handleApplyRemove} className="px-3 py-2 bg-[var(--bg-primary)] border border-border/50 rounded text-[var(--text-secondary)] hover:text-[var(--critical)] hover:border-[var(--critical)] transition-colors shrink-0 transition-all duration-300 ease-out hover:-translate-y-0.5 w-full md:w-auto">
             <Minus size={14} />
           </button>
-          <button onClick={handleApplyAdd} className="px-4 py-2 bg-[var(--bg-panel-raised)] border border-[var(--border)] rounded flex items-center gap-1 text-xs font-bold text-[var(--text-primary)] hover:text-[var(--accent-primary)] hover:border-[var(--accent-primary)] transition-colors shrink-0">
+          <button onClick={handleApplyAdd} className="px-4 py-2 bg-[var(--bg-panel-raised)] border border-border/50 rounded flex items-center gap-1 text-xs font-bold text-[var(--text-primary)] hover:text-[var(--accent-primary)] hover:border-[var(--accent-primary)] transition-colors shrink-0 transition-all duration-300 ease-out hover:-translate-y-0.5 w-full md:w-auto">
             <Plus size={14} /> Add
           </button>
         </div>
@@ -383,7 +383,7 @@ export default function CommanderInventory() {
       case 'DENIED':
         return { label: 'Denied', icon: XCircle, color: 'text-[var(--critical)]', bg: 'bg-[var(--critical)]/10 border-[var(--critical)]/30' };
       default:
-        return { label: status, icon: Clock, color: 'text-[var(--text-secondary)]', bg: 'bg-[var(--bg-panel-raised)] border-[var(--border)]' };
+        return { label: status, icon: Clock, color: 'text-[var(--text-secondary)]', bg: 'bg-[var(--bg-panel-raised)] border-border/50' };
     }
   };
 
@@ -393,9 +393,9 @@ export default function CommanderInventory() {
       {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold font-['Space_Grotesk'] text-[var(--text-primary)] tracking-tight mb-2">Offline-First Inventory</h1>
+          <h1 className="text-3xl md:text-4xl font-light tracking-tight text-foregroundfont-['Space_Grotesk'] text-[var(--text-primary)] tracking-tight mb-2">Offline-First Inventory</h1>
         </div>
-        <div className="flex items-center gap-2 px-4 py-2 bg-[var(--ok)]/10 border border-[var(--ok)]/30 rounded-full text-[var(--ok)] shadow-[var(--shadow-glass)]">
+        <div className="flex items-center gap-2 px-4 py-2 bg-[var(--ok)]/10 border border-[var(--ok)]/30 rounded-full text-[var(--ok)] shadow-sm hover:shadow-md">
           <Wifi size={16} />
           <span className="text-sm font-bold tracking-wide">Local Stock</span>
         </div>
@@ -409,10 +409,10 @@ export default function CommanderInventory() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ${
+              className={`px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
                 activeTab === tab 
                   ? 'bg-[var(--accent-primary)] text-white shadow-[0_0_15px_rgba(59,130,246,0.3)]' 
-                  : 'bg-[var(--bg-panel)] text-[var(--text-secondary)] border border-[var(--border)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-panel-raised)]'
+                  : 'bg-[var(--bg-panel)] text-[var(--text-secondary)] border border-border/50 hover:text-[var(--text-primary)] hover:bg-[var(--bg-panel-raised)]'
               }`}
             >
               {tab}
@@ -429,13 +429,13 @@ export default function CommanderInventory() {
               placeholder="Search items..." 
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-[var(--bg-panel)] border border-[var(--border)] rounded-lg pl-9 pr-4 py-2 text-[var(--text-primary)] text-sm focus:outline-none focus:border-[var(--accent-primary)] shadow-[var(--shadow-glass)] transition-colors"
+              className="w-full bg-[var(--bg-panel)] border border-border/50 rounded-xl pl-9 pr-4 py-2 text-[var(--text-primary)] text-sm focus:outline-none focus:border-[var(--accent-primary)] shadow-sm hover:shadow-md transition-colors"
             />
           </div>
           {/* Restored Add Item Button */}
           <button 
             onClick={() => setIsAddItemModalOpen(true)}
-            className="flex items-center gap-2 px-5 py-2 bg-[var(--bg-panel-raised)] text-[var(--text-primary)] border border-[var(--border)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] rounded-lg text-sm font-bold transition-all shadow-[var(--shadow-glass)] shrink-0"
+            className="flex items-center gap-2 px-5 py-2 bg-[var(--bg-panel-raised)] text-[var(--text-primary)] border border-border/50 hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] rounded-xl text-sm font-bold transition-all shadow-sm hover:shadow-md shrink-0"
           >
             <Plus size={16} /> Add Item
           </button>
@@ -443,7 +443,7 @@ export default function CommanderInventory() {
       </div>
 
       {/* Grid Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8 shrink-0">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6 mb-8 shrink-0">
         <AnimatePresence>
           {filteredItems.length === 0 ? (
             <motion.div 
@@ -468,7 +468,7 @@ export default function CommanderInventory() {
         </AnimatePresence>
       </div>
 
-      <section className="mb-8 border border-[var(--border)] bg-[var(--bg-panel)] p-4" aria-labelledby="stock-runway-heading">
+      <section className="mb-8 border border-border/50 bg-[var(--bg-panel)] p-4" aria-labelledby="stock-runway-heading">
         <h2 id="stock-runway-heading" className="mb-3 text-sm font-bold text-[var(--text-primary)]">Stock Runway</h2>
         {runwayError ? (
           <p role="alert" className="text-xs text-[var(--critical)]">{runwayError}</p>
@@ -477,7 +477,7 @@ export default function CommanderInventory() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-2">
             {runwayItems.map(item => (
-              <div key={item.item_id} className="flex items-center justify-between gap-3 border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-2">
+              <div key={item.item_id} className="flex items-center justify-between gap-3 border border-border/50 bg-[var(--bg-primary)] px-3 py-2">
                 <div className="min-w-0">
                   <span className="block truncate text-xs font-semibold text-[var(--text-primary)]">{item.name}</span>
                   <span className="text-[10px] text-[var(--text-secondary)]">{Number(item.current_stock).toLocaleString()} {item.unit}</span>
@@ -496,19 +496,19 @@ export default function CommanderInventory() {
       {/* ──────────────────────────────────────────────────────────
           BOTTOM SECTION: REQUEST ASSET BUTTON + LIFECYCLE LOG
           ────────────────────────────────────────────────────────── */}
-      <div className="mt-auto grid grid-cols-1 xl:grid-cols-12 gap-6 shrink-0">
+      <div className="mt-auto grid grid-cols-1 xl:grid-cols-12 gap-4 md:gap-6 shrink-0">
         
         {/* Request Asset Action Area */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="col-span-1 xl:col-span-8 bg-[var(--bg-panel)] backdrop-blur-xl border border-[var(--border)] rounded-xl shadow-[var(--shadow-glass)] p-8 flex flex-col items-center justify-center min-h-[250px]"
+          className="col-span-1 xl:col-span-8 bg-surface/80 backdrop-blur-md border border-border/50 rounded-2xl shadow-sm hover:shadow-md p-4 md:p-8 flex flex-col items-center justify-center min-h-[250px]"
         >
           <div className="text-center max-w-md">
             <h3 className="text-xl font-bold text-[var(--text-primary)] font-['Space_Grotesk'] mb-3">Official Station Requisition</h3>
             <button 
               onClick={() => setIsModalOpen(true)}
-              className="w-full md:w-auto px-10 py-4 bg-gradient-to-b from-blue-500 to-blue-600 text-white hover:from-blue-400 hover:to-blue-500 border border-blue-400/30 rounded-xl text-base font-bold transition-all shadow-[var(--shadow-glass)] hover:scale-105 active:scale-95 flex items-center justify-center gap-3 mx-auto"
+              className="w-full md:w-auto px-10 py-4 bg-gradient-to-b from-blue-500 to-blue-600 text-white hover:from-blue-400 hover:to-blue-500 border border-blue-400/30 rounded-2xl text-base font-bold transition-all shadow-sm hover:shadow-md hover:scale-105 active:scale-95 flex items-center justify-center gap-3 mx-auto"
             >
               <Send size={20} /> Request Asset
             </button>
@@ -520,7 +520,7 @@ export default function CommanderInventory() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="col-span-1 xl:col-span-4 bg-[var(--bg-panel)] backdrop-blur-xl border border-[var(--border)] rounded-xl shadow-[var(--shadow-glass)] p-5 flex flex-col h-full min-h-[250px] max-h-[300px]"
+          className="col-span-1 xl:col-span-4 bg-surface/80 backdrop-blur-md border border-border/50 rounded-2xl shadow-sm hover:shadow-md p-5 flex flex-col h-full min-h-[250px] max-h-[300px]"
         >
           <h3 className="text-sm font-bold text-[var(--text-secondary)] uppercase tracking-wider mb-4 flex items-center gap-2">
             <Clock size={16} /> Request Lifecycle Status
@@ -541,7 +541,7 @@ export default function CommanderInventory() {
                     layout
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className={`p-3 rounded-lg border ${ui.bg} flex flex-col gap-2 shadow-sm transition-colors duration-500`}
+                    className={`p-3 rounded-xl border ${ui.bg} flex flex-col gap-2 shadow-sm transition-colors duration-500`}
                   >
                     <div className="flex justify-between items-start">
                       <span className="text-sm font-bold text-[var(--text-primary)] leading-tight">{req.qty} {req.unit} <br/><span className="text-[var(--text-secondary)] text-xs font-normal">{req.item}</span></span>
@@ -575,10 +575,10 @@ export default function CommanderInventory() {
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="w-full max-w-lg bg-[var(--bg-panel-raised)] border border-[var(--border)] rounded-2xl shadow-2xl overflow-hidden font-['Work_Sans'] relative"
+              className="w-full max-w-lg bg-[var(--bg-panel-raised)] border border-border/50 rounded-2xl shadow-2xl overflow-hidden font-['Work_Sans'] relative"
             >
               {/* Modal Header */}
-              <div className="px-6 py-5 border-b border-[var(--border)] flex justify-between items-center bg-[var(--bg-panel)] relative overflow-hidden">
+              <div className="px-6 py-5 border-b border-border/50 flex justify-between items-center bg-[var(--bg-panel)] relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent-primary)]/10 to-transparent pointer-events-none"></div>
                 <h2 className="text-lg font-bold text-[var(--accent-primary)] font-['Space_Grotesk'] tracking-wide relative z-10">
                   Submit Official Station Requisition
@@ -592,7 +592,7 @@ export default function CommanderInventory() {
               </div>
               
               {/* Modal Body */}
-              <form onSubmit={handleRequisition} className="p-6 flex flex-col gap-6">
+              <form onSubmit={handleRequisition} className="p-4 md:p-6 flex flex-col gap-4 md:gap-6">
                 
                 <div>
                   <label className="block text-[10px] font-bold text-[var(--text-secondary)] mb-2 uppercase tracking-widest">
@@ -602,7 +602,7 @@ export default function CommanderInventory() {
                     <select 
                       value={reqAsset}
                       onChange={(e) => setReqAsset(e.target.value)}
-                      className="w-full bg-[var(--bg-primary)] border border-[var(--border)] text-[var(--text-primary)] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--accent-primary)] transition-colors appearance-none shadow-inner cursor-pointer"
+                      className="w-full bg-[var(--bg-primary)] border border-border/50 text-[var(--text-primary)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[var(--accent-primary)] transition-colors appearance-none shadow-inner cursor-pointer"
                     >
                       <option value="" disabled>Select from database...</option>
                       {items.map(i => (
@@ -626,7 +626,7 @@ export default function CommanderInventory() {
                           placeholder="Enter new asset name..." 
                           value={customAsset}
                           onChange={(e) => setCustomAsset(e.target.value)}
-                          className="mt-3 w-full bg-[var(--bg-primary)] border border-[var(--border)] text-[var(--text-primary)] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--accent-primary)] transition-colors shadow-inner"
+                          className="mt-3 w-full bg-[var(--bg-primary)] border border-border/50 text-[var(--text-primary)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[var(--accent-primary)] transition-colors shadow-inner"
                         />
                       </motion.div>
                     )}
@@ -645,7 +645,7 @@ export default function CommanderInventory() {
                     value={reqQty}
                     onChange={(e) => setReqQty(e.target.value)}
                     placeholder="Enter amount..."
-                    className="w-full bg-[var(--bg-primary)] border border-[var(--border)] text-[var(--text-primary)] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--accent-primary)] transition-colors shadow-inner"
+                    className="w-full bg-[var(--bg-primary)] border border-border/50 text-[var(--text-primary)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[var(--accent-primary)] transition-colors shadow-inner"
                   />
                 </div>
 
@@ -653,14 +653,14 @@ export default function CommanderInventory() {
                   <label className="block text-[10px] font-bold text-[var(--text-secondary)] mb-2 uppercase tracking-widest">
                     Priority Level
                   </label>
-                  <div className="flex gap-4">
+                  <div className="flex flex-col md:flex-row gap-4">
                     <button 
                       type="button" 
                       onClick={() => setReqUrgency('ROUTINE')}
-                      className={`flex-1 py-3 rounded-lg text-sm font-bold border transition-all duration-300 ${
+                      className={`flex-1 py-3 rounded-xl text-sm font-bold border transition-all duration-300 ${
                         reqUrgency === 'ROUTINE' 
                           ? 'bg-[var(--accent-primary)] text-white border-[var(--accent-primary)] shadow-[0_0_15px_rgba(59,130,246,0.3)]' 
-                          : 'bg-[var(--bg-primary)] border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-panel)]'
+                          : 'bg-[var(--bg-primary)] border-border/50 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-panel)]'
                       }`}
                     >
                       ROUTINE
@@ -668,10 +668,10 @@ export default function CommanderInventory() {
                     <button 
                       type="button" 
                       onClick={() => setReqUrgency('CRITICAL')}
-                      className={`flex-1 py-3 rounded-lg text-sm font-bold border transition-all duration-300 ${
+                      className={`flex-1 py-3 rounded-xl text-sm font-bold border transition-all duration-300 ${
                         reqUrgency === 'CRITICAL' 
                           ? 'bg-[var(--critical)] text-white border-[var(--critical)] shadow-[0_0_15px_rgba(225,29,72,0.3)]' 
-                          : 'bg-[var(--bg-primary)] border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--critical)] hover:bg-[var(--critical)]/10 hover:border-[var(--critical)]/50'
+                          : 'bg-[var(--bg-primary)] border-border/50 text-[var(--text-secondary)] hover:text-[var(--critical)] hover:bg-[var(--critical)]/10 hover:border-[var(--critical)]/50'
                       }`}
                     >
                       CRITICAL
@@ -680,7 +680,7 @@ export default function CommanderInventory() {
                 </div>
 
                 {/* Footer */}
-                <div className="mt-2 pt-5 border-t border-[var(--border)] flex justify-end items-center gap-4">
+                <div className="mt-2 pt-5 border-t border-border/50 flex justify-end items-center gap-4">
                   <button 
                     type="button" 
                     onClick={() => setIsModalOpen(false)} 
@@ -691,7 +691,7 @@ export default function CommanderInventory() {
                   <button 
                     type="submit"
                     disabled={syncState !== 'IDLE'}
-                    className={`px-6 py-3 rounded-lg font-bold text-sm transition-all shadow-[var(--shadow-glass)] disabled:opacity-80 min-w-[200px] flex justify-center items-center ${
+                    className={`px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-sm hover:shadow-md disabled:opacity-80 min-w-[200px] flex justify-center items-center ${
                       syncState === 'QUEUED' 
                         ? 'bg-[var(--ok)] text-white' 
                         : 'bg-gradient-to-b from-[var(--accent-primary)] to-blue-600 hover:from-blue-400 hover:to-[var(--accent-primary)] text-white border border-blue-400/30'
@@ -721,10 +721,10 @@ export default function CommanderInventory() {
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="w-full max-w-lg bg-[var(--bg-panel-raised)] border border-[var(--border)] rounded-2xl shadow-2xl overflow-hidden font-['Work_Sans'] relative"
+              className="w-full max-w-lg bg-[var(--bg-panel-raised)] border border-border/50 rounded-2xl shadow-2xl overflow-hidden font-['Work_Sans'] relative"
             >
               {/* Modal Header */}
-              <div className="px-6 py-5 border-b border-[var(--border)] flex justify-between items-center bg-[var(--bg-panel)] relative overflow-hidden">
+              <div className="px-6 py-5 border-b border-border/50 flex justify-between items-center bg-[var(--bg-panel)] relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-[var(--ok)]/10 to-transparent pointer-events-none"></div>
                 <h2 className="text-lg font-bold text-[var(--ok)] font-['Space_Grotesk'] tracking-wide relative z-10">
                   Add Local Inventory Item
@@ -738,7 +738,7 @@ export default function CommanderInventory() {
               </div>
               
               {/* Modal Body */}
-              <form onSubmit={handleAddItemSubmit} className="p-6 flex flex-col gap-6">
+              <form onSubmit={handleAddItemSubmit} className="p-4 md:p-6 flex flex-col gap-4 md:gap-6">
                 <div>
                   <label className="block text-[10px] font-bold text-[var(--text-secondary)] mb-2 uppercase tracking-widest">
                     Item Name
@@ -749,11 +749,11 @@ export default function CommanderInventory() {
                     value={newItemData.name}
                     onChange={(e) => setNewItemData({...newItemData, name: e.target.value})}
                     placeholder="e.g. Spare Battery Pack"
-                    className="w-full bg-[var(--bg-primary)] border border-[var(--border)] text-[var(--text-primary)] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--ok)] transition-colors shadow-inner"
+                    className="w-full bg-[var(--bg-primary)] border border-border/50 text-[var(--text-primary)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[var(--ok)] transition-colors shadow-inner"
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[10px] font-bold text-[var(--text-secondary)] mb-2 uppercase tracking-widest">
                       Category
@@ -761,7 +761,7 @@ export default function CommanderInventory() {
                     <select 
                       value={newItemData.category}
                       onChange={(e) => setNewItemData({...newItemData, category: e.target.value})}
-                      className="w-full bg-[var(--bg-primary)] border border-[var(--border)] text-[var(--text-primary)] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--ok)] transition-colors appearance-none shadow-inner cursor-pointer"
+                      className="w-full bg-[var(--bg-primary)] border border-border/50 text-[var(--text-primary)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[var(--ok)] transition-colors appearance-none shadow-inner cursor-pointer"
                     >
                       <option value="FUEL">FUEL</option>
                       <option value="MEDICAL">MEDICAL</option>
@@ -779,12 +779,12 @@ export default function CommanderInventory() {
                       value={newItemData.unit}
                       onChange={(e) => setNewItemData({...newItemData, unit: e.target.value})}
                       placeholder="e.g. Liters, Units"
-                      className="w-full bg-[var(--bg-primary)] border border-[var(--border)] text-[var(--text-primary)] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--ok)] transition-colors shadow-inner"
+                      className="w-full bg-[var(--bg-primary)] border border-border/50 text-[var(--text-primary)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[var(--ok)] transition-colors shadow-inner"
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[10px] font-bold text-[var(--text-secondary)] mb-2 uppercase tracking-widest">
                       Initial Quantity
@@ -796,7 +796,7 @@ export default function CommanderInventory() {
                       value={newItemData.qty}
                       onChange={(e) => setNewItemData({...newItemData, qty: e.target.value})}
                       placeholder="Enter amount..."
-                      className="w-full bg-[var(--bg-primary)] border border-[var(--border)] text-[var(--text-primary)] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--ok)] transition-colors shadow-inner"
+                      className="w-full bg-[var(--bg-primary)] border border-border/50 text-[var(--text-primary)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[var(--ok)] transition-colors shadow-inner"
                     />
                   </div>
                   <div>
@@ -808,13 +808,13 @@ export default function CommanderInventory() {
                       value={newItemData.shelfNumber}
                       onChange={(e) => setNewItemData({...newItemData, shelfNumber: e.target.value})}
                       placeholder="e.g. TNK-04"
-                      className="w-full bg-[var(--bg-primary)] border border-[var(--border)] text-[var(--text-primary)] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--ok)] transition-colors shadow-inner"
+                      className="w-full bg-[var(--bg-primary)] border border-border/50 text-[var(--text-primary)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[var(--ok)] transition-colors shadow-inner"
                     />
                   </div>
                 </div>
 
                 {/* Footer */}
-                <div className="mt-2 pt-5 border-t border-[var(--border)] flex justify-end items-center gap-4">
+                <div className="mt-2 pt-5 border-t border-border/50 flex justify-end items-center gap-4">
                   <button 
                     type="button" 
                     onClick={() => setIsAddItemModalOpen(false)} 
@@ -824,7 +824,7 @@ export default function CommanderInventory() {
                   </button>
                   <button 
                     type="submit"
-                    className="px-6 py-3 rounded-lg font-bold text-sm transition-all shadow-[var(--shadow-glass)] bg-gradient-to-b from-[var(--ok)] to-green-600 hover:from-green-500 hover:to-[var(--ok)] text-white border border-green-400/30"
+                    className="px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-sm hover:shadow-md bg-gradient-to-b from-[var(--ok)] to-green-600 hover:from-green-500 hover:to-[var(--ok)] text-white border border-green-400/30 w-full md:w-auto"
                   >
                     Add Item
                   </button>
@@ -853,7 +853,7 @@ export default function CommanderInventory() {
               className="bg-[var(--bg-panel-raised)] border border-[var(--critical)]/50 rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden flex flex-col relative font-['Work_Sans']"
             >
               <div className="absolute top-0 left-0 right-0 h-1 bg-[var(--critical)]" />
-              <div className="p-6">
+              <div className="p-4 md:p-6">
                 <div className="flex items-center gap-3 mb-4 text-[var(--critical)]">
                   <AlertTriangle size={24} />
                   <h3 className="text-lg font-bold font-['Space_Grotesk']">Confirm Deletion</h3>
@@ -870,7 +870,7 @@ export default function CommanderInventory() {
                     value={deleteConfirmText}
                     onChange={(e) => setDeleteConfirmText(e.target.value)}
                     placeholder="Type 'REMOVE' here"
-                    className="w-full bg-[var(--bg-panel)] border border-[var(--border)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--critical)] transition-colors mb-6"
+                    className="w-full bg-[var(--bg-panel)] border border-border/50 rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--critical)] transition-colors mb-6"
                   />
                   <div className="flex justify-end gap-3">
                     <button
@@ -879,14 +879,14 @@ export default function CommanderInventory() {
                         setIsDeleteModalOpen(false);
                         setDeleteConfirmText('');
                       }}
-                      className="px-4 py-2 rounded-lg text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-panel)] transition-colors"
+                      className="px-4 py-2 rounded-xl text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-panel)] transition-colors"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
                       disabled={deleteConfirmText !== 'REMOVE'}
-                      className="px-4 py-2 rounded-lg text-sm font-medium bg-[var(--critical)] text-white hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_var(--critical)] shadow-opacity-50"
+                      className="px-4 py-2 rounded-xl text-sm font-medium bg-[var(--critical)] text-white hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_var(--critical)] shadow-opacity-50 transition-all duration-300 ease-out hover:-translate-y-0.5 w-full md:w-auto"
                     >
                       Confirm Removal
                     </button>

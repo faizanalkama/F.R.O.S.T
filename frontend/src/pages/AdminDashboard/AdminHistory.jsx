@@ -93,7 +93,7 @@ export default function AdminHistory() {
  });
 
  return (
-  <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-6 h-full flex flex-col overflow-hidden">
+  <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 sm:p-6 h-full flex flex-col overflow-hidden">
    {/* Header */}
    <div className="flex items-center justify-between mb-6 shrink-0">
     <div>
@@ -103,7 +103,7 @@ export default function AdminHistory() {
     </div>
 
     <div className="flex items-center gap-3">
-     <div className="flex items-center gap-2 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] px-3 py-1.5 rounded-lg border border-[var(--border)] text-xs font-mono">
+     <div className="flex items-center gap-2 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md px-3 py-1.5 rounded-xl border border-border/50 text-xs font-mono">
       <Radio size={14} className="text-[var(--ok)] animate-pulse" />
       <span className="text-[var(--text-secondary)]">Ledger State:</span>
       <span className="text-[var(--ok)] font-semibold">SYNCHRONIZED (12s Tick)</span>
@@ -124,7 +124,7 @@ export default function AdminHistory() {
       value={searchQuery}
       onChange={(e) => setSearchQuery(e.target.value)}
       placeholder="Search action, ID, hash, or admin..."
-      className="w-full bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg pl-9 pr-3 py-2 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors font-['Work_Sans']"
+      className="w-full bg-[var(--bg-primary)] border border-border/50 rounded-xl pl-9 pr-3 py-2 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors font-['Work_Sans']"
      />
     </div>
 
@@ -135,10 +135,10 @@ export default function AdminHistory() {
        key={cat}
        type="button"
        onClick={() => setActiveCategory(cat)}
-       className={`px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+       className={`px-3 py-1.5 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
         activeCategory === cat
-         ? 'border border-[var(--accent-primary)] text-[var(--accent-primary)] bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] shadow-sm'
-         : 'border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)]'
+         ? 'border border-[var(--accent-primary)] text-[var(--accent-primary)] bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md shadow-sm'
+         : 'border border-border/50 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md'
        }`}
       >
        {cat}
@@ -150,7 +150,7 @@ export default function AdminHistory() {
     <button
      type="button"
      onClick={handleExport}
-     className="flex items-center gap-2 px-4 py-2 border border-[var(--border)] rounded-lg bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] text-[var(--text-secondary)] hover:text-[var(--accent-primary)] hover:border-[var(--accent-primary)] transition-colors font-['Work_Sans'] text-xs font-medium cursor-pointer ml-auto"
+     className="flex items-center gap-2 px-4 py-2 border border-border/50 rounded-xl bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md text-[var(--text-secondary)] hover:text-[var(--accent-primary)] hover:border-[var(--accent-primary)] transition-colors font-['Work_Sans'] text-xs font-medium cursor-pointer ml-auto transition-all duration-300 ease-out hover:-translate-y-0.5 w-full md:w-auto"
     >
      {exportedStatus ? (
       <>
@@ -194,7 +194,7 @@ export default function AdminHistory() {
          initial={{ opacity: 0, y: -20 }}
          animate={{ opacity: 1, y: 0 }}
          transition={{ duration: 0.25 }}
-         className="mb-3 border border-[var(--border)] rounded-lg bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] overflow-hidden shadow-sm hover:border-[var(--accent-primary)]/50 transition-colors"
+         className="mb-3 border border-border/50 rounded-xl bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md overflow-hidden shadow-sm hover:border-[var(--accent-primary)]/50 transition-colors"
         >
          {/* Main Clickable Row */}
          <div
@@ -205,7 +205,7 @@ export default function AdminHistory() {
          >
           <div className="flex items-center gap-3.5 flex-1 min-w-0">
            {/* Category Icon with Severity Dot */}
-           <div className="relative p-2 rounded-lg bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] text-[var(--accent-primary)] shrink-0">
+           <div className="relative p-2 rounded-xl bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 text-[var(--accent-primary)] shrink-0">
             <Icon size={16} />
             <span
              className={`absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full ${
@@ -233,7 +233,7 @@ export default function AdminHistory() {
 
           {/* Category Badge & Expand Chevron */}
           <div className="flex items-center gap-3 shrink-0">
-           <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded border border-[var(--border)] bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] text-[var(--text-secondary)] font-semibold">
+           <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded border border-border/50 bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md text-[var(--text-secondary)] font-semibold">
             {log.category}
            </span>
            <ChevronDown
@@ -255,8 +255,8 @@ export default function AdminHistory() {
             transition={{ duration: 0.25 }}
             className="overflow-hidden"
            >
-            <div className="bg-[var(--bg-primary)] p-4 font-mono text-xs text-[var(--text-secondary)] border-t border-[var(--border)]">
-             <div className="flex items-center justify-between pb-2 mb-3 border-b border-[var(--border)]">
+            <div className="bg-[var(--bg-primary)] p-4 font-mono text-xs text-[var(--text-secondary)] border-t border-border/50">
+             <div className="flex items-center justify-between pb-2 mb-3 border-b border-border/50">
               <span className="flex items-center gap-1.5 text-[var(--accent-primary)] font-semibold text-[11px] uppercase tracking-wider">
                <Terminal size={13} />
                Cryptographic Header & Payload Proof
@@ -267,7 +267,7 @@ export default function AdminHistory() {
               </span>
              </div>
 
-             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-3">
               <div>
                <span className="text-[var(--text-secondary)] uppercase text-[10px] block mb-0.5">
                 Operator / Admin ID:
@@ -302,7 +302,7 @@ export default function AdminHistory() {
               </div>
              </div>
 
-             <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] p-3 rounded border border-[var(--border)]">
+             <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md p-3 rounded border border-border/50">
               <span className="text-[var(--text-secondary)] uppercase text-[10px] block mb-1">
                SHA-256 Cryptographic Signature Hash:
               </span>

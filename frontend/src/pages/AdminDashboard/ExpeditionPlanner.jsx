@@ -52,7 +52,7 @@ const CustomPieTooltip = ({ active, payload, total }) => {
   if (active && payload && payload.length) {
     const data = payload[0];
     return (
-      <div className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] p-2.5 rounded-lg shadow-xl font-['Work_Sans'] text-xs">
+      <div className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-border/50 p-2.5 rounded-xl shadow-xl font-['Work_Sans'] text-xs">
         <p className="font-semibold text-[var(--text-primary)]">{data.payload.category || data.name}</p>
         <p className="text-[var(--accent-primary)] font-mono font-bold mt-0.5">
           ₹{Number(data.value).toFixed(1)} Cr ({(total > 0 ? (data.value / total) * 100 : 0).toFixed(1)}%)
@@ -369,9 +369,9 @@ export default function ExpeditionPlanner() {
   };
 
   return (
-    <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-6 h-full flex flex-col overflow-hidden overflow-x-hidden w-full max-w-full">
+    <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 sm:p-6 h-full flex flex-col overflow-hidden overflow-x-hidden w-full max-w-full">
       {/* Dashboard Header */}
-      <div className="flex items-center justify-between mb-6 shrink-0 pb-4 border-b border-[var(--border)]">
+      <div className="flex items-center justify-between mb-6 shrink-0 pb-4 border-b border-border/50">
         <div>
           <h2 className="text-[var(--accent-primary)] font-['Space_Grotesk'] font-bold text-2xl tracking-wide">
             EXPEDITION PLANNER · COMMAND DECK
@@ -380,7 +380,7 @@ export default function ExpeditionPlanner() {
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] px-3.5 py-1.5 rounded-lg border border-[var(--border)] text-xs font-mono">
+          <div className="flex items-center gap-2 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md px-3.5 py-1.5 rounded-xl border border-border/50 text-xs font-mono">
             <Radio size={14} className="text-[var(--ok)] animate-pulse" />
             <span className="text-[var(--text-secondary)]">Edge Mesh Sync:</span>
             <span className="text-[var(--ok)] font-semibold">Active</span>
@@ -391,17 +391,17 @@ export default function ExpeditionPlanner() {
       {/* Main Scrollable Body */}
       <div className="flex-1 overflow-y-auto space-y-6 pr-1">
         {plannerNotice && (
-          <p role="status" className="border-b border-[var(--border)] pb-3 text-xs text-[var(--text-secondary)]">
+          <p role="status" className="border-b border-border/50 pb-3 text-xs text-[var(--text-secondary)]">
             {plannerNotice}
           </p>
         )}
         <InventoryDemandPanel />
 
         {/* ─── Top Row: Timeline & Interactive Budget ─── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
           {/* Timeline Gantt */}
-          <div className="lg:col-span-7 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-5 flex flex-col justify-between min-w-0">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-[var(--border)]">
+          <div className="lg:col-span-7 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-5 flex flex-col justify-between min-w-0">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-border/50">
               <div>
                 <h3 className="text-[var(--text-secondary)] text-xs font-semibold uppercase tracking-widest flex items-center gap-2">
                   <Plane size={15} className="text-[var(--accent-primary)]" />
@@ -424,34 +424,34 @@ export default function ExpeditionPlanner() {
             </div>
 
             {isAddVesselOpen && (
-              <form onSubmit={handleAddVessel} className="mb-4 p-4 border border-[var(--border)] rounded-lg bg-[var(--bg-primary)]">
-                <div className="grid grid-cols-2 gap-4 mb-3">
+              <form onSubmit={handleAddVessel} className="mb-4 p-4 border border-border/50 rounded-xl bg-[var(--bg-primary)]">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
                   <div>
                     <label className="text-[10px] text-[var(--text-secondary)] uppercase">Vessel Name</label>
-                    <input required value={newVessel.vesselName} onChange={e => setNewVessel({ ...newVessel, vesselName: e.target.value })} className="w-full mt-1 bg-[var(--bg-panel)] border border-[var(--border)] px-2 py-1.5 text-xs text-[var(--text-primary)]" />
+                    <input required value={newVessel.vesselName} onChange={e => setNewVessel({ ...newVessel, vesselName: e.target.value })} className="w-full mt-1 bg-[var(--bg-panel)] border border-border/50 px-2 py-1.5 text-xs text-[var(--text-primary)]" />
                   </div>
                   <div>
                     <label className="text-[10px] text-[var(--text-secondary)] uppercase">Route</label>
-                    <input required value={newVessel.route} onChange={e => setNewVessel({ ...newVessel, route: e.target.value })} className="w-full mt-1 bg-[var(--bg-panel)] border border-[var(--border)] px-2 py-1.5 text-xs text-[var(--text-primary)]" />
+                    <input required value={newVessel.route} onChange={e => setNewVessel({ ...newVessel, route: e.target.value })} className="w-full mt-1 bg-[var(--bg-panel)] border border-border/50 px-2 py-1.5 text-xs text-[var(--text-primary)]" />
                   </div>
                   <div>
                     <label className="text-[10px] text-[var(--text-secondary)] uppercase">Departure Date</label>
-                    <input type="date" required value={newVessel.departureDate} onChange={e => setNewVessel({ ...newVessel, departureDate: e.target.value })} className="w-full mt-1 bg-[var(--bg-panel)] border border-[var(--border)] px-2 py-1.5 text-xs text-[var(--text-primary)]" />
+                    <input type="date" required value={newVessel.departureDate} onChange={e => setNewVessel({ ...newVessel, departureDate: e.target.value })} className="w-full mt-1 bg-[var(--bg-panel)] border border-border/50 px-2 py-1.5 text-xs text-[var(--text-primary)]" />
                   </div>
                   <div>
                     <label className="text-[10px] text-[var(--text-secondary)] uppercase">Arrival Date</label>
-                    <input type="date" required value={newVessel.arrivalDate} onChange={e => setNewVessel({ ...newVessel, arrivalDate: e.target.value })} className="w-full mt-1 bg-[var(--bg-panel)] border border-[var(--border)] px-2 py-1.5 text-xs text-[var(--text-primary)]" />
+                    <input type="date" required value={newVessel.arrivalDate} onChange={e => setNewVessel({ ...newVessel, arrivalDate: e.target.value })} className="w-full mt-1 bg-[var(--bg-panel)] border border-border/50 px-2 py-1.5 text-xs text-[var(--text-primary)]" />
                   </div>
                 </div>
                 <div className="flex justify-end gap-2">
                   <button type="button" onClick={() => setIsAddVesselOpen(false)} className="px-3 py-1.5 text-xs text-[var(--text-secondary)]">Cancel</button>
-                  <button type="submit" className="px-3 py-1.5 border border-[var(--accent-primary)] text-xs text-[var(--accent-primary)] font-semibold rounded">Save Vessel</button>
+                  <button type="submit" className="px-3 py-1.5 border border-[var(--accent-primary)] text-xs text-[var(--accent-primary)] font-semibold rounded transition-all duration-300 ease-out hover:-translate-y-0.5 w-full md:w-auto">Save Vessel</button>
                 </div>
               </form>
             )}
 
             <div className="space-y-3 mb-2 flex-1 overflow-y-auto">
-              <div className="grid grid-cols-[2fr_1fr_1fr_1fr] gap-4 items-center text-[10px] text-[var(--text-secondary)] uppercase tracking-wider pb-2 border-b border-[var(--border)]">
+              <div className="hidden sm:grid grid-cols-[2fr_1fr_1fr_1fr] gap-4 items-center text-[10px] md:text-xs uppercase tracking-widest font-bold text-muted pb-2 border-b border-border/50">
                 <div>Vessel / Route</div>
                 <div>Departure</div>
                 <div>Arrival</div>
@@ -461,7 +461,7 @@ export default function ExpeditionPlanner() {
               {flights.length === 0 ? (
                 <p className="text-xs text-[var(--text-secondary)] py-4 text-center">No vessels scheduled.</p>
               ) : flights.map((f) => (
-                <div key={f._id} className="grid grid-cols-[2fr_1fr_1fr_1fr] gap-4 items-center py-2 border-b border-[var(--border)] border-dashed">
+                <div key={f._id} className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr_1fr] gap-2 sm:gap-4 items-start sm:items-center py-3 sm:py-2 border-b border-border/50 border-dashed">
                   <div>
                     <p className="font-bold text-[var(--text-primary)] text-sm">{f.vesselName}</p>
                     <p className="text-xs text-[var(--text-secondary)] truncate">{f.route}</p>
@@ -485,14 +485,14 @@ export default function ExpeditionPlanner() {
               ))}
             </div>
 
-            <div className="text-[10px] text-[var(--text-secondary)] pt-3 border-t border-[var(--border)] font-mono flex flex-col gap-1">
+            <div className="text-[10px] text-[var(--text-secondary)] pt-3 border-t border-border/50 font-mono flex flex-col gap-1">
               <span className="text-[var(--accent-primary)] font-bold">Architectural Note: Map Integration</span>
               <span>Setting a vessel to "In Transit" exposes its coordinates to the Global Cargo Map. Map component queries GET /api/v1/expeditions?status=In Transit.</span>
             </div>
           </div>
 
           {/* Interactive INR Budget Donut */}
-          <div className="lg:col-span-5 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-5 flex flex-col justify-between min-w-0">
+          <div className="lg:col-span-5 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-5 flex flex-col justify-between min-w-0">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-[var(--text-secondary)] text-xs uppercase tracking-widest font-semibold flex items-center gap-2">
                 <IndianRupee size={15} className="text-[var(--accent-primary)]" />
@@ -515,13 +515,13 @@ export default function ExpeditionPlanner() {
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
-                  <button type="button" onClick={handleAutomateBudget} className="inline-flex items-center gap-1.5 px-2.5 py-1.5 border border-[var(--accent-primary)] text-[var(--accent-primary)] text-[10px] font-semibold hover:bg-[var(--accent-primary)]/10 rounded">
+                  <button type="button" onClick={handleAutomateBudget} className="inline-flex items-center gap-1.5 px-2.5 py-1.5 border border-[var(--accent-primary)] text-[var(--accent-primary)] text-[10px] font-semibold hover:bg-[var(--accent-primary)]/10 rounded transition-all duration-300 ease-out hover:-translate-y-0.5 w-full md:w-auto">
                     <BrainCircuit size={12} /> Automate Budget
                   </button>
                   <button
                     type="button"
                     onClick={() => { setBudgetDraft(budgetData.map(entry => ({ ...entry }))); setIsBudgetEditing(true); setPlannerNotice(''); }}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 border border-[var(--border)] text-[var(--text-secondary)] text-[10px] font-semibold hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] rounded"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 border border-border/50 text-[var(--text-secondary)] text-[10px] font-semibold hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] rounded"
                   >
                     <Pencil size={12} /> Edit budget
                   </button>
@@ -529,7 +529,7 @@ export default function ExpeditionPlanner() {
               )}
             </div>
 
-            <div className={`${isBudgetEditing ? 'grid grid-cols-1 gap-4' : 'grid grid-cols-[minmax(0,1fr)_auto] gap-6'} items-center w-full my-auto min-w-0`}>
+            <div className={`${isBudgetEditing ? 'grid grid-cols-1 gap-4' : 'grid grid-cols-[minmax(0,1fr)_auto] gap-4 md:gap-6'} items-center w-full my-auto min-w-0`}>
               {/* Donut Chart */}
               <div className="w-full flex items-center justify-center py-1 min-w-0">
                 <div className="w-40 h-40 relative flex items-center justify-center shrink-0">
@@ -565,7 +565,7 @@ export default function ExpeditionPlanner() {
                 {displayedBudgetData.map((b, index) => (
                   <div
                     key={isBudgetEditing ? index : b.category}
-                    className="flex items-center justify-between bg-[var(--bg-primary)] border border-[var(--border)] rounded px-3 py-2 w-full gap-6"
+                    className="flex items-center justify-between bg-[var(--bg-primary)] border border-border/50 rounded px-3 py-2 w-full gap-4 md:gap-6"
                   >
                     <div className="flex items-center gap-2 min-w-0">
                       <span
@@ -577,7 +577,7 @@ export default function ExpeditionPlanner() {
                           aria-label={`Budget category ${index + 1}`}
                           value={budgetDraft[index]?.category ?? ''}
                           onChange={event => setBudgetDraft(current => current.map((entry, entryIndex) => entryIndex === index ? { ...entry, category: event.target.value } : entry))}
-                          className="w-32 min-w-0 bg-[var(--bg-panel-raised)] border border-[var(--border)] px-2 py-1 text-xs text-[var(--text-primary)]"
+                          className="w-32 min-w-0 bg-[var(--bg-panel-raised)] border border-border/50 px-2 py-1 text-xs text-[var(--text-primary)]"
                         />
                       ) : (
                         <span className="text-[var(--text-primary)] text-sm font-medium whitespace-nowrap">{b.category}</span>
@@ -593,7 +593,7 @@ export default function ExpeditionPlanner() {
                             step="0.1"
                             value={budgetDraft[index]?.amountInCr ?? ''}
                             onChange={event => setBudgetDraft(current => current.map((entry, entryIndex) => entryIndex === index ? { ...entry, amountInCr: event.target.value === '' ? '' : Number(event.target.value) } : entry))}
-                            className="w-20 bg-[var(--bg-panel-raised)] border border-[var(--border)] px-2 py-1 text-xs text-[var(--text-primary)]"
+                            className="w-20 bg-[var(--bg-panel-raised)] border border-border/50 px-2 py-1 text-xs text-[var(--text-primary)]"
                           /> Cr
                         </label>
                         <button type="button" onClick={() => setBudgetDraft(current => current.filter((_, i) => i !== index))} className="text-[var(--critical)] hover:text-white p-1">
@@ -608,7 +608,7 @@ export default function ExpeditionPlanner() {
               </div>
             </div>
 
-            <div className="text-[10px] text-[var(--text-secondary)] pt-2 border-t border-[var(--border)] font-mono flex justify-between">
+            <div className="text-[10px] text-[var(--text-secondary)] pt-2 border-t border-border/50 font-mono flex justify-between">
               <span>Financial Authority: MoES/NCPOR</span>
               <span className="text-[var(--ok)]">Reserve: ₹{Number(reserveAmount).toFixed(1)} Cr ({(budgetTotal > 0 ? (reserveAmount / budgetTotal) * 100 : 0).toFixed(0)}%)</span>
             </div>
@@ -616,8 +616,8 @@ export default function ExpeditionPlanner() {
         </div>
 
         {/* ─── Middle Row: Drag-and-Drop Roster Planning ─── */}
-        <div className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-5">
-          <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--border)]">
+        <div className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-5">
+          <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/50">
             <div>
               <h3 className="text-[var(--text-secondary)] text-xs font-semibold uppercase tracking-widest flex items-center gap-2 mb-1">
                 <Users size={15} className="text-[var(--accent-primary)]" />
@@ -626,14 +626,14 @@ export default function ExpeditionPlanner() {
             </div>
             <button
               onClick={() => setIsAddRosterModalOpen(true)}
-              className="px-4 py-2 text-xs font-bold bg-[var(--bg-primary)] border border-[var(--border)] text-[var(--text-primary)] rounded hover:text-[var(--accent-primary)] hover:border-[var(--accent-primary)] transition-all flex items-center gap-2 shadow-sm"
+              className="px-4 py-2 text-xs font-bold bg-[var(--bg-primary)] border border-border/50 text-[var(--text-primary)] rounded hover:text-[var(--accent-primary)] hover:border-[var(--accent-primary)] transition-all flex items-center gap-2 shadow-sm"
             >
               <Plus size={14} /> Add Personnel
             </button>
           </div>
 
           {apiError && (
-            <div className="p-4 mb-4 bg-red-900/50 border-2 border-red-500 rounded-lg text-white font-mono text-sm break-words">
+            <div className="p-4 mb-4 bg-red-900/50 border-2 border-red-500 rounded-xl text-white font-mono text-sm break-words">
               <h3 className="text-red-400 font-bold text-lg">CRITICAL API FETCH FAILURE:</h3>
               <p>{apiError}</p>
               <p className="mt-2 text-yellow-300">Raw Data State: {rawResponse}</p>
@@ -646,10 +646,10 @@ export default function ExpeditionPlanner() {
             onPersonnelAdded={fetchPersonnel}
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             {/* Summer Team Reorder */}
-            <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-4 flex flex-col">
-              <div className="flex items-center justify-between mb-3 pb-2 border-b border-[var(--border)]">
+            <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 flex flex-col">
+              <div className="flex items-center justify-between mb-3 pb-2 border-b border-border/50">
                 <span className="text-[var(--accent-primary)] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-[var(--accent-primary)] inline-block"></span>
                   Summer Operational Team
@@ -663,7 +663,7 @@ export default function ExpeditionPlanner() {
                 {summerTeam.length === 0 ? (
                   <p className="text-xs text-[var(--text-secondary)] py-4 text-center italic">No personnel assigned to Summer Operational.</p>
                 ) : summerTeam.map((m) => (
-                  <div key={m._id || m.name} className="flex flex-col sm:flex-row sm:items-center justify-between w-full p-3 bg-[var(--bg-primary)] border border-[var(--border)] rounded shadow-sm hover:border-[var(--accent-primary)]/50 transition-colors">
+                  <div key={m._id || m.name} className="flex flex-col sm:flex-row sm:items-center justify-between w-full p-3 bg-[var(--bg-primary)] border border-border/50 rounded shadow-sm hover:border-[var(--accent-primary)]/50 transition-colors">
                     <div className="flex items-center gap-3 min-w-0 pr-2">
                       <div className="w-8 h-8 rounded bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] flex items-center justify-center font-bold text-sm shrink-0">
                         {m.name.charAt(0).toUpperCase()}
@@ -677,7 +677,7 @@ export default function ExpeditionPlanner() {
                         </span>
                       </div>
                     </div>
-                    <span className="text-xs font-mono text-[var(--text-secondary)] bg-[var(--bg-panel)] px-2 py-1 rounded border border-[var(--border)] mt-2 sm:mt-0 text-right shrink-0">
+                    <span className="text-xs font-mono text-[var(--text-secondary)] bg-[var(--bg-panel)] px-2 py-1 rounded border border-border/50 mt-2 sm:mt-0 text-right shrink-0">
                       {m.role}
                     </span>
                   </div>
@@ -686,8 +686,8 @@ export default function ExpeditionPlanner() {
             </div>
 
             {/* Winter-Over Team Reorder */}
-            <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-4 flex flex-col">
-              <div className="flex items-center justify-between mb-3 pb-2 border-b border-[var(--border)]">
+            <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 flex flex-col">
+              <div className="flex items-center justify-between mb-3 pb-2 border-b border-border/50">
                 <span className="text-[var(--accent-primary)] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-[var(--accent-primary)] inline-block"></span>
                   Winter-Over Isolation Team
@@ -701,7 +701,7 @@ export default function ExpeditionPlanner() {
                 {winterTeam.length === 0 ? (
                   <p className="text-xs text-[var(--text-secondary)] py-4 text-center italic">No personnel assigned to Winter-Over.</p>
                 ) : winterTeam.map((m) => (
-                  <div key={m._id || m.name} className="flex flex-col sm:flex-row sm:items-center justify-between w-full p-3 bg-[var(--bg-primary)] border border-[var(--border)] rounded shadow-sm hover:border-[var(--accent-primary)]/50 transition-colors">
+                  <div key={m._id || m.name} className="flex flex-col sm:flex-row sm:items-center justify-between w-full p-3 bg-[var(--bg-primary)] border border-border/50 rounded shadow-sm hover:border-[var(--accent-primary)]/50 transition-colors">
                     <div className="flex items-center gap-3 min-w-0 pr-2">
                       <div className="w-8 h-8 rounded bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] flex items-center justify-center font-bold text-sm shrink-0">
                         {m.name.charAt(0).toUpperCase()}
@@ -715,7 +715,7 @@ export default function ExpeditionPlanner() {
                         </span>
                       </div>
                     </div>
-                    <span className="text-xs font-mono text-[var(--text-secondary)] bg-[var(--bg-panel)] px-2 py-1 rounded border border-[var(--border)] mt-2 sm:mt-0 text-right shrink-0">
+                    <span className="text-xs font-mono text-[var(--text-secondary)] bg-[var(--bg-panel)] px-2 py-1 rounded border border-border/50 mt-2 sm:mt-0 text-right shrink-0">
                       {m.role}
                     </span>
                   </div>
@@ -726,8 +726,8 @@ export default function ExpeditionPlanner() {
         </div>
 
         {/* ─── Bottom Section: Launch Control & Logistics AI ─── */}
-        <div className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-5">
-          <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--border)]">
+        <div className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-5">
+          <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/50">
             <div className="flex items-center gap-2">
               <Cpu size={16} className="text-[var(--accent-primary)]" />
               <h3 className="text-[var(--accent-primary)] font-['Space_Grotesk'] font-bold text-lg tracking-wider">
@@ -736,9 +736,9 @@ export default function ExpeditionPlanner() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
             {/* Left Column: ML Prediction */}
-            <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-5 flex flex-col justify-between">
+            <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-5 flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <BrainCircuit size={18} className="text-[var(--accent-primary)]" />
@@ -748,7 +748,7 @@ export default function ExpeditionPlanner() {
                 </div>
                 <label className="block mb-4 text-[10px] uppercase text-[var(--text-secondary)]">
                   Station
-                  <select value={weatherStation} onChange={event => setWeatherStation(event.target.value)} className="mt-1 block w-full bg-[var(--bg-primary)] border border-[var(--border)] px-3 py-2 text-xs text-[var(--text-primary)]">
+                  <select value={weatherStation} onChange={event => setWeatherStation(event.target.value)} className="mt-1 block w-full bg-[var(--bg-primary)] border border-border/50 px-3 py-2 text-xs text-[var(--text-primary)]">
                     <option value="maitri">Maitri</option>
                     <option value="bharati">Bharati</option>
                     <option value="himadri">Himadri</option>
@@ -761,7 +761,7 @@ export default function ExpeditionPlanner() {
                   type="button"
                   onClick={handlePredictWindow}
                   disabled={isPredicting}
-                  className="w-full py-3 text-sm font-bold tracking-wide flex justify-center items-center gap-2 rounded-lg bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--accent-primary)] text-[var(--accent-primary)] hover:bg-[var(--accent-primary)] hover:text-white transition-all duration-200 disabled:opacity-50 cursor-pointer"
+                  className="w-full py-3 text-sm font-bold tracking-wide flex justify-center items-center gap-2 rounded-xl bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-[var(--accent-primary)] text-[var(--accent-primary)] hover:bg-[var(--accent-primary)] hover:text-white transition-all duration-200 disabled:opacity-50 cursor-pointer"
                 >
                   {isPredicting ? (
                     <>
@@ -783,10 +783,10 @@ export default function ExpeditionPlanner() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.3 }}
-                      className={`mt-4 p-4 rounded-xl border-2 ${predictionResult.safe ? 'border-[var(--ok)] bg-[var(--ok)]/10' : 'border-[var(--critical)] bg-[var(--critical)]/10'}`}
+                      className={`mt-4 p-4 rounded-2xl border-2 ${predictionResult.safe ? 'border-[var(--ok)] bg-[var(--ok)]/10' : 'border-[var(--critical)] bg-[var(--critical)]/10'}`}
                     >
                       <div className="flex items-start gap-3">
-                        <div className={`p-2 rounded-lg shrink-0 ${predictionResult.safe ? 'bg-[var(--ok)]/20 text-[var(--ok)]' : 'bg-[var(--critical)]/20 text-[var(--critical)]'}`}>
+                        <div className={`p-2 rounded-xl shrink-0 ${predictionResult.safe ? 'bg-[var(--ok)]/20 text-[var(--ok)]' : 'bg-[var(--critical)]/20 text-[var(--critical)]'}`}>
                           {predictionResult.safe ? <CheckCircle size={22} /> : <AlertTriangle size={22} />}
                         </div>
                         <div className="flex-1">
@@ -799,7 +799,7 @@ export default function ExpeditionPlanner() {
                             </span>
                           </div>
 
-                          <div className="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[var(--ok)]/20 text-xs text-[var(--text-secondary)]">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3 pt-3 border-t border-[var(--ok)]/20 text-xs text-[var(--text-secondary)]">
                             <div className="flex items-center gap-1.5">
                               <Wind size={13} className="text-[var(--accent-primary)]" />
                               <span>Wind: <strong className="text-[var(--text-primary)]">{Number(predictionResult.wind).toFixed(1)} m/s</strong></span>
@@ -823,7 +823,7 @@ export default function ExpeditionPlanner() {
             </div>
 
             {/* Right Column: Cryptographic Sealing & Broadcast */}
-            <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-5 flex flex-col justify-between">
+            <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-5 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
@@ -832,7 +832,7 @@ export default function ExpeditionPlanner() {
                       Manifest Sealing
                     </h4>
                   </div>
-                  <button onClick={() => { setSealStep('CREATE'); setIsSealModalOpen(true); }} className="px-3 py-1.5 bg-[var(--accent-primary)] text-white text-xs font-bold rounded flex items-center gap-1.5 hover:bg-blue-600 transition-colors shadow-[var(--shadow-glass)]">
+                  <button onClick={() => { setSealStep('CREATE'); setIsSealModalOpen(true); }} className="px-3 py-1.5 bg-[var(--accent-primary)] text-white text-xs font-bold rounded flex items-center gap-1.5 hover:bg-blue-600 transition-colors shadow-sm hover:shadow-md">
                     <Plus size={14} /> Create Seal
                   </button>
                 </div>
@@ -847,7 +847,7 @@ export default function ExpeditionPlanner() {
                       key={manifest.hash}
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="p-4 rounded-xl border border-[var(--ok)]/50 bg-[var(--ok)]/5 shadow-[0_0_20px_rgba(74,222,128,0.1)] shrink-0"
+                      className="p-4 rounded-2xl border border-[var(--ok)]/50 bg-[var(--ok)]/5 shadow-[0_0_20px_rgba(74,222,128,0.1)] shrink-0"
                     >
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2 text-[var(--ok)] text-xs font-bold uppercase tracking-wider">
@@ -859,7 +859,7 @@ export default function ExpeditionPlanner() {
                         </span>
                       </div>
 
-                      <div className="bg-[var(--bg-primary)] p-2.5 rounded border border-[var(--border)] flex flex-col gap-3">
+                      <div className="bg-[var(--bg-primary)] p-2.5 rounded border border-border/50 flex flex-col gap-3">
                         <div>
                           <p className="text-[var(--text-secondary)] text-[10px] uppercase font-semibold mb-1">
                             SHA-256 Digest:
@@ -868,7 +868,7 @@ export default function ExpeditionPlanner() {
                             {manifest.hash}
                           </p>
                         </div>
-                        <div className="pt-2 border-t border-[var(--border)]/50 grid grid-cols-2 gap-4">
+                        <div className="pt-2 border-t border-border/50/50 grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
                             <p className="text-[var(--text-secondary)] text-[10px] uppercase font-semibold mb-1">
                               Destination:
@@ -917,12 +917,12 @@ export default function ExpeditionPlanner() {
                   initial={{ scale: 0.95, opacity: 0, y: 20 }}
                   animate={{ scale: 1, opacity: 1, y: 0 }}
                   exit={{ scale: 0.95, opacity: 0, y: 20 }}
-                  className="w-full max-w-2xl bg-[var(--bg-panel-raised)] border border-[var(--border)] rounded-2xl shadow-2xl overflow-hidden font-['Work_Sans'] relative max-h-[90vh] flex flex-col"
+                  className="w-full max-w-2xl bg-[var(--bg-panel-raised)] border border-border/50 rounded-2xl shadow-2xl overflow-hidden font-['Work_Sans'] relative max-h-[90vh] flex flex-col"
                 >
                   {/* Modal Header */}
-                  <div className="px-6 py-5 border-b border-[var(--border)] flex justify-between items-center bg-[var(--bg-panel)] shrink-0">
+                  <div className="px-6 py-5 border-b border-border/50 flex justify-between items-center bg-[var(--bg-panel)] shrink-0">
                     <div className="flex items-center gap-3">
-                      <div className="p-2 bg-[var(--accent-primary)]/10 rounded-lg text-[var(--accent-primary)]">
+                      <div className="p-2 bg-[var(--accent-primary)]/10 rounded-xl text-[var(--accent-primary)]">
                         <Lock size={20} />
                       </div>
                       <div>
@@ -937,13 +937,13 @@ export default function ExpeditionPlanner() {
                   </div>
 
                   {/* Modal Body */}
-                  <div className="p-6 overflow-y-auto flex-1 custom-scrollbar">
+                  <div className="p-4 md:p-6 overflow-y-auto flex-1 custom-scrollbar">
                     {sealStep === 'CREATE' ? (
-                      <div className="flex flex-col gap-6">
-                        <div className="grid grid-cols-2 gap-4">
+                      <div className="flex flex-col gap-4 md:gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
                             <label className="text-[10px] text-[var(--text-secondary)] uppercase font-bold mb-1.5 block tracking-widest">Destination Station</label>
-                            <select value={draftManifest.destination} onChange={e => setDraftManifest({ ...draftManifest, destination: e.target.value })} className="w-full bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg px-3 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] cursor-pointer shadow-inner">
+                            <select value={draftManifest.destination} onChange={e => setDraftManifest({ ...draftManifest, destination: e.target.value })} className="w-full bg-[var(--bg-primary)] border border-border/50 rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] cursor-pointer shadow-inner">
                               <option value="Himadri">Himadri Station</option>
                               <option value="Bharati">Bharati Station</option>
                               <option value="Maitri">Maitri Station</option>
@@ -951,27 +951,27 @@ export default function ExpeditionPlanner() {
                           </div>
                           <div>
                             <label className="text-[10px] text-[var(--text-secondary)] uppercase font-bold mb-1.5 block tracking-widest">Transport Vessel</label>
-                            <select value={draftManifest.vessel} onChange={e => setDraftManifest({ ...draftManifest, vessel: e.target.value })} className="w-full bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg px-3 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] cursor-pointer shadow-inner">
+                            <select value={draftManifest.vessel} onChange={e => setDraftManifest({ ...draftManifest, vessel: e.target.value })} className="w-full bg-[var(--bg-primary)] border border-border/50 rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] cursor-pointer shadow-inner">
                               {availableVessels.map(v => <option key={v} value={v}>{v}</option>)}
                             </select>
                           </div>
                         </div>
 
                         <div>
-                          <div className="flex items-center justify-between mb-2 pb-2 border-b border-[var(--border)]">
+                          <div className="flex items-center justify-between mb-2 pb-2 border-b border-border/50">
                             <div>
                               <label className="text-[10px] text-[var(--text-secondary)] uppercase font-bold tracking-widest block">Cargo Line Items</label>
                             </div>
-                            <div className="flex gap-2">
-                              <button onClick={addEmptyItem} className="text-xs font-bold text-[var(--accent-primary)] hover:text-blue-400 flex items-center gap-1.5 px-3 py-1.5 bg-[var(--accent-primary)]/10 rounded-lg transition-colors"><Plus size={14} /> Add Asset</button>
-                              <button onClick={addCustomItem} className="text-xs font-bold text-[var(--text-secondary)] hover:text-white flex items-center gap-1.5 px-3 py-1.5 bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg transition-colors"><Plus size={14} /> Custom</button>
+                            <div className="flex flex-col md:flex-row gap-2">
+                              <button onClick={addEmptyItem} className="text-xs font-bold text-[var(--accent-primary)] hover:text-blue-400 flex items-center gap-1.5 px-3 py-1.5 bg-[var(--accent-primary)]/10 rounded-xl transition-colors transition-all duration-300 ease-out hover:-translate-y-0.5 w-full md:w-auto"><Plus size={14} /> Add Asset</button>
+                              <button onClick={addCustomItem} className="text-xs font-bold text-[var(--text-secondary)] hover:text-white flex items-center gap-1.5 px-3 py-1.5 bg-[var(--bg-primary)] border border-border/50 rounded-xl transition-colors transition-all duration-300 ease-out hover:-translate-y-0.5 w-full md:w-auto"><Plus size={14} /> Custom</button>
                             </div>
                           </div>
                           <div className="space-y-3 mt-4">
                             {draftManifest.items.map((item, idx) => (
                               <div key={idx} className="flex items-center gap-3">
                                 {item.isCustom ? (
-                                  <input type="text" placeholder="Custom Item Name" value={item.name} onChange={e => updateItem(idx, 'name', e.target.value)} className="flex-1 bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg px-3 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)]" />
+                                  <input type="text" placeholder="Custom Item Name" value={item.name} onChange={e => updateItem(idx, 'name', e.target.value)} className="flex-1 bg-[var(--bg-primary)] border border-border/50 rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)]" />
                                 ) : (
                                   <select
                                     value={item.name}
@@ -983,24 +983,24 @@ export default function ExpeditionPlanner() {
                                       if (std) newItems[idx].unit = std.unit;
                                       setDraftManifest({ ...draftManifest, items: newItems });
                                     }}
-                                    className="flex-1 bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg px-3 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] cursor-pointer"
+                                    className="flex-1 bg-[var(--bg-primary)] border border-border/50 rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] cursor-pointer"
                                   >
                                     <option value="" disabled>Select Approved Asset...</option>
                                     {standardInventory.map(inv => <option key={inv.name} value={inv.name}>{inv.name}</option>)}
                                   </select>
                                 )}
-                                <input type="number" placeholder="Qty" value={item.qty} onChange={e => updateItem(idx, 'qty', e.target.value)} className="w-24 bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg px-3 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)]" />
-                                <input type="text" placeholder="Unit" value={item.unit} readOnly={!item.isCustom} onChange={e => updateItem(idx, 'unit', e.target.value)} className={`w-28 bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg px-3 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] ${!item.isCustom ? 'opacity-70 cursor-not-allowed' : ''}`} />
-                                <button type="button" onClick={() => removeItem(idx)} className="text-[var(--text-secondary)] hover:text-white hover:bg-[var(--critical)] p-2 rounded-lg transition-colors bg-[var(--bg-primary)] border border-[var(--border)]"><Minus size={16} /></button>
+                                <input type="number" placeholder="Qty" value={item.qty} onChange={e => updateItem(idx, 'qty', e.target.value)} className="w-24 bg-[var(--bg-primary)] border border-border/50 rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)]" />
+                                <input type="text" placeholder="Unit" value={item.unit} readOnly={!item.isCustom} onChange={e => updateItem(idx, 'unit', e.target.value)} className={`w-28 bg-[var(--bg-primary)] border border-border/50 rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] ${!item.isCustom ? 'opacity-70 cursor-not-allowed' : ''}`} />
+                                <button type="button" onClick={() => removeItem(idx)} className="text-[var(--text-secondary)] hover:text-white hover:bg-[var(--critical)] p-2 rounded-xl transition-colors bg-[var(--bg-primary)] border border-border/50"><Minus size={16} /></button>
                               </div>
                             ))}
                           </div>
                         </div>
                       </div>
                     ) : (
-                      <div className="flex flex-col gap-6">
-                        <div className="p-5 bg-[var(--bg-primary)] border border-[var(--border)] rounded-xl flex flex-col gap-5 shadow-inner">
-                          <div className="grid grid-cols-2 gap-4">
+                      <div className="flex flex-col gap-4 md:gap-6">
+                        <div className="p-5 bg-[var(--bg-primary)] border border-border/50 rounded-2xl flex flex-col gap-5 shadow-inner">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                               <span className="text-[10px] text-[var(--text-secondary)] uppercase font-bold tracking-widest block mb-1">Destination</span>
                               <p className="text-sm font-bold text-[var(--text-primary)]">{draftManifest.destination} Station, Antarctica</p>
@@ -1010,11 +1010,11 @@ export default function ExpeditionPlanner() {
                               <p className="text-sm font-bold text-[var(--text-primary)]">{draftManifest.vessel}</p>
                             </div>
                           </div>
-                          <div className="pt-4 border-t border-[var(--border)]/50">
+                          <div className="pt-4 border-t border-border/50/50">
                             <span className="text-[10px] text-[var(--text-secondary)] uppercase font-bold tracking-widest block mb-3">Cargo Roster ({draftManifest.items.length} items)</span>
                             <ul className="space-y-2">
                               {draftManifest.items.map((it, i) => (
-                                <li key={i} className="text-sm text-[var(--text-primary)] flex justify-between bg-[var(--bg-panel-raised)] px-3 py-2 rounded border border-[var(--border)]">
+                                <li key={i} className="text-sm text-[var(--text-primary)] flex justify-between bg-[var(--bg-panel-raised)] px-3 py-2 rounded border border-border/50">
                                   <span className="font-medium">{it.name || 'Unnamed Item'}</span>
                                   <span className="font-mono text-[var(--accent-primary)] font-bold">{it.qty} {it.unit}</span>
                                 </li>
@@ -1022,7 +1022,7 @@ export default function ExpeditionPlanner() {
                             </ul>
                           </div>
                         </div>
-                        <div className="bg-amber-500/10 border border-amber-500/30 p-4 rounded-xl flex items-start gap-3">
+                        <div className="bg-amber-500/10 border border-amber-500/30 p-4 rounded-2xl flex items-start gap-3">
                           <AlertTriangle size={20} className="text-amber-500 shrink-0 mt-0.5" />
                           <p className="text-sm text-amber-500 font-medium leading-relaxed">Sealing is permanent. Verify the manifest before continuing.</p>
                         </div>
@@ -1031,16 +1031,16 @@ export default function ExpeditionPlanner() {
                   </div>
 
                   {/* Modal Footer */}
-                  <div className="px-6 py-4 border-t border-[var(--border)] bg-[var(--bg-panel)] flex justify-end gap-3 shrink-0">
+                  <div className="px-6 py-4 border-t border-border/50 bg-[var(--bg-panel)] flex justify-end gap-3 shrink-0">
                     {sealStep === 'CREATE' ? (
                       <>
-                        <button onClick={() => setIsSealModalOpen(false)} className="px-5 py-2.5 bg-[var(--bg-primary)] text-[var(--text-secondary)] text-sm font-bold rounded-lg border border-[var(--border)] hover:text-[var(--text-primary)] transition-colors">Cancel</button>
-                        <button onClick={() => setSealStep('REVIEW')} className="px-6 py-2.5 bg-[var(--accent-primary)] text-white text-sm font-bold rounded-lg border border-blue-400/30 hover:bg-blue-600 transition-colors shadow-lg">Review Manifest</button>
+                        <button onClick={() => setIsSealModalOpen(false)} className="px-5 py-2.5 bg-[var(--bg-primary)] text-[var(--text-secondary)] text-sm font-bold rounded-xl border border-border/50 hover:text-[var(--text-primary)] transition-colors">Cancel</button>
+                        <button onClick={() => setSealStep('REVIEW')} className="px-6 py-2.5 bg-[var(--accent-primary)] text-white text-sm font-bold rounded-xl border border-blue-400/30 hover:bg-blue-600 transition-colors shadow-lg">Review Manifest</button>
                       </>
                     ) : (
                       <>
-                        <button onClick={() => setSealStep('CREATE')} className="px-5 py-2.5 bg-[var(--bg-primary)] text-[var(--text-secondary)] text-sm font-bold rounded-lg border border-[var(--border)] hover:text-[var(--text-primary)] transition-colors">Edit Draft</button>
-                        <button onClick={handleConfirmSeal} disabled={isSealing} className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-sm font-bold rounded-lg hover:brightness-110 transition-all duration-300 shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center gap-2 border border-emerald-400/30">
+                        <button onClick={() => setSealStep('CREATE')} className="px-5 py-2.5 bg-[var(--bg-primary)] text-[var(--text-secondary)] text-sm font-bold rounded-xl border border-border/50 hover:text-[var(--text-primary)] transition-colors">Edit Draft</button>
+                        <button onClick={handleConfirmSeal} disabled={isSealing} className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-sm font-bold rounded-xl hover:brightness-110 transition-all duration-300 shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center gap-2 border border-emerald-400/30 w-full md:w-auto">
                           {isSealing ? <><Loader size={16} className="animate-spin" /> Sealing Digest...</> : <><ShieldCheck size={16} /> Confirm & Seal Manifest</>}
                         </button>
                       </>

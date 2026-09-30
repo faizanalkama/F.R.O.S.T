@@ -72,7 +72,7 @@ export default function LiveTelemetryRadar() {
  const latestPoint = data[data.length - 1] || { temp: -45, power: 95 };
 
  return (
-  <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-6 min-h-full flex flex-col">
+  <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 sm:p-6 min-h-full flex flex-col">
    {/* Header and Live Badge */}
    <div className="flex items-center justify-between mb-4">
     <div>
@@ -82,7 +82,7 @@ export default function LiveTelemetryRadar() {
     </div>
 
     {/* Live Stream Active Badge */}
-    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] text-xs font-mono">
+    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-border/50 text-xs font-mono">
      <Radio size={14} className="text-[var(--accent-primary)] animate-pulse" />
      <span className="text-[var(--text-primary)] font-semibold">Live Stream Active</span>
      <span className="w-2 h-2 rounded-full bg-[var(--ok)] animate-ping ml-1"></span>
@@ -97,7 +97,7 @@ export default function LiveTelemetryRadar() {
       animate={{ opacity: 1, height: 'auto', y: 0 }}
       exit={{ opacity: 0, height: 0, y: -10 }}
       transition={{ duration: 0.3 }}
-      className="bg-red-500/20 border border-[var(--critical)] text-[var(--critical)] p-3 rounded-lg flex items-center justify-between gap-2 mb-4 animate-pulse"
+      className="bg-red-500/20 border border-[var(--critical)] text-[var(--critical)] p-3 rounded-xl flex items-center justify-between gap-2 mb-4 animate-pulse"
      >
       <div className="flex items-center gap-2">
        <AlertTriangle size={18} className="shrink-0" />
@@ -113,8 +113,8 @@ export default function LiveTelemetryRadar() {
    </AnimatePresence>
 
    {/* Current Real-Time Sensor Metrics */}
-   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 font-['Work_Sans']">
-    <div className="flex items-center gap-3 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] px-4 py-3 rounded-lg border border-[var(--border)]">
+   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6 font-['Work_Sans']">
+    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md p-4 sm:p-3 md:p-4 rounded-xl border border-border/50 text-center sm:text-left">
      <div className="p-2 rounded bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]">
       <Thermometer size={18} />
      </div>
@@ -124,7 +124,7 @@ export default function LiveTelemetryRadar() {
      </div>
     </div>
 
-    <div className="flex items-center gap-3 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] px-4 py-3 rounded-lg border border-[var(--border)]">
+    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md p-4 sm:p-3 md:p-4 rounded-xl border border-border/50 text-center sm:text-left">
      <div className={`p-2 rounded ${latestPoint.power < 85 ? 'bg-[var(--critical)]/20 text-[var(--critical)]' : 'bg-[var(--ok)]/10 text-[var(--ok)]'}`}>
       <Zap size={18} />
      </div>
@@ -136,7 +136,7 @@ export default function LiveTelemetryRadar() {
      </div>
     </div>
 
-    <div className="flex items-center gap-3 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] px-4 py-3 rounded-lg border border-[var(--border)]">
+    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md p-4 sm:p-3 md:p-4 rounded-xl border border-border/50 text-center sm:text-left">
      <div className="p-2 rounded bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]">
       <Activity size={18} />
      </div>
@@ -148,7 +148,7 @@ export default function LiveTelemetryRadar() {
      </div>
     </div>
 
-    <div className="flex items-center gap-3 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] px-4 py-3 rounded-lg border border-[var(--border)]">
+    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md p-4 sm:p-3 md:p-4 rounded-xl border border-border/50 text-center sm:text-left">
      <div className="p-2 rounded bg-[var(--text-secondary)]/10 text-[var(--text-secondary)]">
       <Radio size={18} />
      </div>
@@ -160,7 +160,7 @@ export default function LiveTelemetryRadar() {
    </div>
 
    {/* Real-time Streaming Recharts Chart */}
-   <div className="w-full mt-8" style={{ height: '400px' }}>
+   <div className="w-full mt-8 h-[300px] sm:h-[400px]">
     <ResponsiveContainer width="100%" height="100%">
      <LineChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 10 }}>
       <CartesianGrid strokeDasharray="3 3" stroke="#374151" vertical={false} opacity={0.5} />

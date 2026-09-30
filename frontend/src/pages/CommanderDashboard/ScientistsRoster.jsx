@@ -8,7 +8,7 @@ function PersonnelCard({ person, onEdit }) {
  const isElevated = person.status === 'elevated';
 
  return (
-  <div className="bg-[var(--bg-panel-raised)] shadow-[var(--shadow-glass)] border border-[var(--border)] p-5 rounded-xl flex flex-col gap-4 relative group transition-all duration-300 hover:shadow-lg hover:border-[var(--accent-primary)] hover:border-opacity-50">
+  <div className="bg-[var(--bg-panel-raised)] shadow-sm hover:shadow-md border border-border/50 p-5 rounded-2xl flex flex-col gap-4 relative group transition-all duration-300 hover:shadow-lg hover:border-[var(--accent-primary)] hover:border-opacity-50">
    
    {/* Edit Button - Appears on hover */}
    <button 
@@ -21,7 +21,7 @@ function PersonnelCard({ person, onEdit }) {
 
    {/* Header */}
    <div className="flex items-start gap-4">
-    <div className="relative w-16 h-16 shrink-0 rounded-full bg-[var(--bg-panel)] shadow-[var(--shadow-glass)] border-2 border-[var(--border)] flex items-center justify-center overflow-hidden">
+    <div className="relative w-16 h-16 shrink-0 rounded-full bg-[var(--bg-panel)] shadow-sm hover:shadow-md border-2 border-border/50 flex items-center justify-center overflow-hidden">
      {person.imageUrl ? (
       <img src={person.imageUrl} alt={person.name} className="w-full h-full object-cover" />
      ) : (
@@ -36,34 +36,34 @@ function PersonnelCard({ person, onEdit }) {
       <p className="text-[var(--text-primary)] font-bold text-lg truncate">{person.name}</p>
      </div>
      <p className="text-[var(--accent-primary)] font-medium text-sm truncate">{person.role}</p>
-     <p className="text-[var(--text-secondary)] text-xs mt-1 bg-[var(--bg-panel)] inline-block px-2 py-0.5 rounded-full border border-[var(--border)]">
+     <p className="text-[var(--text-secondary)] text-xs mt-1 bg-[var(--bg-panel)] inline-block px-2 py-0.5 rounded-full border border-border/50">
       {person.department || 'General'}
      </p>
     </div>
    </div>
 
    {/* Details */}
-   <div className="text-[var(--text-secondary)] text-sm line-clamp-2 h-10 italic border-l-2 border-[var(--border)] pl-3">
+   <div className="text-[var(--text-secondary)] text-sm line-clamp-2 h-10 italic border-l-2 border-border/50 pl-3">
     "{person.bio || 'No specialized biography provided.'}"
    </div>
 
    {/* Vitals */}
-   <div className="grid grid-cols-3 gap-3 mt-2">
-    <div className="text-center bg-[var(--bg-panel)] rounded-lg px-2 py-2 border border-[var(--border)] relative overflow-hidden group/vital">
+   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
+    <div className="text-center bg-[var(--bg-panel)] rounded-xl px-2 py-2 border border-border/50 relative overflow-hidden group/vital">
      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--bg-panel-raised)] opacity-0 group-hover/vital:opacity-100 transition-opacity" />
      <p className="text-[var(--text-secondary)] text-[10px] uppercase tracking-wider mb-1 relative z-10">Heart</p>
      <p className={`font-bold text-lg relative z-10 ${isElevated ? 'text-[var(--critical)]' : 'text-[var(--ok)]'}`}>
       {person.heartRate || 72} <span className="text-xs font-normal opacity-70">bpm</span>
      </p>
     </div>
-    <div className="text-center bg-[var(--bg-panel)] rounded-lg px-2 py-2 border border-[var(--border)] relative overflow-hidden group/vital">
+    <div className="text-center bg-[var(--bg-panel)] rounded-xl px-2 py-2 border border-border/50 relative overflow-hidden group/vital">
      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--bg-panel-raised)] opacity-0 group-hover/vital:opacity-100 transition-opacity" />
      <p className="text-[var(--text-secondary)] text-[10px] uppercase tracking-wider mb-1 relative z-10">Temp</p>
      <p className={`font-bold text-lg relative z-10 ${person.temp && person.temp > 37.5 ? 'text-[var(--critical)]' : 'text-[var(--text-primary)]'}`}>
       {person.temp || 36.6}°C
      </p>
     </div>
-    <div className="text-center bg-[var(--bg-panel)] rounded-lg px-2 py-2 border border-[var(--border)] relative overflow-hidden group/vital">
+    <div className="text-center bg-[var(--bg-panel)] rounded-xl px-2 py-2 border border-border/50 relative overflow-hidden group/vital">
      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--bg-panel-raised)] opacity-0 group-hover/vital:opacity-100 transition-opacity" />
      <p className="text-[var(--text-secondary)] text-[10px] uppercase tracking-wider mb-1 relative z-10">SpO₂</p>
      <p className={`font-bold text-lg relative z-10 ${person.o2 && person.o2 < 95 ? 'text-[var(--critical)]' : 'text-[var(--text-primary)]'}`}>
@@ -73,7 +73,7 @@ function PersonnelCard({ person, onEdit }) {
    </div>
 
    {/* Status Bar */}
-   <div className={`flex items-center gap-2 text-xs px-3 py-2 rounded-lg font-medium mt-auto ${
+   <div className={`flex items-center gap-2 text-xs px-3 py-2 rounded-xl font-medium mt-auto ${
     isElevated
      ? 'bg-[var(--critical)]/10 text-[var(--critical)] border border-[var(--critical)]/20'
      : 'bg-[var(--ok)]/10 text-[var(--ok)] border border-[var(--ok)]/20'
@@ -102,7 +102,7 @@ function DeleteConfirmModal({ isOpen, onClose, onConfirm, personName }) {
   <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
    <div className="bg-[var(--bg-panel-raised)] border border-[var(--critical)]/50 rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden flex flex-col relative">
     <div className="absolute top-0 left-0 right-0 h-1 bg-[var(--critical)]" />
-    <div className="p-6">
+    <div className="p-4 md:p-6">
      <div className="flex items-center gap-3 mb-4 text-[var(--critical)]">
       <AlertTriangle size={24} />
       <h3 className="text-lg font-bold font-['Space_Grotesk']">Confirm Deletion</h3>
@@ -119,7 +119,7 @@ function DeleteConfirmModal({ isOpen, onClose, onConfirm, personName }) {
        value={confirmText}
        onChange={(e) => setConfirmText(e.target.value)}
        placeholder="Type 'Remove' here"
-       className="w-full bg-[var(--bg-panel)] border border-[var(--border)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--critical)] transition-colors mb-6"
+       className="w-full bg-[var(--bg-panel)] border border-border/50 rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--critical)] transition-colors mb-6"
       />
       <div className="flex justify-end gap-3">
        <button
@@ -128,14 +128,14 @@ function DeleteConfirmModal({ isOpen, onClose, onConfirm, personName }) {
          onClose();
          setConfirmText('');
         }}
-        className="px-4 py-2 rounded-lg text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-panel)] transition-colors"
+        className="px-4 py-2 rounded-xl text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-panel)] transition-colors"
        >
         Cancel
        </button>
        <button
         type="submit"
         disabled={confirmText !== 'Remove'}
-        className="px-4 py-2 rounded-lg text-sm font-medium bg-[var(--critical)] text-white hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_var(--critical)] shadow-opacity-50"
+        className="px-4 py-2 rounded-xl text-sm font-medium bg-[var(--critical)] text-white hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_var(--critical)] shadow-opacity-50 transition-all duration-300 ease-out hover:-translate-y-0.5 w-full md:w-auto"
        >
         Confirm Removal
        </button>
@@ -191,20 +191,20 @@ function ScientistFormModal({ isOpen, onClose, onSave, onDelete, initialData }) 
 
  return (
   <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-   <div className="bg-[var(--bg-panel-raised)] border border-[var(--border)] rounded-2xl w-full max-w-md shadow-2xl overflow-hidden flex flex-col">
-    <div className="flex items-center justify-between p-6 border-b border-[var(--border)]">
+   <div className="bg-[var(--bg-panel-raised)] border border-border/50 rounded-2xl w-full max-w-md shadow-2xl overflow-hidden flex flex-col">
+    <div className="flex items-center justify-between p-4 md:p-6 border-b border-border/50">
      <h3 className="text-xl font-bold text-[var(--text-primary)] font-['Space_Grotesk']">
       {initialData ? 'Edit Personnel' : 'Register New Personnel'}
      </h3>
-     <button onClick={onClose} className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors p-1 rounded-md hover:bg-[var(--bg-panel)]">
+     <button onClick={onClose} className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors p-1 rounded-md hover:bg-[var(--bg-panel)] transition-all duration-300 ease-out hover:-translate-y-0.5 w-full md:w-auto">
       <X size={20} />
      </button>
     </div>
     
-    <form onSubmit={handleSubmit} className="p-6 flex flex-col gap-4">
-     <div className="flex gap-4 items-center">
+    <form onSubmit={handleSubmit} className="p-4 md:p-6 flex flex-col gap-4">
+     <div className="flex flex-col md:flex-row gap-4 items-center">
        <div 
-        className="w-16 h-16 rounded-full bg-[var(--bg-panel)] border border-[var(--border)] flex items-center justify-center shrink-0 overflow-hidden relative group cursor-pointer"
+        className="w-16 h-16 rounded-full bg-[var(--bg-panel)] border border-border/50 flex items-center justify-center shrink-0 overflow-hidden relative group cursor-pointer"
         onClick={() => fileInputRef.current?.click()}
         title="Upload Image"
        >
@@ -232,13 +232,13 @@ function ScientistFormModal({ isOpen, onClose, onSave, onDelete, initialData }) 
           </button>
           
           {showPhotoConfirm && (
-           <div className="bg-[var(--bg-panel-raised)] border border-[var(--critical)]/50 rounded-lg p-2 shadow-lg flex flex-col gap-2 min-w-[140px] animate-in fade-in zoom-in duration-200">
+           <div className="bg-[var(--bg-panel-raised)] border border-[var(--critical)]/50 rounded-xl p-2 shadow-lg flex flex-col gap-2 min-w-[140px] animate-in fade-in zoom-in duration-200">
             <p className="text-[10px] text-[var(--text-secondary)] font-bold text-center m-0">Confirm Removal?</p>
-            <div className="flex gap-2">
+            <div className="flex flex-col md:flex-row gap-2">
              <button
               type="button"
               onClick={() => setShowPhotoConfirm(false)}
-              className="flex-1 py-1 px-2 text-[10px] bg-[var(--bg-panel)] rounded border border-[var(--border)] hover:text-[var(--text-primary)] transition-colors"
+              className="flex-1 py-1 px-2 text-[10px] bg-[var(--bg-panel)] rounded border border-border/50 hover:text-[var(--text-primary)] transition-colors"
              >
               Cancel
              </button>
@@ -274,11 +274,11 @@ function ScientistFormModal({ isOpen, onClose, onSave, onDelete, initialData }) 
        required
        value={formData.name}
        onChange={e => setFormData({...formData, name: e.target.value})}
-       className="w-full bg-[var(--bg-panel)] border border-[var(--border)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
+       className="w-full bg-[var(--bg-panel)] border border-border/50 rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
       />
      </div>
      
-     <div className="grid grid-cols-2 gap-4">
+     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div>
        <label className="block text-xs text-[var(--text-secondary)] mb-1 uppercase tracking-wider">Role *</label>
        <input 
@@ -286,7 +286,7 @@ function ScientistFormModal({ isOpen, onClose, onSave, onDelete, initialData }) 
         required
         value={formData.role}
         onChange={e => setFormData({...formData, role: e.target.value})}
-        className="w-full bg-[var(--bg-panel)] border border-[var(--border)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
+        className="w-full bg-[var(--bg-panel)] border border-border/50 rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
        />
       </div>
       <div>
@@ -295,7 +295,7 @@ function ScientistFormModal({ isOpen, onClose, onSave, onDelete, initialData }) 
         type="text" 
         value={formData.department}
         onChange={e => setFormData({...formData, department: e.target.value})}
-        className="w-full bg-[var(--bg-panel)] border border-[var(--border)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
+        className="w-full bg-[var(--bg-panel)] border border-border/50 rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
        />
       </div>
      </div>
@@ -306,16 +306,16 @@ function ScientistFormModal({ isOpen, onClose, onSave, onDelete, initialData }) 
        rows={3}
        value={formData.bio}
        onChange={e => setFormData({...formData, bio: e.target.value})}
-       className="w-full bg-[var(--bg-panel)] border border-[var(--border)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors resize-none"
+       className="w-full bg-[var(--bg-panel)] border border-border/50 rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors resize-none"
       />
      </div>
 
-     <div className="flex justify-between items-center mt-4 pt-4 border-t border-[var(--border)]">
+     <div className="flex justify-between items-center mt-4 pt-4 border-t border-border/50">
       {initialData ? (
        <button 
         type="button"
         onClick={() => onDelete(initialData.id || initialData.personnel_id)}
-        className="px-3 py-2 rounded-lg text-sm font-medium text-[var(--critical)] hover:bg-[var(--critical)]/10 transition-colors flex items-center gap-2"
+        className="px-3 py-2 rounded-xl text-sm font-medium text-[var(--critical)] hover:bg-[var(--critical)]/10 transition-colors flex items-center gap-2"
        >
         <Trash2 size={16} />
         Delete
@@ -323,17 +323,17 @@ function ScientistFormModal({ isOpen, onClose, onSave, onDelete, initialData }) 
       ) : (
        <div></div>
       )}
-      <div className="flex gap-3">
+      <div className="flex flex-col md:flex-row gap-3">
        <button 
         type="button" 
         onClick={onClose}
-        className="px-4 py-2 rounded-lg text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-panel)] transition-colors"
+        className="px-4 py-2 rounded-xl text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-panel)] transition-colors transition-all duration-300 ease-out hover:-translate-y-0.5 w-full md:w-auto"
        >
         Cancel
        </button>
        <button 
         type="submit"
-        className="px-4 py-2 rounded-lg text-sm font-medium bg-[var(--accent-primary)] text-white hover:opacity-90 transition-opacity shadow-[0_0_15px_var(--accent-primary)] shadow-opacity-50"
+        className="px-4 py-2 rounded-xl text-sm font-medium bg-[var(--accent-primary)] text-white hover:opacity-90 transition-opacity shadow-[0_0_15px_var(--accent-primary)] shadow-opacity-50 transition-all duration-300 ease-out hover:-translate-y-0.5 w-full md:w-auto"
        >
         {initialData ? 'Save Changes' : 'Add Personnel'}
        </button>
@@ -440,7 +440,7 @@ export default function ScientistsRoster() {
  };
 
  return (
-  <div className="bg-[var(--bg-panel)]/50 backdrop-blur-2xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-2xl p-6 min-h-full flex flex-col relative overflow-hidden">
+  <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 sm:p-6 min-h-full flex flex-col relative overflow-hidden">
    {/* Decorative Background Glow */}
    <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--accent-primary)]/5 rounded-full blur-[100px] pointer-events-none" />
    
@@ -460,7 +460,7 @@ export default function ScientistsRoster() {
     
     <button 
      onClick={handleOpenAdd}
-     className="flex items-center gap-2 bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] border border-[var(--accent-primary)]/30 hover:bg-[var(--accent-primary)] hover:text-white px-4 py-2.5 rounded-lg font-medium transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0)] hover:shadow-[0_0_15px_var(--accent-primary)]"
+     className="flex items-center gap-2 bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] border border-[var(--accent-primary)]/30 hover:bg-[var(--accent-primary)] hover:text-white px-4 py-2.5 rounded-xl font-medium transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0)] hover:shadow-[0_0_15px_var(--accent-primary)] w-full md:w-auto"
     >
      <Plus size={18} />
      <span>Add Personnel</span>
@@ -468,7 +468,7 @@ export default function ScientistsRoster() {
    </div>
 
    {roster.length === 0 ? (
-    <div className="flex-1 flex flex-col items-center justify-center text-[var(--text-secondary)] opacity-50 relative z-10 border-2 border-dashed border-[var(--border)] rounded-2xl m-4 bg-[var(--bg-panel-raised)]/30">
+    <div className="flex-1 flex flex-col items-center justify-center text-[var(--text-secondary)] opacity-50 relative z-10 border-2 border-dashed border-border/50 rounded-2xl m-4 bg-[var(--bg-panel-raised)]/30">
      <User size={64} className="mb-4 opacity-50" />
      <p className="text-lg">No personnel registered</p>
     </div>

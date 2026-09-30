@@ -119,7 +119,7 @@ export default function ArrivalCargoScanner() {
  };
 
  return (
-  <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-6 flex flex-col h-full overflow-y-auto">
+  <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 md:p-6 flex flex-col h-full overflow-y-auto">
    <div className="flex items-center justify-between mb-6">
     <div>
      <h2 className="text-[var(--accent-primary)] font-['Space_Grotesk'] font-bold text-2xl tracking-wide">
@@ -129,7 +129,7 @@ export default function ArrivalCargoScanner() {
    </div>
 
     {/* Reference Hash */}
-   <div className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-4 mb-6">
+   <div className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 mb-6">
     <div className="flex items-center justify-between mb-2">
      <div className="flex items-center gap-2">
       <Hash size={16} className="text-[var(--accent-primary)]" />
@@ -148,20 +148,20 @@ export default function ArrivalCargoScanner() {
      )}
     </div>
 
-    <p className="text-[var(--text-primary)] font-mono text-xs break-all leading-relaxed bg-[var(--bg-primary)] p-2.5 rounded border border-[var(--border)] select-all">
+    <p className="text-[var(--text-primary)] font-mono text-xs break-all leading-relaxed bg-[var(--bg-primary)] p-2.5 rounded border border-border/50 select-all">
     {expectedHash || sealedManifestHash || 'No reference hash loaded'}
     </p>
    </div>
 
    {/* Interactive Laser Barcode Scanning Area */}
-   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
+   <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 mb-6">
     {/* Barcode Laser Target */}
-    <div className="lg:col-span-4 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-5 flex flex-col items-center justify-center relative overflow-hidden">
+    <div className="lg:col-span-4 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-5 flex flex-col items-center justify-center relative overflow-hidden">
      <span className="text-[10px] uppercase font-mono text-[var(--text-secondary)] tracking-widest mb-3">
       Optical Scan Target
      </span>
 
-     <div className="relative w-48 h-28 bg-[var(--bg-primary)] border border-[var(--border)] rounded-lg flex items-center justify-center p-3 overflow-hidden shadow-inner">
+     <div className="relative w-48 h-28 bg-[var(--bg-primary)] border border-border/50 rounded-xl flex items-center justify-center p-3 overflow-hidden shadow-inner">
       {/* Mock Barcode Graphic SVG */}
       <svg
        className="w-full h-16 text-[var(--text-primary)] opacity-80"
@@ -207,12 +207,12 @@ export default function ArrivalCargoScanner() {
     </div>
 
     {/* Scanner Hardware Input Controls */}
-    <div className="lg:col-span-8 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-5 flex flex-col justify-between">
+    <div className="lg:col-span-8 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-5 flex flex-col justify-between">
      <div>
       <label className="block text-[var(--text-secondary)] text-xs font-semibold uppercase tracking-wider mb-2">
     Scanned Payload
       </label>
-      <div className="flex gap-2 mb-3">
+      <div className="flex flex-col md:flex-row gap-2 mb-3">
        <div className="relative flex-1">
         <Scan size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]" />
         <input
@@ -221,14 +221,14 @@ export default function ArrivalCargoScanner() {
          value={payloadInput}
          onChange={(e) => setPayloadInput(e.target.value)}
          onKeyDown={(e) => e.key === 'Enter' && executeVerify()}
-         className="w-full bg-[var(--bg-primary)] border border-[var(--border)] text-[var(--text-primary)] rounded-lg pl-10 pr-4 py-3 text-xs font-mono placeholder:text-[var(--text-secondary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
+         className="w-full bg-[var(--bg-primary)] border border-border/50 text-[var(--text-primary)] rounded-xl pl-10 pr-4 py-3 text-xs font-mono placeholder:text-[var(--text-secondary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
         />
        </div>
        <button
         type="button"
         onClick={() => executeVerify()}
         disabled={!payloadInput.trim() || isScanning}
-        className="px-5 py-3 bg-gradient-to-b from-blue-500 to-blue-600 text-white font-semibold shadow-[0_0_20px_rgba(59,130,246,0.3),inset_0_1px_0_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.4)] hover:from-blue-400 hover:to-blue-500 transition-all duration-300 border border-blue-400/30 rounded-lg font-bold text-xs tracking-wider uppercase hover:opacity-90 transition-opacity disabled:opacity-40 flex items-center gap-2 cursor-pointer font-['Space_Grotesk']"
+        className="px-5 py-3 bg-gradient-to-b from-blue-500 to-blue-600 text-white font-semibold shadow-[0_0_20px_rgba(59,130,246,0.3),inset_0_1px_0_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5),inset_0_1px_0_rgba(255,255,255,0.4)] hover:from-blue-400 hover:to-blue-500 transition-all duration-300 border border-blue-400/30 rounded-xl font-bold text-xs tracking-wider uppercase hover:opacity-90 transition-opacity disabled:opacity-40 flex items-center gap-2 cursor-pointer font-['Space_Grotesk']"
        >
         <Scan size={16} />
         VERIFY
@@ -237,7 +237,7 @@ export default function ArrivalCargoScanner() {
      </div>
 
      {/* Scanner Controls */}
-     <div className="pt-3 border-t border-[var(--border)] flex flex-wrap gap-2 items-center">
+     <div className="pt-3 border-t border-border/50 flex flex-wrap gap-2 items-center">
       <span className="text-[10px] uppercase font-mono text-[var(--text-secondary)] mr-2">
        Scanner Controls:
       </span>
@@ -245,7 +245,7 @@ export default function ArrivalCargoScanner() {
        type="button"
        onClick={() => handleSimulateHardwareScan(Math.random() > 0.3)}
        disabled={isScanning}
-       className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--accent-primary)] text-[var(--accent-primary)] rounded text-xs font-semibold hover:bg-[var(--accent-primary)] hover:text-white transition-colors cursor-pointer disabled:opacity-40"
+       className="flex items-center gap-1.5 px-3 py-1.5 bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-[var(--accent-primary)] text-[var(--accent-primary)] rounded text-xs font-semibold hover:bg-[var(--accent-primary)] hover:text-white transition-colors cursor-pointer disabled:opacity-40"
       >
        <Barcode size={13} />
     Run Test Scan
@@ -254,7 +254,7 @@ export default function ArrivalCargoScanner() {
        <button
         type="button"
         onClick={handleReset}
-        className="flex items-center gap-1 px-3 py-1.5 bg-transparent border border-[var(--border)] text-[var(--text-primary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-all duration-300 ease-out transition-colors ml-auto cursor-pointer"
+        className="flex items-center gap-1 px-3 py-1.5 bg-transparent border border-border/50 text-[var(--text-primary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-all duration-300 ease-out transition-colors ml-auto cursor-pointer w-full md:w-auto"
        >
         <RefreshCw size={12} />
         Reset
@@ -273,7 +273,7 @@ export default function ArrivalCargoScanner() {
        initial={{ opacity: 0 }}
        animate={{ opacity: 1 }}
        exit={{ opacity: 0 }}
-       className="text-center py-12 border-2 border-dashed border-[var(--border)] rounded-xl"
+       className="text-center py-12 border-2 border-dashed border-border/50 rounded-2xl"
       >
        <Package size={48} className="mx-auto mb-3 text-[var(--text-secondary)] opacity-30" />
        <p className="text-[var(--text-primary)] font-semibold text-sm">
@@ -290,10 +290,10 @@ export default function ArrivalCargoScanner() {
        animate={{ opacity: 1, scale: 1 }}
        exit={{ opacity: 0, scale: 0.94 }}
        transition={{ duration: 0.3 }}
-       className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border-2 border-[var(--ok)] rounded-xl p-6 shadow-[0_0_40px_rgba(46,160,67,0.2)]"
+       className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border-2 border-[var(--ok)] rounded-2xl p-4 md:p-6 shadow-[0_0_40px_rgba(46,160,67,0.2)]"
       >
        <div className="flex items-start gap-4 mb-5">
-        <div className="p-3 rounded-xl bg-[var(--ok)]/20 text-[var(--ok)] shrink-0">
+        <div className="p-3 rounded-2xl bg-[var(--ok)]/20 text-[var(--ok)] shrink-0">
          <CheckCircle size={32} />
         </div>
         <div>
@@ -314,10 +314,10 @@ export default function ArrivalCargoScanner() {
        key={`mismatch-${shakeKey}`}
        animate={{ x: [-10, 10, -10, 10, 0] }}
        transition={{ duration: 0.4 }}
-       className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border-2 border-[var(--critical)] rounded-xl p-6 shadow-[0_0_50px_rgba(232,62,47,0.35)]"
+       className="bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border-2 border-[var(--critical)] rounded-2xl p-4 md:p-6 shadow-[0_0_50px_rgba(232,62,47,0.35)]"
       >
        <div className="flex items-start gap-4 mb-5">
-        <div className="p-3 rounded-xl bg-[var(--critical)]/20 text-[var(--critical)] shrink-0 animate-pulse">
+        <div className="p-3 rounded-2xl bg-[var(--critical)]/20 text-[var(--critical)] shrink-0 animate-pulse">
          <ShieldAlert size={34} />
         </div>
         <div>
@@ -337,7 +337,7 @@ export default function ArrivalCargoScanner() {
 
        {/* Hash Comparison Diff */}
        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5 text-xs font-mono">
-        <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] p-3 rounded-lg border border-[var(--border)]">
+        <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md p-3 rounded-xl border border-border/50">
          <span className="text-[var(--text-secondary)] text-[10px] uppercase block mb-1">
           Expected Hash:
          </span>
@@ -345,7 +345,7 @@ export default function ArrivalCargoScanner() {
           {expectedHash || sealedManifestHash || 'No reference hash loaded'}
          </p>
         </div>
-        <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] p-3 rounded-lg border border-[var(--critical)]/50">
+        <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md p-3 rounded-xl border border-[var(--critical)]/50">
          <span className="text-[var(--text-secondary)] text-[10px] uppercase block mb-1">
           Scanned Payload Hash (Local):
          </span>
@@ -356,10 +356,10 @@ export default function ArrivalCargoScanner() {
        </div>
 
        {/* Discrepancy Breakdown Table */}
-       <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] rounded-lg border border-[var(--border)] overflow-hidden">
+       <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md rounded-xl border border-border/50 overflow-hidden">
         <table className="w-full text-xs font-['Work_Sans']">
          <thead>
-          <tr className="text-[var(--text-secondary)] uppercase tracking-wider border-b border-[var(--border)] bg-[var(--bg-primary)]/50">
+          <tr className="text-[var(--text-secondary)] uppercase tracking-wider border-b border-border/50 bg-[var(--bg-primary)]/50">
            <th className="text-left p-2.5">Manifest Item</th>
            <th className="text-right p-2.5">Expected</th>
            <th className="text-right p-2.5">Physical Count</th>
@@ -373,7 +373,7 @@ export default function ArrivalCargoScanner() {
            return (
             <tr
              key={row.item}
-             className={`border-b border-[var(--border)] last:border-0 ${
+             className={`border-b border-border/50 last:border-0 ${
               hasDiff ? 'bg-[var(--critical)]/10' : ''
              }`}
             >

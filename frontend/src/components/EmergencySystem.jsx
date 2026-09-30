@@ -91,10 +91,10 @@ export default function EmergencySystem() {
     </div>
 
     <div style={{ display: 'flex', gap: '16px' }}>
-     <button className="btn" style={{ flex: 1, background: '#fef08a', color: '#b91c1c', justifyContent: 'center', padding: '16px', fontSize: '1.2rem' }}>
+     <button className="btn transition-all duration-300 ease-out hover:-translate-y-0.5 shadow-sm ring-1 ring-inset ring-black/10 dark:ring-white/10 w-full md:w-auto" style={{ flex: 1, background: '#fef08a', color: '#b91c1c', justifyContent: 'center', padding: '16px', fontSize: '1.2rem' }}>
       Dispatch Rescue Team
      </button>
-     <button className="btn secondary" style={{ flex: 1, justifyContent: 'center' }} onClick={() => setActiveEmergency(null)}>
+     <button className="btn transition-all duration-300 ease-out hover:-translate-y-0.5 shadow-sm ring-1 ring-inset ring-black/10 dark:ring-white/10 secondary w-full md:w-auto" style={{ flex: 1, justifyContent: 'center' }} onClick={() => setActiveEmergency(null)}>
       Acknowledge & Mute
      </button>
     </div>

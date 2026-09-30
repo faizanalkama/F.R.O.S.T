@@ -118,20 +118,20 @@ export default function GlobalCargoTracker() {
  };
 
  return (
-  <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--border)] rounded-xl p-6 h-full flex flex-col relative overflow-hidden">
+  <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-border/50 rounded-2xl p-4 sm:p-6 h-full flex flex-col relative overflow-hidden">
    <h2 className="text-[var(--accent-primary)] font-['Space_Grotesk'] font-bold text-2xl mb-6 tracking-wide">
     GLOBAL CARGO TRACKER
    </h2>
 
    {/* Summary Counters */}
-   <div className="flex gap-4 mb-6">
-    <div className="flex items-center gap-2 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] px-4 py-2 rounded-lg border border-[var(--border)]">
+   <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-6">
+    <div className="flex items-center gap-2 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md px-4 py-2 rounded-xl border border-border/50">
      <Ship size={16} className="text-[var(--accent-primary)]" />
      <span className="text-[var(--text-secondary)] text-sm">
       Active Vessels: <span className="text-[var(--text-primary)] font-bold">{activeShipments.length}</span>
      </span>
     </div>
-    <div className="flex items-center gap-2 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] px-4 py-2 rounded-lg border border-[var(--border)]">
+    <div className="flex items-center gap-2 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md px-4 py-2 rounded-xl border border-border/50">
      <Anchor size={16} className="text-[var(--ok)]" />
      <span className="text-[var(--text-secondary)] text-sm">
       Docked:{' '}
@@ -140,7 +140,7 @@ export default function GlobalCargoTracker() {
       </span>
      </span>
     </div>
-    <div className="flex items-center gap-2 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] px-4 py-2 rounded-lg border border-[var(--border)]">
+    <div className="flex items-center gap-2 bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md px-4 py-2 rounded-xl border border-border/50">
      <Clock size={16} className="text-[var(--critical)]" />
      <span className="text-[var(--text-secondary)] text-sm">
       Delayed:{' '}
@@ -153,7 +153,7 @@ export default function GlobalCargoTracker() {
 
    {/* GIS Tactical Map with Radar Sweep Effect */}
    <div
-    className="cargo-map-surface w-full h-[500px] mb-8 border border-[var(--border)] rounded-lg overflow-hidden relative"
+    className="cargo-map-surface w-full h-[500px] mb-8 border border-border/50 rounded-xl overflow-hidden relative"
     role="img"
     aria-label="World map showing cargo vessel routes and current locations"
    >
@@ -302,7 +302,7 @@ export default function GlobalCargoTracker() {
    <div className="flex-1 overflow-auto">
     <table className="w-full text-left font-['Work_Sans'] text-[var(--text-primary)]">
      <thead>
-      <tr className="text-[var(--text-secondary)] text-xs uppercase tracking-widest border-b border-[var(--border)]">
+      <tr className="text-[var(--text-secondary)] text-xs uppercase tracking-widest border-b border-border/50">
        <th className="pb-3 pr-4">Vessel</th>
        <th className="pb-3 pr-4">Cargo Type</th>
        <th className="pb-3 pr-4">Destination</th>
@@ -324,8 +324,8 @@ export default function GlobalCargoTracker() {
         <tr
          key={i}
          onClick={() => setSelectedVessel(s)}
-         className={`border-b border-[var(--border)] hover:bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] transition-colors cursor-pointer ${
-          isSelected ? 'bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border-l-2 border-l-[var(--accent-primary)]' : ''
+         className={`border-b border-border/50 hover:bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md transition-colors cursor-pointer ${
+          isSelected ? 'bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border-l-2 border-l-[var(--accent-primary)]' : ''
          }`}
         >
          <td className="py-3 pr-4">
@@ -369,10 +369,10 @@ export default function GlobalCargoTracker() {
       animate={{ x: 0 }}
       exit={{ x: '100%' }}
       transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-      className="absolute top-0 right-0 w-96 h-full bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-[var(--shadow-glass)] border-l border-[var(--border)] shadow-2xl p-6 flex flex-col z-50 overflow-y-auto"
+      className="absolute top-0 right-0 w-full sm:w-96 h-full bg-[var(--bg-panel-raised)] backdrop-blur-xl shadow-sm hover:shadow-md border-l border-border/50 shadow-2xl p-4 sm:p-6 flex flex-col z-50 overflow-y-auto"
      >
       {/* Panel Header */}
-      <div className="flex items-start justify-between pb-4 border-b border-[var(--border)] mb-6">
+      <div className="flex items-start justify-between pb-4 border-b border-border/50 mb-6">
        <div>
         <span className="text-[10px] uppercase font-mono text-[var(--text-secondary)] tracking-widest block mb-1">
          Tactical AIS Telemetry
@@ -384,14 +384,14 @@ export default function GlobalCargoTracker() {
        <button
         type="button"
         onClick={() => setSelectedVessel(null)}
-        className="p-1 rounded text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] transition-colors cursor-pointer"
+        className="p-1 rounded text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md transition-colors cursor-pointer"
        >
         <X size={18} />
        </button>
       </div>
 
       {/* Status Badge & Destination */}
-      <div className="flex items-center justify-between bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] p-3 rounded-lg border border-[var(--border)] mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md p-3 rounded-xl border border-border/50 mb-6">
        <span
         className={`text-xs font-semibold px-3 py-1 rounded border ${statusStyles[selectedVessel.status]}`}
        >
@@ -409,8 +409,8 @@ export default function GlobalCargoTracker() {
         Live Navigational Telemetry
        </h4>
 
-       <div className="grid grid-cols-2 gap-3 font-['Work_Sans']">
-        <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] p-3 rounded-lg border border-[var(--border)]">
+       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 font-['Work_Sans']">
+        <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md p-3 rounded-xl border border-border/50">
          <div className="flex items-center gap-1.5 text-[var(--text-secondary)] text-[10px] uppercase mb-1">
           <Navigation size={12} className="text-[var(--accent-primary)]" />
           <span>Heading</span>
@@ -420,7 +420,7 @@ export default function GlobalCargoTracker() {
          </p>
         </div>
 
-        <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] p-3 rounded-lg border border-[var(--border)]">
+        <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md p-3 rounded-xl border border-border/50">
          <div className="flex items-center gap-1.5 text-[var(--text-secondary)] text-[10px] uppercase mb-1">
           <Activity size={12} className="text-[var(--accent-primary)]" />
           <span>Speed</span>
@@ -430,7 +430,7 @@ export default function GlobalCargoTracker() {
          </p>
         </div>
 
-        <div className="col-span-2 bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] p-3 rounded-lg border border-[var(--border)]">
+        <div className="col-span-2 bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md p-3 rounded-xl border border-border/50">
          <div className="flex items-center gap-1.5 text-[var(--text-secondary)] text-[10px] uppercase mb-1">
           <MapPin size={12} className="text-[var(--ok)]" />
           <span>Coordinates</span>
@@ -454,10 +454,10 @@ export default function GlobalCargoTracker() {
         type="button"
         onClick={handlePingAIS}
         disabled={isPinging}
-        className={`w-full py-3 px-4 rounded-lg font-semibold text-xs tracking-wider uppercase transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer ${
+        className={`w-full py-3 px-4 rounded-xl font-semibold text-xs tracking-wider uppercase transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer ${
          pingSuccess
           ? 'bg-[var(--ok)]/20 border border-[var(--ok)] text-[var(--ok)]'
-          : 'bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] border border-[var(--accent-primary)] text-[var(--accent-primary)] hover:bg-[var(--accent-primary)] hover:text-[var(--bg-primary)]'
+          : 'bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md border border-[var(--accent-primary)] text-[var(--accent-primary)] hover:bg-[var(--accent-primary)] hover:text-[var(--bg-primary)]'
         }`}
        >
         {isPinging ? (
@@ -481,8 +481,8 @@ export default function GlobalCargoTracker() {
 
       {/* Sealed Manifest Section */}
       <div className="flex-1 flex flex-col justify-end">
-       <div className="bg-[var(--bg-panel)] backdrop-blur-xl shadow-[var(--shadow-glass)] p-4 rounded-lg border border-[var(--border)]">
-        <div className="flex items-center gap-2 mb-3 pb-2 border-b border-[var(--border)]">
+       <div className="bg-surface/80 backdrop-blur-md shadow-sm hover:shadow-md p-4 rounded-xl border border-border/50">
+        <div className="flex items-center gap-2 mb-3 pb-2 border-b border-border/50">
          <Lock size={14} className="text-[var(--accent-primary)]" />
          <h4 className="text-[var(--accent-primary)] text-xs font-bold uppercase tracking-wider">
           Sealed Cargo Manifest
@@ -501,7 +501,7 @@ export default function GlobalCargoTracker() {
          ))}
         </div>
 
-        <p className="text-[var(--text-secondary)] text-[10px] font-mono border-t border-[var(--border)] pt-2">
+        <p className="text-[var(--text-secondary)] text-[10px] font-mono border-t border-border/50 pt-2">
          🔒 Cryptographic hash verified by edge mesh
         </p>
        </div>

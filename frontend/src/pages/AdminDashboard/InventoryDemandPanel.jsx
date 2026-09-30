@@ -37,7 +37,7 @@ export default function InventoryDemandPanel() {
   }, [isOpen, loadForecast]);
 
   return (
-    <section className="border border-[var(--border)] rounded">
+    <section className="border border-border/50 rounded">
       <button
         type="button"
         aria-expanded={isOpen}
@@ -53,14 +53,14 @@ export default function InventoryDemandPanel() {
         <ChevronDown size={15} className={`shrink-0 text-[var(--text-secondary)] transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
-      {isOpen && <div id="inventory-demand-content" className="border-t border-[var(--border)] px-4 py-4">
+      {isOpen && <div id="inventory-demand-content" className="border-t border-border/50 px-4 py-4">
        <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
         <button
           type="button"
           onClick={loadForecast}
           disabled={loading}
           aria-label="Refresh inventory demand signals"
-          className="inline-flex items-center gap-2 border border-[var(--border)] px-3 py-2 text-xs text-[var(--text-secondary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] disabled:opacity-50"
+          className="inline-flex items-center gap-2 border border-border/50 px-3 py-2 text-xs text-[var(--text-secondary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] disabled:opacity-50 transition-all duration-300 ease-out hover:-translate-y-0.5 w-full md:w-auto"
         >
           <RefreshCw size={14} className={loading ? 'animate-spin' : ''} />
           Refresh
@@ -77,7 +77,7 @@ export default function InventoryDemandPanel() {
         <div className="overflow-x-auto">
           <table className="w-full min-w-[680px] text-left text-xs">
             <thead>
-              <tr className="border-b border-[var(--border)] text-[var(--text-secondary)] uppercase">
+              <tr className="border-b border-border/50 text-[var(--text-secondary)] uppercase">
                 <th className="py-2 pr-4 font-semibold">Base / item</th>
                 <th className="py-2 pr-4 font-semibold">Stock</th>
                 <th className="py-2 pr-4 font-semibold">Reorder line</th>
@@ -88,7 +88,7 @@ export default function InventoryDemandPanel() {
             </thead>
             <tbody>
               {items.map(item => (
-                <tr key={`${item.station}-${item.item_id}`} className="border-b border-[var(--border)]/60 last:border-0">
+                <tr key={`${item.station}-${item.item_id}`} className="border-b border-border/50/60 last:border-0">
                   <td className="py-2.5 pr-4">
                     <span className="block text-[var(--text-primary)] font-semibold">{item.name}</span>
                     <span className="text-[var(--text-secondary)]">{item.station}</span>

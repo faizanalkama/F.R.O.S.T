@@ -91,10 +91,10 @@ export default function Dashboard() {
  };
 
  return (
-  <div className="page-container">
+  <div className="page-container overflow-x-hidden">
    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
     <h1>Live Operations Map</h1>
-    <button className="btn danger" onClick={triggerMockSOS}>
+    <button className="btn transition-all duration-300 ease-out hover:-translate-y-0.5 shadow-sm ring-1 ring-inset ring-black/10 dark:ring-white/10 danger w-full md:w-auto" onClick={triggerMockSOS}>
      <AlertTriangle size={18} /> Simulate SOS (Node 04)
     </button>
    </div>
